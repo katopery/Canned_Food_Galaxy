@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member: one
+  canned_food: one
+  expiry_date_rating: 1
+  taste_rating: 1
+  snack_rating: 1
+  outdoor_rating: 1
+
+two:
+  member: two
+  canned_food: two
+  expiry_date_rating: 1
+  taste_rating: 1
+  snack_rating: 1
+  outdoor_rating: 1

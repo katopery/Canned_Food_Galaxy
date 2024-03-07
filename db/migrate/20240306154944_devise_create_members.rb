@@ -32,9 +32,9 @@ class DeviseCreateMembers < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string     :nickname,         null: false
-      t.string     :phone_number,     null: false
-      t.boolean    :is_member_status, null: false, default: true # Trueが有効、Falseが退会
+      t.string     :nickname,         null: false                 # ニックネーム
+      t.string     :phone_number,     null: false                 # 電話番号
+      t.boolean    :is_member_status, null: false, default: true  # 会員ステータス true:有効、false:退会
 
       t.timestamps null: false
     end
