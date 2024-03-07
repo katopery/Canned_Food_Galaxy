@@ -1,79 +1,57 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'comments/index'
-    delete 'comments/destroy'
-  end
-  namespace :admin do
-    get 'reviews/index'
-    delete 'reviews/destroy'
-  end
-  namespace :admin do
-    get 'members/index'
-    get 'members/show'
-    get 'members/edit'
-    patch 'members/update'
-  end
-  namespace :admin do
-    get 'canned_foods/index'
-    get 'canned_foods/new'
-    post 'canned_foods/create'
-    get 'canned_foods/show'
-    get 'canned_foods/edit'
-    get 'canned_foods/search'
-    patch 'canned_foods/update'
-  end
-  namespace :public do
-    post 'favorites/create'
-    get 'favorites/index'
-    delete 'favorites/destroy'
-  end
-  namespace :public do
-    post 'comments/create'
-    get 'comments/index'
-    delete 'comments/destroy'
-  end
-  namespace :public do
-    get 'reviews/index'
-    get 'reviews/show'
-    post 'reviews/create'
-    delete 'reviews/destroy'
-  end
-  namespace :public do
-    post 'relationships/create'
-    delete 'relationships/destroy'
-    get 'relationships/followings'
-    get 'relationships/followers'
-    get 'relationships/index'
-  end
-  namespace :public do
-    get 'members/index'
-    get 'members/edit'
-    patch 'members/update'
-    get 'members/show'
-    get 'members/unsubscribe'
-    patch 'members/withdraw'
-  end
-  namespace :public do
-    get 'canned_foods/index'
-    get 'canned_foods/search'
-    get 'canned_foods/show'
-  end
-  scope module: :public do
-    root to: "homes#top"
-  end
-  
-  #会員用
+  # 会員用
   devise_for :members, skip: [:passwords], controllers: 
   {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
   
-  
+  # 管理者用
   devise_for :admin, skip: [:registrations, :passwords], controllers:
   {
     sessions: "admin/sessions"
   }
+  
+  scope module: :public do
+    root to: "homes#top"
+    
+    get '/canned_foods/search' => 'canned_foods#search'
+    resources :canned_foods, only: [:index, :show]
+    
+    get '/members/my_page' => 'members#index'
+    get '/members/:member_id' => 'members#show'
+    get '/members/information/edit' => 'members#edit'
+    patch '/members/information' => 'members#update'
+    get '/members/unsubscribe' => 'members#unsubscribe'
+    patch '/members/withdraw' => 'members#withdraw'
+    
+    post '/members/:member_id/relationships' => 'relationships#create'
+    delete '/members/:member_id/relationships' => 'relationships#destroy'
+    get '/members/:member_id/followings' => 'relationships#followings', as: "followings"
+    get '/members/:member_id/followers' => 'relationships#followers', as: "followers"
+    get '/members/followers' => 'relationships#index'
+    
+    get '/members/:member_id/reviews' => 'reviews#show'
+    resources :reviews, only: [:index, :create, :destroy]
+    
+    post '/reviews/:review_id/comments' => 'comments#create'
+    get '/reviews/:review_id/comments' => 'comments#index'
+    delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
+    
+    resources :favorites, only: [:index, :create, :destroy]
+  end
+  
+  namespace :admin do
+    get '/canned_foods/search' => 'canned_foods/search'
+    resources :canned_foods, only: [:index, :new, :create, :show, :edit, :update]
+    
+    resources :members, only: [:index, :show, :edit, :update]
+    
+    resources :reviews, only: [:index, :destroy]
+    
+    get '/reviews/:review_id/comments' => 'comments#index'
+    delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
