@@ -29,4 +29,7 @@ class Member < ApplicationRecord
     followings.include?(member)
   end
 
+
+  validates :nickname, uniqueness: true, presence: true
+  validates :phone_number, presence: true
 end
