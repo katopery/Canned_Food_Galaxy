@@ -16,4 +16,10 @@ class Public::MembersController < ApplicationController
 
   def withdraw
   end
+  
+  private
+
+  def member_params
+    params.require(:member).permit(:nickname, :phone_number, :email, :password, :password_confirmation)
+  end
 end
