@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
   def index
+    @member = Member.find(current_member.id)
   end
 
   def edit
@@ -20,6 +21,6 @@ class Public::MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:nickname, :phone_number, :email, :password, :password_confirmation)
+    params.require(:member).permit(:nickname, :phone_number, :email, :password, :password_confirmation, :image)
   end
 end
