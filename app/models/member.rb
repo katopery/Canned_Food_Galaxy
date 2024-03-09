@@ -14,6 +14,8 @@ class Member < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed   # フォローしている会員を取得
   has_many :followers, through: :passive_relationships, source: :follower   # フォロワーを取得
 
+  has_one_attached :image  # 会員の画像用
+
   # 指定した会員をフォローする
   def follow(member)
     active_relationships.create(followed_id: member.id)
@@ -28,7 +30,6 @@ class Member < ApplicationRecord
   def following?(member)
     followings.include?(member)
   end
-
 
   validates :nickname, uniqueness: true, presence: true
   validates :phone_number, presence: true
