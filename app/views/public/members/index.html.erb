@@ -12,34 +12,39 @@
     </div>
   </div>
   
-  <div class="row mt-4 justify-content-center">
-    <table class="table table-bordered text-center col-7">
-      <tr>
-        <td class="col-4 bg-secondary">
-          ニックネーム
-        </td>
-        <td>
-          <%= @member.nickname %>
-        </td>
-      </tr>
-      
-      <tr>
-        <td class="col-4 bg-secondary">
-          電話番号
-        </td>
-        <td>
-          <%= @member.phone_number %>
-        </td>
-      </tr>
-      
-      <tr>
-        <td class="col-4 bg-secondary">
-          メールアドレス
-        </td>
-        <td>
-          <%= @member.email %>
-        </td>
-      </tr>
+  <div class="row my-5 justify-content-center">
+    <div class="col-3 text-center">
+      <% if @member.image.attached? %>
+        <%= image_tag @member.image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      <p>
+        ニックネーム</br>
+        <%= @member.nickname %>
+      </p>
+    </div>
+    
+    <table class="table table-bordered col-7 text-center">
+      <tbody>
+        <tr>
+          <td class="col-4 bg-secondary align-middle">
+            電話番号
+          </td>
+          <td class="align-middle">
+            <%= @member.phone_number %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="col-4 bg-secondary align-middle">
+            メールアドレス
+          </td>
+          <td class="align-middle">
+            <%= @member.email %>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
   
