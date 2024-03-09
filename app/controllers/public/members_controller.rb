@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
   def index
+    @member = Member.find(current_member.id)
   end
 
   def edit
