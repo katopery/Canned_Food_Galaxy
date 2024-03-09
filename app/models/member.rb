@@ -30,6 +30,16 @@ class Member < ApplicationRecord
   def following?(member)
     followings.include?(member)
   end
+  
+  # ゲスト会員
+  GUEST_MEMBER_EMAIL = 'guest@example.com'
+  def self.guest
+    find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
+      member.password = SecureRandom.urlsafe_base64
+      member.nickname = "ゲスト"
+      member.phone_number = "XXXXXXXXXXX"
+    end
+  end
 
   validates :nickname, uniqueness: true, presence: true, length: { in: 1..12 }
   validates :phone_number, presence: true
