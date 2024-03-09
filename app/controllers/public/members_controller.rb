@@ -25,6 +25,12 @@ class Public::MembersController < ApplicationController
   end
 
   def withdraw
+    @member = current_member
+    # is_member_statusカラムをfalseに変更することにより退会フラグを立てる
+    @member.update(is_member_status: false)
+    reset_session
+    flash[:notice] = "退会が完了しました。またのご利用お待ちしております。"
+    redirect_to root_path
   end
   
   private
