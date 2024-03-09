@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DWCPf</title>
+    <title>缶詰の星</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,6 +12,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="footer_adjustments">
+      <%= render 'layouts/header' %>
+
+      <main>
+        <%= yield %>
+      </main>
+      
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>
