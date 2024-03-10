@@ -24,14 +24,14 @@ class Admin::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  
-  protected
+
+  # ログイン後、会員一覧画面（管理者Top画面）に遷移
   def after_sign_in_path_for(resource)
     admin_members_path
   end
 
+  # ログアウト後、管理者ログインに遷移
   def after_sign_out_path_for(resource)
     new_admin_session_path
   end
-  
 end
