@@ -30,7 +30,7 @@ class Member < ApplicationRecord
   def following?(member)
     followings.include?(member)
   end
-  
+
   # ゲスト会員
   GUEST_MEMBER_EMAIL = 'guest@example.com'
   def self.guest
