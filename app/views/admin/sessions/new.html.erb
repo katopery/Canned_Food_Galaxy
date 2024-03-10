@@ -1,27 +1,28 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row offset-2 my-5">
-    <h2 class="px-3 text-center bg-info">管理者ログイン</h2>
+    <h3 class="px-3 text-center bg-info">管理者ログイン</h3>
   </div>
-    
-  <%= form_with(url: session_path(resource_name), local: true) do |f| %>
+
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="row mt-5 justify-content-center">
       <div class="field form-group">
-        <%= f.label :"📧メールアドレス" %>
+        <%= f.label :email, "📧メールアドレス" %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
       </div>
     </div>
     
     <div class="row my-2 justify-content-center">
       <div class="field form-group">
-          <%= f.label :"🔒パスワード" %>
-          <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.label :password, "🔒パスワード" %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
     </div>
-
-    <div class="row mt-2 justify-content-center">
-      <div class="actions">
+    
+    <div class="row justify-content-center">
+      <div class="actions mt-2">
         <%= f.submit "ログイン", class:"btn btn-primary" %>
       </div>
     </div>
   <% end %>
+  <%= render "admin/shared/links" %>
 </div>
