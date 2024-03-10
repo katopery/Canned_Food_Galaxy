@@ -14,7 +14,11 @@
   <body>
     <div class="footer_adjustments">
       <%= render 'layouts/header' %>
-
+      
+      <div>
+        <%= flash[:notice] %>
+      </div>
+      
       <main>
         <%= yield %>
       </main>
