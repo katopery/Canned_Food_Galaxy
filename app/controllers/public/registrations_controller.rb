@@ -57,6 +57,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   
+  # 新規会員登録後、マイページに遷移
   def after_sign_up_path_for(resource)
     members_my_page_path
   end

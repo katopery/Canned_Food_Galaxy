@@ -33,6 +33,7 @@ class Member < ApplicationRecord
 
   # ゲスト会員
   GUEST_MEMBER_EMAIL = 'guest@example.com'
+  
   def self.guest
     find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
       member.password = SecureRandom.urlsafe_base64
@@ -40,7 +41,11 @@ class Member < ApplicationRecord
       member.phone_number = "XXXXXXXXXXX"
     end
   end
+  
+  def guest_member?
+    email == GUEST_MEMBER_EMAIL
+  end
 
   validates :nickname, uniqueness: true, presence: true, length: { in: 1..12 }
-  validates :phone_number, presence: true
+  validates :phone_number, presence: true, length: { in: 1..15 }
 end

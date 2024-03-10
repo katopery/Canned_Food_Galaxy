@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   devise_for :members, skip: [:passwords], controllers: 
   {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: 'public/sessions',
+    passwords: 'public/passwords'
   }
   
   # 管理者用
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   }
   
   devise_scope :member do
-    post 'members/guest_sign_in', to: 'members/sessions#guest_sign_in', as: "members_guest_sign_in"
+    post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in', as: "members_guest_sign_in"
   end
   
   scope module: :public do
