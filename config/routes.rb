@@ -23,11 +23,11 @@ Rails.application.routes.draw do
     resources :canned_foods, only: [:index, :show]
     
     get '/members/my_page' => 'members#index'
-    get '/members/:member_id' => 'members#show'
     get '/members/information/edit' => 'members#edit'
     patch '/members/information' => 'members#update'
     get '/members/unsubscribe' => 'members#unsubscribe'
     patch '/members/withdraw' => 'members#withdraw'
+    get '/members/:member_id' => 'members#show'
     
     post '/members/:member_id/relationships' => 'relationships#create'
     delete '/members/:member_id/relationships' => 'relationships#destroy'
