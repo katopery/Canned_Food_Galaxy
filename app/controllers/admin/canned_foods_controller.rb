@@ -10,6 +10,9 @@ class Admin::CannedFoodsController < ApplicationController
     @canned_food = CannedFood.new(canned_food_params)
   
     if @canned_food.save
+      # 中間テーブル缶詰タグの保存
+      canned_tags = @canned_food.canned_tags.build(tag_id: params[:canned_food][:tag_ids])
+      canned_tags.save!
       # 保存成功した場合の処理
       redirect_to admin_canned_food_path(@canned_food.id),notice: "缶詰の登録が完了しました"
     else
@@ -20,6 +23,7 @@ class Admin::CannedFoodsController < ApplicationController
   
   def show
     @canned_food = CannedFood.find(params[:id])
+    @tags = @canned_food.tags
   end
 
   def edit
