@@ -1,2 +1,47 @@
-<h1>Admin::CannedFoods#show</h1>
-<p>Find me in app/views/admin/canned_foods/show.html.erb</p>
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center bg-info">缶詰詳細</h2>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-3 d-flex align-items-center justify-content-center">
+      <%= image_tag @canned_food.get_image(200,100), class: "image" %>
+    </div>
+    
+    <div class="col-9">
+      <table class="table table-bordered text-center">
+        <tbody>
+          <tr>
+            <td class="col-4 bg-secondary">缶詰名</td>
+            <td><%= @canned_food.canned_name %></td>
+          </tr>
+          <tr>
+            <td class="col-4 bg-secondary">缶詰説明</td>
+            <td class="text-left text-break"><%=safe_join(@canned_food.description.split("\n"),tag(:br))%></td>
+          </tr>
+          <tr>
+            <td class="col-4 bg-secondary">缶詰タグ</td>
+            <% @tags.each do |tag| %>
+              <td><%= tag.name %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td class="col-4 bg-secondary">販売ステータス</td>
+            <td>
+              <% if @canned_food.is_canned_status == true %>
+                <strong class="text-success"><%= "表示" %></strong>
+              <% else %>
+                <strong class="text-danger"><%= "非表示" %></strong>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="my-3 text-center">
+    <%= link_to "編集する", edit_admin_canned_food_path(@canned_food.id), class: "btn btn-success" %>
+    <%= link_to "一覧に戻る", admin_canned_foods_path, class: "btn btn-info" %>
+  </div>
+</div>
