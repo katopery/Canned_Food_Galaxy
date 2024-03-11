@@ -22,24 +22,20 @@
             <td>缶詰名</td>
             <td><%= f.text_field :canned_name, autofocus: true, placeholder: "缶詰名", class: "form-control" %></td>
           </tr>
-          
           <tr>
             <td>缶詰説明</td>
             <td><%= f.text_area :description, autofocus: true, placeholder: "ここに説明文を記述します", class: "form-control", rows: "7" %></td>
           </tr>
-          
           <tr>
             <td>缶詰画像</td>
             <td><%= f.file_field :image, autofocus: true, accept: "image/*" %></td>
           </tr>
-
           <tr>
             <td>缶詰タグ</td>
             <td>
               <%= f.collection_select :tag_ids, Tag.all, :id, :name, autofocus: true, multiple: true, include_blank: "--選択してください--", class: "form-control" %>
             </td>
           </tr>
-          
           <tr>
             <td>表示ステータス</td>
             <td>

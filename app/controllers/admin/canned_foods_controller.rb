@@ -27,12 +27,25 @@ class Admin::CannedFoodsController < ApplicationController
   end
 
   def edit
-  end
-
-  def search
+    @canned_food = CannedFood.find(params[:id])
+    @tags = @canned_food.tags
   end
 
   def update
+    @canned_food = CannedFood.find(params[:id])
+    
+    if @canned_food.update(canned_food_params)
+       # 中間テーブル缶詰タグの保存
+      @canned_food.tag_ids = params[:canned_food][:tag_ids]
+      # 保存成功した場合の処理
+      redirect_to admin_canned_food_path(@canned_food.id),notice: "缶詰情報が更新されました"
+    else
+      # 保存失敗した場合の処理
+      render :edit
+    end
+  end
+  
+  def search
   end
   
   private
