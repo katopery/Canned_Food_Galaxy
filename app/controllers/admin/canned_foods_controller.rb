@@ -19,6 +19,7 @@ class Admin::CannedFoodsController < ApplicationController
   end
   
   def show
+    @canned_food = CannedFood.find(params[:id])
   end
 
   def edit
