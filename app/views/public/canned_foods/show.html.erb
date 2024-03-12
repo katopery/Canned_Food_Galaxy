@@ -1,2 +1,112 @@
-<h1>Public::CannedFoods#show</h1>
-<p>Find me in app/views/public/canned_foods/show.html.erb</p>
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center bg-info">缶詰詳細</h2>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+      <div>
+        <%= image_tag @canned_food.get_image(200,100), class: "image" %>
+      </div>
+      <div>
+        缶詰名： <%= @canned_food.canned_name %>
+      </div>
+      <div>
+        <% @tags.each do |tag| %>
+          タグ： <%= tag.name %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="col-2">
+      <div class="detail-review">賞味期限</div>
+      <%= render "public/reviews/average_rate.html.erb", canned_food: @canned_food, ave: @expiry_date_avg %>
+    </div>
+    
+    <div class="col-2">
+      <div class="detail-review">おいしさ</div>
+      <%= render "public/reviews/average_rate.html.erb", canned_food: @canned_food, ave: @taste_avg %>
+    </div>
+    
+    <div class="col-2">
+      <div class="detail-review">おつまみ</div>
+      <%= render "public/reviews/average_rate.html.erb", canned_food: @canned_food, ave: @snack_avg %>
+    </div>
+    
+    <div class="col-2">
+      <div class="detail-review">アウトドア</div>
+      <%= render "public/reviews/average_rate.html.erb", canned_food: @canned_food, ave: @outdoor_avg %>
+    </div>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div class="col-6 border border-primary">
+      <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
+    </div>
+  </div>
+  
+  <%= form_with model: @review, local: true do |f| %>
+    <div class="row my-4 justify-content-center">
+      <div class="col-md-3">
+        <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
+        <div id="expiry_date_rating_star"></div>
+      </div>
+
+      <div class="col-md-3">
+        <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
+        <div id="taste_rating_star"></div>
+      </div>
+      
+      <div class="col-md-3">
+        <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
+        <div id="snack_rating_star"></div>
+      </div>
+      
+      <div class="col-md-3">
+        <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
+        <div id="outdoor_rating_star"></div>
+      </div>
+    </div>
+    
+    <% if member_signed_in? %>
+      <div class="my-4 d-flex flex-column align-items-center justify-content-center">
+        <%= f.submit "レビュー追加" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- レビュー用 -->
+<script>
+  $('#expiry_date_rating_star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    scoreName: 'review[expiry_date_rating]',
+    half: false,
+  });
+  
+  $('#taste_rating_star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    scoreName: 'review[taste_rating]',
+    half: false,
+  });
+  
+  $('#snack_rating_star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    scoreName: 'review[snack_rating]',
+    half: false,
+  });
+  
+  $('#outdoor_rating_star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    scoreName: 'review[outdoor_rating]',
+    half: false,
+  });
+</script>
