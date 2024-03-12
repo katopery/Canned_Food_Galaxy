@@ -15,6 +15,13 @@ class CannedFood < ApplicationRecord
     image.variant(resize_to_limit: [width,height]).processed
   end
   
+  #部分一致検索
+  def self.looks(search, word)
+    if search == "partial"
+      @canned_foods = CannedFood.where("canned_name LIKE?","%#{word}%")
+    end
+  end
+  
   validates :canned_name, presence: true
   validates :description, presence: true
   validates :image, presence: true
