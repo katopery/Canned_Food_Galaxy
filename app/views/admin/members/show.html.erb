@@ -43,7 +43,11 @@
             会員ステータス
           </td>
           <td class="align-middle">
-            <%= @member.is_member_status %>
+            <% if @member.is_member_status == true %>
+              <span class="text-success">有効</span>
+            <% else %>
+              <span class="text-secondary">退会</span>
+            <% end %>
           </td>
         </tr>
       </tbody>
