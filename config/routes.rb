@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     get '/members/:member_id/followers' => 'relationships#followers', as: "followers"
     get '/members/followers' => 'relationships#index'
     
-    get '/members/:member_id/reviews' => 'reviews#show'
+    get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
     resources :reviews, only: [:index, :create, :destroy]
     
     post '/reviews/:review_id/comments' => 'comments#create'
@@ -47,17 +47,17 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    get '/canned_foods/search' => 'canned_foods/search'
+    get '/canned_foods/search' => 'canned_foods#search'
     resources :canned_foods, only: [:index, :new, :create, :show, :edit, :update]
     
     resources :members, only: [:index, :show, :edit, :update]
     
+    get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
     resources :reviews, only: [:index, :destroy]
     
     get '/reviews/:review_id/comments' => 'comments#index'
     delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
   end
-
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
