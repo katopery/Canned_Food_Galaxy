@@ -1,2 +1,62 @@
-<h1>Admin::Members#show</h1>
-<p>Find me in app/views/admin/members/show.html.erb</p>
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center bg-info">
+        <%= @member.nickname %>さんの会員詳細
+    </h2>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div class="col-3 text-center">
+      <% if @member.image.attached? %>
+        <%= image_tag @member.image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      <p>
+        ニックネーム</br>
+        <%= @member.nickname %>
+      </p>
+    </div>
+
+    <table class="table table-bordered col-7 text-center">
+      <tbody>
+        <tr>
+          <td class="col-4 bg-secondary align-middle">
+            電話番号
+          </td>
+          <td class="align-middle">
+            <%= @member.phone_number %>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="col-4 bg-secondary align-middle">
+            メールアドレス
+          </td>
+          <td class="align-middle">
+            <%= @member.email %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="col-4 bg-secondary align-middle">
+            会員ステータス
+          </td>
+          <td class="align-middle">
+            <%= @member.is_member_status %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div>
+      <%= link_to "編集する", edit_admin_member_path, class: "btn btn-success px-4 py-2" %>
+    </div>
+
+    <div class="offset-1">
+      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn btn-primary px-4 py-2" %>
+    </div>
+  </div>
+</div>
