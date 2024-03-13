@@ -1,11 +1,11 @@
-<div id="star_<%= canned_food.id %>"></div>
+<div id="star_<%= canned_food.id %>_<%= type %>"></div>
 <div class="eval-star"><%= ave %>/5点</div>
 
 <script>
   $(document).on('turbolinks:load', function() {
-    let elem = document.querySelector('#star_<%= canned_food.id %>');
+    let elem = document.querySelector('#star_<%= canned_food.id %>_<%= type %>');
     if(elem == null) return;
-  
+
     elem.innerHTML = ""
     let opt = {
       starOn: "<%= asset_path('star-on.png') %>",
@@ -15,49 +15,5 @@
       readOnly: true,
     };
     raty(elem, opt);
-  });
-</script>
-
-<script>
-  $(document).on('turbolinks:load', function() {
-    let elem;
-    let options = {
-      starOn: "<%= asset_path('star-on.png') %>",
-      starOff: "<%= asset_path('star-off.png') %>",
-      starHalf: "<%= asset_path('star-half.png') %>",
-      readOnly: true
-    };
-
-    // 賞味期限
-    elem = document.querySelector('#expiry_date_rating_star');
-    if (elem) {
-      elem.innerHTML = "";
-      options.score = <%= canned_food.reviews.average(:expiry_date_rating).to_f.round(1) %>;
-      raty(elem, options);
-    }
-
-    // おいしさ
-    elem = document.querySelector('#taste_rating_star');
-    if (elem) {
-      elem.innerHTML = "";
-      options.score = <%= canned_food.reviews.average(:taste_rating).to_f.round(1) %>;
-      raty(elem, options);
-    }
-
-    // おつまみ
-    elem = document.querySelector('#snack_rating_star');
-    if (elem) {
-      elem.innerHTML = "";
-      options.score = <%= canned_food.reviews.average(:snack_rating).to_f.round(1) %>;
-      raty(elem, options);
-    }
-
-    // アウトドア
-    elem = document.querySelector('#outdoor_rating_star');
-    if (elem) {
-      elem.innerHTML = "";
-      options.score = <%= canned_food.reviews.average(:outdoor_rating).to_f.round(1) %>;
-      raty(elem, options);
-    }
   });
 </script>

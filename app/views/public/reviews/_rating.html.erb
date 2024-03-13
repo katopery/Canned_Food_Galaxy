@@ -30,31 +30,31 @@
 
 <!-- レビュー用 -->
 <script>
-  $('#expiry_date_rating_star').raty({
+  raty(document.querySelector('#expiry_date_rating_star'),{
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
     scoreName: 'review[expiry_date_rating]',
     half: false,
   });
-  
-  $('#taste_rating_star').raty({
+
+  raty(document.querySelector('#taste_rating_star'),{
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
     scoreName: 'review[taste_rating]',
     half: false,
   });
-  
-  $('#snack_rating_star').raty({
+
+  raty(document.querySelector('#snack_rating_star'),{
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
     scoreName: 'review[snack_rating]',
     half: false,
   });
-  
-  $('#outdoor_rating_star').raty({
+
+  raty(document.querySelector('#outdoor_rating_star'),{
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
