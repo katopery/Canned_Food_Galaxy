@@ -1,2 +1,65 @@
-<h1>Admin::Members#edit</h1>
-<p>Find me in app/views/admin/members/edit.html.erb</p>
+<div class="container">
+  <div class="row offset-2 my-5">
+    <h3 class="px-3 text-center bg-info">
+      <%= @member.nickname %>さんの会員情報編集
+    </h3>
+  </div>
+  
+  <% if @member.errors.any? %>
+    <h3>
+      <%= @member.errors.count %>件のエラーが発生したため、保存されませんでした:
+    </h3>
+    <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  
+  <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="table table-borderless col-7">
+        <tbody>
+          <tr>
+            <div class="field">
+              <td><%= f.label :"ニックネーム" %></td>
+              <td>
+                <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ" %>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="field">
+              <td><%= f.label :"メールアドレス" %></td>
+              <td>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="field">
+              <td><%= f.label :"電話番号(ハイフンなし)" %></td>
+              <td>
+                <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000" %>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <td>表示ステータス</td>
+            <td>
+              <%= f.radio_button :is_member_status, :true,class:"form-check-input ml-2" %>
+              <%= f.label :is_member_status, "有効",class:"form-check-label ml-4" %>
+
+              <%= f.radio_button :is_member_status, :false,class:"form-check-input ml-2" %>
+              <%= f.label :is_member_status, "退会",class:"form-check-label ml-4" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+      <%= f.submit "編集内容を保存", class: "btn btn-success px-4" %>
+    </div>
+  <% end %>
+</div>
