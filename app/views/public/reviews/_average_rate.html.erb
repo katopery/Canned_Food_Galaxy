@@ -1,5 +1,5 @@
 <div id="star_<%= canned_food.id %>_<%= type %>"></div>
-<div class="eval-star"><%= ave %>/5点</div>
+<div class="eval-star"><%= ave.to_f.round(1) %>/5点</div>
 
 <script>
   $(document).on('turbolinks:load', function() {

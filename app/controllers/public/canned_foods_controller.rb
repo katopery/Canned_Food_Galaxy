@@ -8,6 +8,7 @@ class Public::CannedFoodsController < ApplicationController
   def show
     @canned_food = CannedFood.find(params[:id])
     @tags = @canned_food.tags
+    @member = Member.find(current_member.id)
     
     # 新規レビュー作成用
     @review = @canned_food.reviews.build

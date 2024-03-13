@@ -1,4 +1,6 @@
 <%= form_with model: review, local: true do |f| %>
+  <%= f.hidden_field :canned_food_id, value:  review.canned_food_id %>
+
   <div class="row my-4 justify-content-center">
     <div class="col-md-3">
       <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
@@ -21,7 +23,8 @@
     </div>
   </div>
   
-  <% if member_signed_in? %>
+  <% unless member.reviews.exists? %>
+
     <div class="my-4 d-flex flex-column align-items-center justify-content-center">
       <%= f.submit "レビュー追加" %>
     </div>

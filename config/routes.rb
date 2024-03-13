@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     get '/members/followers' => 'relationships#index'
     
     get '/members/:member_id/reviews' => 'reviews#show'
-    resources :reviews, only: [:index, :create, :destroy]
+    resources :reviews, only: [:index, :create, :update, :destroy]
     
     post '/reviews/:review_id/comments' => 'comments#create'
     get '/reviews/:review_id/comments' => 'comments#index', as: 'review_comments'
