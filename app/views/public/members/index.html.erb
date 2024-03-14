@@ -7,7 +7,7 @@
     <div class="mr-5 d-flex align-items-center">
       <h4 class="px-3 text-center bg-info">登録情報</h4>
     </div>
-    
+
     <% unless @member.guest_member? %>
       <div class="d-flex align-items-center">
         <%= link_to "編集する", members_information_edit_path, class: "btn btn-success" %>
@@ -54,13 +54,13 @@
   <% unless @member.guest_member? %>
     <div class="row mt-5 justify-content-center">
       <div>
-        <%= link_to "レビュー 一覧", "/members/#{current_member.id}/reviews", class: "btn btn-primary px-4 py-2" %>
+        <%= link_to "レビュー 一覧", reviews_member_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
       </div>
-  
+
       <div class="offset-1">
         <%= link_to "フォロー 一覧", members_followers_path, class: "btn btn-primary px-4 py-2" %>
       </div>
-  
+
       <div class="offset-1">
         <%= link_to "お気に入り 一覧", favorites_path, class: "btn btn-primary px-4 py-2" %>
       </div>
