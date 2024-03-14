@@ -8,12 +8,22 @@ class Public::ReviewsController < ApplicationController
   def create
     @review = current_member.reviews.new(review_params) 
 
-    if @review.save!
+    if @review.save
       flash[:success] = 'レビューを投稿しました。'
       redirect_to review_comments_path(@review.id)
     else
       flash[:error] = 'レビューを投稿に失敗しました。'
-      redirect_to canned_food_path(@review.canned_food_id)
+      
+      # render用データ
+      @canned_food = CannedFood.find(@review.canned_food_id)
+      @tags = @canned_food.tags
+      @member = Member.find(current_member.id)
+      @expiry_date_avg = @canned_food.reviews.average(:expiry_date_rating) || 0
+      @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
+      @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
+      @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
+      
+      render 'public/canned_foods/show'
     end
   end
 
@@ -21,10 +31,21 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
 
     if @review.update(review_params)
-      flash[:notice] = "更新が完了しました。"
+      flash[:notice] = "レビューの更新が完了しました。"
       redirect_to review_comments_path(review_id: @review.id)
     else
-      redirect_to canned_food_path(@review.canned_food_id)
+      flash[:error] = 'レビューの更新に失敗しました。'
+      
+      # render用データ
+      @canned_food = CannedFood.find(@review.canned_food_id)
+      @tags = @canned_food.tags
+      @member = Member.find(current_member.id)
+      @expiry_date_avg = @canned_food.reviews.average(:expiry_date_rating) || 0
+      @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
+      @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
+      @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
+      
+      render 'public/canned_foods/show'
     end
   end
   
