@@ -37,10 +37,10 @@ Rails.application.routes.draw do
     get '/members/followers' => 'relationships#index'
     
     get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
-    resources :reviews, only: [:index, :create, :destroy]
+    resources :reviews, only: [:index, :create, :update, :destroy]
     
     post '/reviews/:review_id/comments' => 'comments#create'
-    get '/reviews/:review_id/comments' => 'comments#index'
+    get '/reviews/:review_id/comments' => 'comments#index', as: 'review_comments'
     delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
     
     resources :favorites, only: [:index, :create, :destroy]

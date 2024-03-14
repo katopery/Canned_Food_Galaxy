@@ -105,12 +105,12 @@ ActiveRecord::Schema.define(version: 2024_03_07_161112) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "member_id", null: false
-    t.integer "canned_food_id", null: false
-    t.integer "expiry_date_rating", null: false
-    t.integer "taste_rating", null: false
-    t.integer "snack_rating", null: false
-    t.integer "outdoor_rating", null: false
+    t.integer "member_id", default: 0, null: false
+    t.integer "canned_food_id", default: 0, null: false
+    t.integer "expiry_date_rating", default: 0, null: false
+    t.integer "taste_rating", default: 0, null: false
+    t.integer "snack_rating", default: 0, null: false
+    t.integer "outdoor_rating", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
