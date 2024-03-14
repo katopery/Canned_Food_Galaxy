@@ -1,2 +1,34 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row my-5">
+    <div class="col-9">
+      <div class="top-image">
+          <p>
+            ようこそ、缶詰の星へ！</br>
+            「缶詰の星」は人々が安心して備蓄品を選べるように、</br>
+            賞味期限や保存方法、味の特性などを詳しく共有するレビューサイトです。</br>
+            缶詰は非常食だけでなく、キャンプ飯やちょっとした高級なおつまみとしても人気があり、</br>
+            多様な用途に適した缶詰を探す情報も提供します。</br>
+            会員でない方も缶詰の閲覧はできますが、</br>
+            レビュー・コメントには会員登録が必要になります。
+          </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 text-center">
+      <h2>新着商品</h2>
+    </div>
+        <% @canned_foods[0,5].each do |canned_food| %>
+            <%= link_to canned_food_path(canned_food) do %>
+              <%= image_tag canned_food.get_image(150,100), class: "image" %>
+            <% end %>
+            <%= canned_food.canned_name %>
+        <% end %>
+  </div>
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to "全ての缶詰を見る >>>", canned_foods_path %>
+    </div>
+  </div>
+</div>

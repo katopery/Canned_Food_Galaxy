@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+.top-image {
+  width: 825px;
+  height: 350px;
+  background-size: cover;
+  background-image: url('../../assets/images/fotor-ai-top-image.jpg');
+  margin-bottom: 10px;
+  display: flex;
+justify-content: center;
+align-items: center;
+}
