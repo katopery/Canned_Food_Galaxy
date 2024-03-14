@@ -18,5 +18,9 @@ class Public::CannedFoodsController < ApplicationController
     @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
     @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
     @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
+    
+    # すでに評価済みかの確認フラグ
+    @review_flg = Review.find_by(member_id: current_member.id, canned_food_id: params[:id])
+    
   end
 end

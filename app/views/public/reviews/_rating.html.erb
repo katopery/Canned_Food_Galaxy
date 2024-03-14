@@ -1,66 +1,12 @@
-<%= form_with model: review, local: true do |f| %>
-  <%= f.hidden_field :canned_food_id, value:  review.canned_food_id %>
+<div id="<%= type %>"></div>
 
-  <div class="row my-4 justify-content-center">
-    <div class="col-md-3">
-      <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
-      <div id="expiry_date_rating_star"></div>
-    </div>
-
-    <div class="col-md-3">
-      <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
-      <div id="taste_rating_star"></div>
-    </div>
-    
-    <div class="col-md-3">
-      <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
-      <div id="snack_rating_star"></div>
-    </div>
-    
-    <div class="col-md-3">
-      <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
-      <div id="outdoor_rating_star"></div>
-    </div>
-  </div>
-  
-  <% unless member.reviews.exists? %>
-    <div class="my-4 d-flex flex-column align-items-center justify-content-center">
-      <%= f.submit "レビュー追加" %>
-    </div>
-  <% end %>
-<% end %>
-
-<!-- レビュー用 -->
 <script>
-  raty(document.querySelector('#expiry_date_rating_star'),{
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    scoreName: 'review[expiry_date_rating]',
-    half: false,
-  });
-
-  raty(document.querySelector('#taste_rating_star'),{
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    scoreName: 'review[taste_rating]',
-    half: false,
-  });
-
-  raty(document.querySelector('#snack_rating_star'),{
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    scoreName: 'review[snack_rating]',
-    half: false,
-  });
-
-  raty(document.querySelector('#outdoor_rating_star'),{
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    scoreName: 'review[outdoor_rating]',
-    half: false,
+  $('#<%= type %>').empty(); // Turbolinksで星が増殖する現象を解消
+  raty(document.querySelector('#<%= type %>'),{
+    size      : 36,
+    starOff   : '<%= asset_path('star-off.png') %>',
+    starOn    : '<%= asset_path('star-on.png') %>',
+    scoreName : 'review[<%= type %>]',
+    half      : false,
   });
 </script>
