@@ -1,5 +1,6 @@
 class Public::CannedFoodsController < ApplicationController
   def index
+    @canned_foods = CannedFood.page(params[:page]).per(10)
   end
 
   def search
