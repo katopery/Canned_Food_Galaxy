@@ -1,2 +1,20 @@
-<h1>Public::Comments#index</h1>
-<p>Find me in app/views/public/comments/index.html.erb</p>
+<table>
+  <tbody>
+    <% @review.comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= link_to member_path(comment.member) do %>
+          <%= image_tag comment.member.get_profile_image, size: "50x50" %><br>
+          <%= comment.member.nickname %>
+        <% end %>
+      </td>
+      <td><%= comment.comment %></td>
+      <td>
+        <% if book_comment.user == current_user %>
+          <%= link_to "Destroy", book_book_comment_path(book, book_comment), method: :delete, class: "btn btn-sm btn-danger float-end" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

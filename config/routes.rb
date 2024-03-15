@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     patch '/members/information' => 'members#update'
     get '/members/unsubscribe' => 'members#unsubscribe'
     patch '/members/withdraw' => 'members#withdraw'
-    get '/members/:member_id' => 'members#show'
+    get '/members/:member_id' => 'members#show', as: "member"
     
     post '/members/:member_id/relationships' => 'relationships#create'
     delete '/members/:member_id/relationships' => 'relationships#destroy'
@@ -37,11 +37,9 @@ Rails.application.routes.draw do
     get '/members/followers' => 'relationships#index'
     
     get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
-    resources :reviews, only: [:index, :create, :update, :destroy]
-    
-    post '/reviews/:review_id/comments' => 'comments#create'
-    get '/reviews/:review_id/comments' => 'comments#index', as: 'review_comments'
-    delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
+    resources :reviews, only: [:index, :create, :update, :destroy] do
+      resources :comments, only: [:create, :index, :destroy]
+    end
     
     resources :favorites, only: [:index, :create, :destroy]
   end
@@ -53,10 +51,9 @@ Rails.application.routes.draw do
     resources :members, only: [:index, :show, :edit, :update]
     
     get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
-    resources :reviews, only: [:index, :destroy]
-    
-    get '/reviews/:review_id/comments' => 'comments#index'
-    delete '/reviews/:review_id/comments/:id' => 'comments#destroy'
+    resources :reviews, only: [:index, :destroy] do
+      resources :comments, only: [:index, :destroy]
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
