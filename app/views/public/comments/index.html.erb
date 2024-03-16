@@ -1,2 +1,112 @@
-<h1>Public::Comments#index</h1>
-<p>Find me in app/views/public/comments/index.html.erb</p>
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center align-middle bg-info">レビュー詳細</h2>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div class="col-3 text-center">
+      <%= link_to canned_food_path(@canned_food) do %>
+        <div>
+          <%= image_tag @canned_food.get_image(200,100), class: "image" %>
+        </div>
+        <div>
+          缶詰名： <%= @canned_food.canned_name %>
+        </div>
+      <% end %>
+      <div>
+        <% @tags.each do |tag| %>
+          タグ： <%= tag.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-6 border border-primary text-break overflow-auto" style="height: 200px">
+      <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
+    </div>
+  </div>
+  
+  <div class="row text-center">
+    <div class="col-2">
+      <%= link_to member_path(@review.member) do %>
+        <%= image_tag @review.member.get_profile_image(100,100), class: "image" %><br>
+        <%= @review.member.nickname %>
+      <% end %>  
+    </div>
+    
+    
+    <div class="col-10">
+      <h5 class="mt-4">
+        <%= @review.member.nickname %>さんの評価
+      </h5>
+      
+      <div class="row mt-2">
+        <div class="col-3">
+          賞味期限
+          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'expiry_date_rating' %>
+        </div>
+        <div class="col-3">
+          おいしさ
+          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'taste_rating' %>
+        </div>
+        <div class="col-3">
+          おつまみ
+          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'snack_rating' %>
+        </div>
+        <div class="col-3">アウトドア
+          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'outdoor_rating' %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="row offset-1 mt-5">
+    <h5 class="px-3 text-center bg-light">コメント一覧</h5>
+    <div class="mx-2">コメント数： <%= @review.comments.count %></div>
+  </div>
+
+  <div class="row my-3 justify-content-center">
+    <div class="col-10">
+      <table class="table table-bordered table-striped table-hover">
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td class="col-2 text-center">
+                <%= link_to member_path(comment.member) do %>
+                  <%= image_tag comment.member.get_profile_image(50,50), class: "image" %><br>
+                  <%= comment.member.nickname %>
+                <% end %>
+              </td>
+              <td class="col-2 text-center">
+                <% if comment.image.attached? %>
+                  <%= image_tag comment.get_image(50,50), class: "image" %>
+                <% end %>
+              </td>
+              <td class="col-6 text-break">
+                <%=safe_join(comment.content.split("\n"),tag(:br))%>
+              </td>
+              <td class="col-2 text-center">
+                <% if comment.member == current_member %>
+                  <%= link_to "Destroy", review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger float-end" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="mx-auto my-2">
+      <%= paginate @comments %>
+    </div>
+  </div>
+
+  <div class="row my-5 justify-content-center">
+    <%= form_with model: @comment, url: review_comments_path, local: true do |f| %>
+      <%= f.file_field :image, autofocus: true, accept: "image/*" %>
+      <%= f.text_area :content, autofocus: true, placeholder: "コメントをここに", cols: "80", rows: "5" %>
+      <%= f.submit "送信" %>
+    <% end %>
+  </div>
+</div>
