@@ -17,7 +17,11 @@
           </tr>
           <tr>
             <td class="col-4 bg-secondary">缶詰説明</td>
-            <td class="text-left text-break"><%=safe_join(@canned_food.description.split("\n"),tag(:br))%></td>
+            <td>
+              <div class="text-left text-break overflow-auto" style="height: 300px">
+                <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
+              </div>
+            </td>
           </tr>
           <tr>
             <td class="col-4 bg-secondary">缶詰タグ</td>

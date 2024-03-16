@@ -7,11 +7,7 @@
   
   <div class="row my-5 justify-content-center">
     <div class="col-3 text-center">
-      <% if @member.image.attached? %>
-        <%= image_tag @member.image, size: "100x100" %>
-      <% else %>
-        <%= image_tag 'no_image', size: "100x100" %>
-      <% end %>
+      <%= image_tag @member.get_profile_image(100,100), class: "image" %>
       <p>
         ニックネーム</br>
         <%= @member.nickname %>
