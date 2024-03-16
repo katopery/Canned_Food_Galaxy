@@ -50,6 +50,11 @@ class Public::ReviewsController < ApplicationController
   end
   
   def destroy
+    review = Review.find(params[:id])
+    canned_food = CannedFood.find(review.canned_food_id)
+    
+    review.destroy
+    redirect_to canned_food_path(canned_food)
   end
   
   private

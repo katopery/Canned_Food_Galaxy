@@ -21,6 +21,8 @@ class Public::MembersController < ApplicationController
   end
 
   def show
+    @member = Member.find(params[:member_id])
+    @reviews = @member.reviews.page(params[:page]).per(5)
   end
 
   def unsubscribe
