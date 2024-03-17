@@ -12,10 +12,12 @@
         <%= @member.nickname %>  
       </div>
       <div class="col-4">
-        フォロー機能
+        レビュー数： <%= @member.reviews.count %>
       </div>
       <div class="col-4">
-        レビュー数： <%= @member.reviews.count %>
+        <% if current_member != @member %>
+          <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+        <% end %>
       </div>
     </div>
   </div>
