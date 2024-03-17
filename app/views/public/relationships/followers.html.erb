@@ -8,13 +8,13 @@
     </div>
   </div>
   
-<% if @members.exists? %>
-  <%= render "/public/members/follow", members: @members %>
-<% else %>
-  <div class="row my-3 justify-content-center text-center">
-    <%= link_to members_my_page_path, class: 'nav-link' do %>
-      <h3>フォロワーはいません</h3>
-    <% end %>
-  </div>
-<% end %>
+  <% if @members.exists? %>
+    <%= render "/public/members/follow", members: @members %>
+  <% else %>
+    <div class="row my-3 justify-content-center text-center">
+      <%= link_to members_my_page_path, class: 'nav-link' do %>
+        <h3>フォロワーはいません</h3>
+      <% end %>
+    </div>
+  <% end %>
 </div>

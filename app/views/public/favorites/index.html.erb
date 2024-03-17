@@ -1,2 +1,27 @@
-<h1>Public::Favorites#index</h1>
-<p>Find me in app/views/public/favorites/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <% if @canned_foods.present? %>
+          <%= render @canned_foods %>
+        <% else %>
+          <p><%= t('.no_result') %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if member_signed_in? %>
+    <div class="row" >
+      <% @favorite_canned_food.each do |favorite_canned_food| %>
+        <%= render "/public/favorites/btn", canned_food: favorite_canned_food %>
+      <% end %>
+      <div class="count-btn">
+        <p><span>お気に入りされた数: </span><%= @favorite_canned_food.favorites.count %></p>
+      </div>
+    </div>
+  <% else %>
+    <p>※※※お気に入りをするにはユーザー登録をしましょう※※※</p>
+  <% end %>
+  
+</div>

@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2024_03_07_161112) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2024_03_07_161112) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -80,6 +80,9 @@ ActiveRecord::Schema.define(version: 2024_03_07_161112) do
     t.integer "canned_food_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["canned_food_id"], name: "index_favorites_on_canned_food_id"
+    t.index ["member_id", "canned_food_id"], name: "index_favorites_on_member_id_and_canned_food_id", unique: true
+    t.index ["member_id"], name: "index_favorites_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -124,4 +127,6 @@ ActiveRecord::Schema.define(version: 2024_03_07_161112) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "canned_foods"
+  add_foreign_key "favorites", "members"
 end

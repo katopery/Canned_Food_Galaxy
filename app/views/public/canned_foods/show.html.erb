@@ -37,6 +37,9 @@
       <div class="detail-review">アウトドア</div>
       <%= render "public/reviews/rate_average.html.erb", canned_food: @canned_food, ave: @outdoor_avg, type: 'outdoor_rate_ave' %>
     </div>
+    <div class="col-1 text-center">
+      <%= render "/public/favorites/btn", canned_food: @canned_food %>
+    </div>
   </div>
 
   <div class="row my-5 justify-content-center">

@@ -31,4 +31,5 @@ class Public::CannedFoodsController < ApplicationController
       @review = @canned_food.reviews.build
     end
   end
+
 end
