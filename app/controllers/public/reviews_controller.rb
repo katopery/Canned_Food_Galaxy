@@ -2,9 +2,6 @@ class Public::ReviewsController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def create
     @review = current_member.reviews.new(review_params) 
 

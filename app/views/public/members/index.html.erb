@@ -52,16 +52,17 @@
   </div>
 
   <% unless @member.guest_member? %>
-    <div class="row mt-5 justify-content-center">
-      <div>
+    <div class="row mt-5 text-center justify-content-center">
+      <div class="col-3">
         <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
       </div>
-
-      <div class="offset-1">
-        <%= link_to "フォロー 一覧", members_followers_path, class: "btn btn-primary px-4 py-2" %>
+      <div class="col-3">
+        <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
       </div>
-
-      <div class="offset-1">
+      <div class="col-3">
+        <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
+      </div>
+      <div class="col-3">
         <%= link_to "お気に入り 一覧", favorites_path, class: "btn btn-primary px-4 py-2" %>
       </div>
     </div>

@@ -28,15 +28,12 @@ Rails.application.routes.draw do
     patch '/members/information' => 'members#update'
     get '/members/unsubscribe' => 'members#unsubscribe'
     patch '/members/withdraw' => 'members#withdraw'
-    get '/members/:member_id' => 'members#show', as: "member"
+    resources :members, only: [:show] do
+      resource :relationships, only: [:create, :destroy]
+    	get "followings" => "relationships#followings", as: "followings"
+    	get "followers" => "relationships#followers", as: "followers"
+    end
     
-    post '/members/:member_id/relationships' => 'relationships#create'
-    delete '/members/:member_id/relationships' => 'relationships#destroy'
-    get '/members/:member_id/followings' => 'relationships#followings', as: "followings"
-    get '/members/:member_id/followers' => 'relationships#followers', as: "followers"
-    get '/members/followers' => 'relationships#index'
-    
-    get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
     resources :reviews, only: [:index, :create, :update, :destroy] do
       resources :comments, only: [:create, :index, :destroy]
     end
