@@ -3,16 +3,6 @@ class Public::CannedFoodsController < ApplicationController
     @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(10)
   end
 
-  def search
-    @word = params[:word]
-    @search = params[:search]
-    @range = params[:range]
-
-    if @range == "缶詰"
-      @canned_foods = CannedFood.looks(@search, @word).page(params[:page]).per(10)
-    end
-  end
-
   def show
     @canned_food = CannedFood.find(params[:id])
     @tags = @canned_food.tags
@@ -38,4 +28,25 @@ class Public::CannedFoodsController < ApplicationController
       @review = @canned_food.reviews.build
     end
   end
+  
+  def search
+    @word = params[:word]
+    @search = params[:search]
+    @range = params[:range]
+
+    # 検索された缶詰に関連付けられたCannedFoodを取得
+    if @range == "缶詰"
+      @canned_foods = CannedFood.looks(@search, @word).page(params[:page]).per(10)
+    end
+  end
+  
+  def search_tag
+    # 検索されたタグを受け取る
+    @tag = Tag.find(params[:tag_id])
+    # 検索されたタグに関連付けられたCannedTagを取得
+    @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
+    # 検索されたタグに関連付けられたCannedFoodを取得
+    @canned_foods = @canned_tags.map(&:canned_food)
+  end
+  
 end
