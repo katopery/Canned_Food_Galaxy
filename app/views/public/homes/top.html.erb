@@ -20,11 +20,11 @@
       <table class="table table-bordered text-center">
         <tbody>
           <tr>
-            <tb class="col-3 d-flex flex-column align-items-center justify-content-center">
+            <tb class="col-3 text-center d-flex flex-column align-items-center justify-content-center">
               <%= link_to canned_food_path(canned_food) do %>
-                <%= image_tag canned_food.get_image(150,100), class: "image" %>
+                <%= image_tag canned_food.get_image(150,100), class: "image" %></br>
+                <%= canned_food.canned_name %>
               <% end %>
-              <%= canned_food.canned_name %>
             </tb>
             <tb class="col-2 my-3">
               <div class="detail-review">賞味期限</div>
