@@ -6,7 +6,8 @@ class Public::FavoritesController < ApplicationController
   end
 
   def index
-    @favorite_canned_food = current_member.favorite_canned_foods.includes(:member).order(created_at: :desc)
+    @favorites = current_member.favorites.includes(:canned_food, :member).order(created_at: :desc)
+    @canned_foods = @favorites.map(&:canned_food)
   end
 
   def destroy

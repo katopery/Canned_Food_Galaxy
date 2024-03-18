@@ -13,7 +13,6 @@ class Public::CannedFoodsController < ApplicationController
     @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
     @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
 
-
     if current_member
       # 会員がログインしている場合
       @member = Member.find(current_member.id)
