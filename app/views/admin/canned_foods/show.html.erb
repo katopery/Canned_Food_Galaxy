@@ -46,6 +46,6 @@
   
   <div class="my-4 text-center">
     <%= link_to "編集する", edit_admin_canned_food_path(@canned_food.id), class: "btn btn-success mr-5" %>
-    <%= link_to "一覧に戻る", admin_canned_foods_path, class: "btn btn-info" %>
+    <%= link_to "レビュー一覧", admin_canned_food_reviews_path(@canned_food.id), class: "btn btn-info" %>
   </div>
 </div>
