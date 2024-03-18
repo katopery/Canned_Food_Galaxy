@@ -13,7 +13,6 @@ class Public::CannedFoodsController < ApplicationController
     @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
     @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
 
-
     if current_member
       # 会員がログインしている場合
       @member = Member.find(current_member.id)
@@ -28,7 +27,7 @@ class Public::CannedFoodsController < ApplicationController
       @review = @canned_food.reviews.build
     end
   end
-  
+
   def search
     @word = params[:word]
     @search = params[:search]
@@ -48,5 +47,4 @@ class Public::CannedFoodsController < ApplicationController
     # 検索されたタグに関連付けられたCannedFoodを取得
     @canned_foods = @canned_tags.map(&:canned_food)
   end
-  
 end
