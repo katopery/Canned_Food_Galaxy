@@ -1,2 +1,54 @@
-<h1>Public::CannedFoods#search</h1>
-<p>Find me in app/views/public/canned_foods/search.html.erb</p>
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center align-middle bg-info">
+      "<%= @word %>"の検索結果
+    </h2>
+  </div>
+  
+  <div class="row my-2">
+    <% if @canned_foods.present? %>
+      <% @canned_foods.each do |canned_food| %>
+        <table class="table table-bordered text-center">
+          <tbody>
+            <tr>
+              <tb class="col-3 text-center d-flex align-items-center justify-content-center">
+                <%= link_to canned_food_path(canned_food) do %>
+                  <div>
+                    <%= image_tag canned_food.get_image(150,100), class: "image" %>
+                  </div>
+                  <div>
+                    <%= canned_food.canned_name %>
+                  </div>
+                <% end %>
+              </tb>
+              <tb class="col-2 my-3">
+                <div class="detail-review">賞味期限</div>
+                <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:expiry_date_rating) || 0, type: 'expiry_date_ave' %>
+              </tb>
+              <tb class="col-2 my-3">
+                <div class="detail-review">おいしさ</div>
+                <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:taste_rating) || 0, type: 'taste_ave' %>
+              </tb>
+              <tb class="col-2 my-3">
+                <div class="detail-review">おつまみ</div>
+                <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:snack_rating) || 0, type: 'snack_ave' %>
+              </tb>
+              <tb class="col-2 my-3">
+                <div class="detail-review">アウトドア</div>
+                <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:outdoor_rating) || 0, type: 'outdoor_ave' %>
+              </tb>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% else %>
+      <h3>缶詰が見つかりませんでした。</h3>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <div class="mx-auto my-2">
+      <%= paginate @canned_foods %>
+    </div>
+  </div>
+</div>

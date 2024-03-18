@@ -4,15 +4,21 @@ class CannedFood < ApplicationRecord
   has_many :canned_tags, dependent: :destroy  # 缶詰タグとの関連付け
   has_many :tags, through: :canned_tags       # タグとの関連付け
 
-  has_one_attached :image  # 缶詰の画像用
+  has_one_attached :image
 
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
     end
-
     image.variant(resize_to_limit: [width,height]).processed
+  end
+  
+  # 検索機能用
+  def self.looks(search, word)
+    if search == "partial"
+      @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
+    end
   end
 
   validates :canned_name, presence: true
