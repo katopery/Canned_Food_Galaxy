@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     
     get '/canned_foods/search' => 'canned_foods#search'
+    get "/canned_foods/search_tag" => "canned_foods#search_tag"
     resources :canned_foods, only: [:index, :show]do
       resources :reviews, only: [:index]
     end

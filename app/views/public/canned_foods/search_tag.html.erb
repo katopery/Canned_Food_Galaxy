@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row offset-1 my-5">
     <h2 class="px-3 text-center align-middle bg-info">
-      "<%= @word %>"の検索結果
+      "<%= @tag.name %>"の検索結果
     </h2>
   </div>
   
@@ -9,7 +9,7 @@
   
   <div class="row">
     <div class="mx-auto my-2">
-      <%= paginate @canned_foods %>
+      <%= paginate @canned_tags %>
     </div>
   </div>
 </div>

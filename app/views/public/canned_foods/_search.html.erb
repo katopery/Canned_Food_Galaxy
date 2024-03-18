@@ -1,37 +1,6 @@
-<div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center bg-info">缶詰一覧</h2>
-    
-    <div class="search_form offset-1 d-flex align-items-center">
-      <%= form_with url: canned_foods_search_path, local: true, method: :get do |f| %>
-        <div class="d-flex align-items-center justify-content-center">
-          <%= f.text_field :word, placeholder:"缶詰名", class:"mr-2" %>
-          <%= f.hidden_field :range, value: "缶詰"%> 
-          <%= f.hidden_field :search, value: "partial"%>
-          <%= f.submit "検索", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="search_form offset-1 d-flex align-items-center">
-      <%= form_tag canned_foods_search_tag_path, method: :get, class: 'boards__searchForm' do %>
-      <%= select_tag :tag_id,
-                     options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-                     {
-                       prompt: 'タグで絞り込み検索',
-                       onchange: 'submit(this.form);'
-                     }
-      %>
-    <% end %>
-    </div>
-  </div>
-
-  <div class="search_form offset-4 mb-3 d-flex align-items-center">
-    絞り込み検索用　未実装
-  </div>
-
-  <div class="row my-2">
-    <% @canned_foods.each do |canned_food| %>
+<div class="row my-2">
+  <% if canned_foods.present? %>
+    <% canned_foods.each do |canned_food| %>
       <table class="table table-bordered text-center">
         <tbody>
           <tr>
@@ -65,11 +34,9 @@
         </tbody>
       </table>
     <% end %>
-  </div>
-  
-  <div class="row">
-    <div class="mx-auto my-2">
-      <%= paginate @canned_foods %>
+  <% else %>
+    <div class="col text-center justify-content-center">
+      <h3>缶詰が見つかりませんでした。</h3>
     </div>
-  </div>
+  <% end %>
 </div>
