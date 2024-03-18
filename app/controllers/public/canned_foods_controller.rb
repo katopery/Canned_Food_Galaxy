@@ -1,6 +1,6 @@
 class Public::CannedFoodsController < ApplicationController
   def index
-    @canned_foods = CannedFood.page(params[:page]).per(5)
+    @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def search
