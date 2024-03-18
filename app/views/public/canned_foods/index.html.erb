@@ -15,14 +15,14 @@
     
     <div class="search_form offset-1 d-flex align-items-center">
       <%= form_tag canned_foods_search_tag_path, method: :get, class: 'boards__searchForm' do %>
-      <%= select_tag :tag_id,
-                     options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-                     {
-                       prompt: 'タグで絞り込み検索',
-                       onchange: 'submit(this.form);'
-                     }
-      %>
-    <% end %>
+        <%= select_tag :tag_id,
+            options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+            {
+              prompt: 'タグで絞り込み検索',
+              onchange: 'submit(this.form);'
+            }
+        %>
+      <% end %>
     </div>
   </div>
 

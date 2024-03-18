@@ -34,18 +34,18 @@ class Public::CannedFoodsController < ApplicationController
     @search = params[:search]
     @range = params[:range]
 
+    # 検索された缶詰に関連付けられたCannedFoodを取得
     if @range == "缶詰"
       @canned_foods = CannedFood.looks(@search, @word).page(params[:page]).per(10)
     end
   end
-  
   
   def search_tag
     # 検索されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
     # 検索されたタグに関連付けられたCannedTagを取得
     @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
-    
+    # 検索されたタグに関連付けられたCannedFoodを取得
     @canned_foods = @canned_tags.map(&:canned_food)
   end
   

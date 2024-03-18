@@ -35,5 +35,4 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to members_my_page_path, notice: 'ゲスト会員としてログインしました。'
   end
 
-
 end
