@@ -1,21 +1,28 @@
 class Public::CannedFoodsController < ApplicationController
   def index
-    @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(5)
+    @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def search
+    @word = params[:word]
+    @search = params[:search]
+    @range = params[:range]
+
+    if @range == "缶詰"
+      @canned_foods = CannedFood.looks(@search, @word).page(params[:page]).per(10)
+    end
   end
 
   def show
     @canned_food = CannedFood.find(params[:id])
     @tags = @canned_food.tags
-    
+
     # 各レビューの平均値算出
     @expiry_date_avg = @canned_food.reviews.average(:expiry_date_rating) || 0
     @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
     @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
     @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
-    
+
 
     if current_member
       # 会員がログインしている場合
