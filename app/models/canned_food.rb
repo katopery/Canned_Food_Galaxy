@@ -16,6 +16,13 @@ class CannedFood < ApplicationRecord
     # 指定した幅と高さにリサイズした画像を返す
     image.variant(resize_to_limit: [width,height]).processed
   end
+  
+  # 検索機能用
+  def self.looks(search, word)
+    if search == "partial"
+      @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
+    end
+  end
 
   validates :canned_name, presence: true
   validates :description, presence: true

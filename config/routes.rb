@@ -21,7 +21,10 @@ Rails.application.routes.draw do
     root to: "homes#top"
     
     get '/canned_foods/search' => 'canned_foods#search'
-    resources :canned_foods, only: [:index, :show]
+    get "/canned_foods/search_tag" => "canned_foods#search_tag"
+    resources :canned_foods, only: [:index, :show]do
+      resources :reviews, only: [:index]
+    end
     
     get '/members/my_page' => 'members#index'
     get '/members/information/edit' => 'members#edit'
@@ -34,7 +37,7 @@ Rails.application.routes.draw do
     	get "followers" => "relationships#followers", as: "followers"
     end
     
-    resources :reviews, only: [:index, :create, :update, :destroy] do
+    resources :reviews, only: [:create, :update, :destroy] do
       resources :comments, only: [:create, :index, :destroy]
     end
     

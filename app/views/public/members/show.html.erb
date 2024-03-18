@@ -15,7 +15,7 @@
         レビュー数： <%= @member.reviews.count %>
       </div>
       <div class="col-4">
-        <% if current_member != @member %>
+        <% if !current_member.guest_member? && current_member != @member %>
           <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
         <% end %>
       </div>
