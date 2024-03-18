@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
+  # ゲストログイン用
   devise_scope :member do
     post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in', as: "members_guest_sign_in"
   end
@@ -46,12 +47,14 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/canned_foods/search' => 'canned_foods#search'
-    resources :canned_foods, only: [:index, :new, :create, :show, :edit, :update]
+    resources :canned_foods, only: [:index, :new, :create, :show, :edit, :update] do
+      resources :reviews, only: [:index]
+    end
     
-    resources :members, only: [:index, :show, :edit, :update]
+    resources :members, only: [:index, :show, :edit, :update] 
     
     get '/members/:member_id/reviews' => 'reviews#show', as: "reviews_member"
-    resources :reviews, only: [:index, :destroy] do
+    resources :reviews, only: [:destroy] do
       resources :comments, only: [:index, :destroy]
     end
   end
