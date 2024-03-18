@@ -33,23 +33,26 @@
       </div>
       <div class="col-2">
         賞味期限
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
+        <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
       </div>
       <div class="col-2">
         おいしさ
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
+        <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
       </div>
       <div class="col-2">
         おつまみ
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
+        <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
       </div>
       <div class="col-2">
         アウトドア
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
+        <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
       </div>
       <div class="col-2">
-        <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn btn-info mb-2" %>
-        <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn btn-danger' %>
+        <div class="mx-2">コメント数： <%= review.comments.count %></div>
+        <div>
+          <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn btn-info mb-2" %>
+          <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn btn-danger' %>
+        </div>
       </div>
     </div>
   <% end %>
