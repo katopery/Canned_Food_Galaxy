@@ -1,6 +1,6 @@
-<div>
+<div class="text-center justify-content-center">
   <p>Favorite</p>
-  <div>
+  <div class="d-flex flex-column align-items-center">
     <% if current_member.favorite?(canned_food) %>
       <%= link_to favorite_path(current_member.favorites.find_by(canned_food_id: canned_food.id)), id: "js-bookmark-button-for-board-#{canned_food.id}", class:"float-right", method: :delete do %>
         <i class="fa-sharp fa-regular fa-heart fa-3x"></i>
