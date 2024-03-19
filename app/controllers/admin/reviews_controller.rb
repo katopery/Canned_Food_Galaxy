@@ -12,9 +12,8 @@ class Admin::ReviewsController < ApplicationController
 
   def destroy
     review = Review.find(params[:id])
-    canned_food = CannedFood.find(review.canned_food_id)
-    
     review.destroy
-    redirect_back(fallback_location: root_path)
+    
+    redirect_to request.referer
   end
 end
