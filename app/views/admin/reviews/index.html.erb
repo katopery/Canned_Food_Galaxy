@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center align-middle bg-info">レビュー一覧</h2>
+    <h2 class="px-3 text-center bg-info">レビュー一覧</h2>
   </div>
   
   <div class="row my-5 justify-content-center">
@@ -55,13 +55,12 @@
       </div>
         
       <div class="col-2">
-        <div class="mx-2">コメント数： <%= review.comments.count %></div>
+        <div class="text-center mb-2">コメント数： <%= review.comments.count %></div>
         <div>
           <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn btn-info mb-2" %>
           <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn btn-danger' %>
         </div>
       </div>
-
     <% end %>
   </div>
 </div>

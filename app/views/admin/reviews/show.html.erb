@@ -21,7 +21,7 @@
     
   <% @reviews.each do |review| %>
     <div class="row my-5 text-center">
-      <div class="col-2">
+      <div class="col-2 d-flex align-items-center">
         <%= link_to admin_canned_food_path(review.canned_food.id) do %>
           <div>
             <%= image_tag review.canned_food.get_image(200,100), class: "image" %>
@@ -48,7 +48,7 @@
         <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
       </div>
       <div class="col-2">
-        <div class="mx-2">コメント数： <%= review.comments.count %></div>
+        <div class="text-center mb-2">コメント数： <%= review.comments.count %></div>
         <div>
           <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn btn-info mb-2" %>
           <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn btn-danger' %>
