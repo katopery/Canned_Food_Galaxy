@@ -6,12 +6,16 @@
   </div>
   
   <div class="row my-2">
-    <%= render "search.html.erb", canned_foods: @canned_foods %>
+    <% if @range == "缶詰" %>
+      <%= render "admin/canned_foods/list.html.erb", canned_foods: @canned_foods %>
+    <% elsif @range == "会員" %>
+      <%= render "admin/members/list.html.erb", members: @members %>
+    <% end %>
   </div>
   
   <div class="row">
     <div class="mx-auto my-2">
-      <%= paginate @canned_foods %>
+      <%= paginate @paginate %>
     </div>
   </div>
 </div>

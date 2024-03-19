@@ -1,6 +1,6 @@
 class Admin::CannedFoodsController < ApplicationController
   def index
-    @canned_foods = CannedFood.page(params[:page]).per(5)
+    @canned_foods = CannedFood.page(params[:page]).per(10)
   end
 
   def new
@@ -44,9 +44,6 @@ class Admin::CannedFoodsController < ApplicationController
       # 更新失敗した場合の処理
       render :edit
     end
-  end
-  
-  def search
   end
   
   private

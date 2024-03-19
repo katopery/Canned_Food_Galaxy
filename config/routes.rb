@@ -46,7 +46,6 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
-    get '/canned_foods/search' => 'canned_foods#search'
     resources :canned_foods, only: [:index, :new, :create, :show, :edit, :update] do
       resources :reviews, only: [:index]
     end
@@ -57,6 +56,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:destroy] do
       resources :comments, only: [:index, :destroy]
     end
+    
+    get "search" => "searches#search"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

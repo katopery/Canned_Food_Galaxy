@@ -1,0 +1,39 @@
+<% if members.present? %>
+  <table class="table text-center">
+    <thead class="bg-info">
+      <tr class="font-weight-bold">
+        <th class="font-weight-bold border border-dark">会員ID</th>
+        <th class="font-weight-bold border border-dark">ニックネーム</th>
+        <th class="font-weight-bold border border-dark">メールアドレス</th>
+        <th class="font-weight-bold border border-dark">ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% members.each do |member| %>
+        <tr>
+          <td class="border border-dark">
+            <%= member.id %>
+          </td>
+          <td class="border border-dark">
+            <%= link_to member.nickname, admin_member_path(member) %>
+          </td>
+          <td class="border border-dark">
+            <%= member.email %>
+          </td>
+          <td class="border border-dark">
+            <% if member.is_member_status == true %>
+              <span class="text-success">有効</span>
+            <% else %>
+              <span class="text-secondary">退会</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="col text-center justify-content-center">
+    <h3>会員が見つかりませんでした。</h3>
+  </div>
+<% end %>
