@@ -21,8 +21,48 @@
     </div>
   </div>
 
-  <div class="search_form offset-4 mb-3 d-flex align-items-center">
-    絞り込み検索用　未実装
+  <div class="row justify-content-center">
+    <%= link_to "新しい順", canned_foods_path(sort_created_at: 'created_at desc') %> 
+    |
+    <%= link_to "古い順", canned_foods_path(sort_created_at: 'created_at asc') %> 
+    |
+    <%= link_to "賞味期限評価の高い順", canned_foods_path(sort_review: 'expiry_date_rating') %>
+    |
+    <%= link_to "おいしさ評価の高い順", canned_foods_path(sort_review: 'taste_rating') %>
+    |
+    <%= link_to "おつまみ評価の高い順", canned_foods_path(sort_review: 'snack_rating') %>
+    |
+    <%= link_to "アウトドア評価の高い順", canned_foods_path(sort_review: 'outdoor_rating') %>
+  </div>
+    
+  <div class="row my-5 justify-content-center">
+    <div class="col-2">
+      <p>評価の絞り込み検索</p>
+    </div>
+    <div class="col-2">
+      <%= form_tag canned_foods_path, method: :get do %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["賞味期限 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= hidden_field_tag :find_review, 'expiry_date_rating' %>
+      <% end %>
+    </div>
+    <div class="col-2">
+      <%= form_tag canned_foods_path, method: :get do %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おいしさ 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= hidden_field_tag :find_review, 'taste_rating' %>
+      <% end %>
+    </div>
+    <div class="col-2">
+      <%= form_tag canned_foods_path, method: :get do %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おつまみ 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= hidden_field_tag :find_review, 'snack_rating' %>
+      <% end %>
+    </div>
+    <div class="col-2">
+      <%= form_tag canned_foods_path, method: :get do %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["アウトドア 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= hidden_field_tag :find_review, 'outdoor_rating' %>
+      <% end %>
+    </div>
   </div>
 
   <div class="row my-2">

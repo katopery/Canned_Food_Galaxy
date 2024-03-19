@@ -1,6 +1,26 @@
 class Public::CannedFoodsController < ApplicationController
   def index
-    @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:sort_created_at]
+      # 新着/古い順表示の処理
+      @canned_foods = CannedFood.order(params[:sort_created_at]).page(params[:page]).per(10)
+    elsif params[:sort_review]
+      # 各評価項目ごとの昇順表示の処理
+      @canned_foods = CannedFood.left_joins(:reviews)
+                                .group(:id).order("avg(reviews.#{params[:sort_review]}) desc")
+                                .page(params[:page])
+                                .per(10)
+    elsif params[:find_review]
+      # 各評価項目ごとの絞り込み表示の処理
+      @canned_foods = CannedFood.left_joins(:reviews)
+                                .group(:id)
+                                .where("reviews.#{params[:find_review]} >= #{params[:rate]}")
+                                .order("avg(reviews.#{params[:find_review]}) desc")
+                                .page(params[:page])
+                                .per(10)
+    else
+      # 通常の表示処理
+      @canned_foods = CannedFood.all.page(params[:page]).per(10)
+    end
   end
 
   def show
