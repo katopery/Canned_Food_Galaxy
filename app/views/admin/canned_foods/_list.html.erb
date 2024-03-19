@@ -1,0 +1,42 @@
+<% if canned_foods.present? %>
+  <table class="table text-center">
+    <thead class="bg-info">
+      <tr>
+        <th class="font-weight-bold border border-dark">缶詰ID</th>
+        <th class="font-weight-bold border border-dark">缶詰名</th>
+        <th class="font-weight-bold border border-dark">缶詰画像</th>
+        <th class="font-weight-bold border border-dark">缶詰タグ</th>
+        <th class="font-weight-bold border border-dark">表示ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% canned_foods.each do |canned_food| %>
+        <tr>
+          <td class="border border-dark"><%= canned_food.id %></td>
+          <td class="border border-dark">
+            <%= link_to admin_canned_food_path(canned_food.id) do %>
+              <%= canned_food.canned_name %>
+            <% end %>
+          </td>
+          <td class="border border-dark"><%= image_tag canned_food.get_image(100,50), class: "image" %></td>
+          <td class="border border-dark">
+            <% canned_food.tags.each do |tag| %>
+              <%= tag.name %>
+            <% end %>
+          </td>
+          <td class="border border-dark">
+            <% if canned_food.is_canned_status == true %>
+              <strong class="text-success"><%= "表示" %></strong>
+            <% else %>
+              <strong class="text-danger"><%= "非表示" %></strong>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="col text-center justify-content-center">
+    <h3>缶詰が見つかりませんでした。</h3>
+  </div>
+<% end %>

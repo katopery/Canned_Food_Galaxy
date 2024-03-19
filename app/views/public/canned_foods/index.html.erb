@@ -14,7 +14,7 @@
     </div>
     
     <div class="search_form offset-1 d-flex align-items-center">
-      <%= form_with(url: canned_foods_search_tag_path, method: :get, class: 'boards__searchForm') do |f| %>
+      <%= form_with url: canned_foods_search_tag_path, method: :get, class: 'boards_searchForm' do |f| %>
         <%= f.collection_select(:tag_id, Tag.all, :id, :name, { prompt: 'タグで絞り込み検索' }) %>
         <%= f.submit "検索", class: "btn btn-primary" %>
       <% end %>

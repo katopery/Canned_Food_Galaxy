@@ -1,36 +1,34 @@
-<div class="row my-2">
-  <% if canned_foods.present? %>
-    <% canned_foods.each do |canned_food| %>
-      <div class="col-3 text-center d-flex align-items-center justify-content-center">
-        <%= link_to canned_food_path(canned_food) do %>
-          <div>
-            <%= image_tag canned_food.get_image(150,100), class: "image" %>
-          </div>
-          <div>
-            <%= canned_food.canned_name %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-2 my-3">
-        <div class="detail-review">賞味期限</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:expiry_date_rating) || 0, type: 'expiry_date_ave' %>
-      </div>
-      <div class="col-2 my-3">
-        <div class="detail-review">おいしさ</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:taste_rating) || 0, type: 'taste_ave' %>
-      </div>
-      <div class="col-2 my-3">
-        <div class="detail-review">おつまみ</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:snack_rating) || 0, type: 'snack_ave' %>
-      </div>
-      <div class="col-2 my-3">
-        <div class="detail-review">アウトドア</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:outdoor_rating) || 0, type: 'outdoor_ave' %>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="col text-center justify-content-center">
-      <h3>缶詰が見つかりませんでした。</h3>
+<% if canned_foods.present? %>
+  <% canned_foods.each do |canned_food| %>
+    <div class="col-3 text-center d-flex align-items-center justify-content-center">
+      <%= link_to canned_food_path(canned_food) do %>
+        <div>
+          <%= image_tag canned_food.get_image(150,100), class: "image" %>
+        </div>
+        <div>
+          <%= canned_food.canned_name %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-2 my-3">
+      <div class="detail-review">賞味期限</div>
+      <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:expiry_date_rating) || 0, type: 'expiry_date_ave' %>
+    </div>
+    <div class="col-2 my-3">
+      <div class="detail-review">おいしさ</div>
+      <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:taste_rating) || 0, type: 'taste_ave' %>
+    </div>
+    <div class="col-2 my-3">
+      <div class="detail-review">おつまみ</div>
+      <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:snack_rating) || 0, type: 'snack_ave' %>
+    </div>
+    <div class="col-2 my-3">
+      <div class="detail-review">アウトドア</div>
+      <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:outdoor_rating) || 0, type: 'outdoor_ave' %>
     </div>
   <% end %>
-</div>
+<% else %>
+  <div class="col text-center justify-content-center">
+    <h3>缶詰が見つかりませんでした。</h3>
+  </div>
+<% end %>

@@ -1,43 +1,15 @@
 <div class="container">
   <div class="row offset-1 my-5">
     <h2 class="px-3 text-center bg-info">会員一覧</h2>
+    
+    <div class="search_form offset-1 d-flex align-items-center">
+      <%= render "admin/searches/form", word: "会員名", range: "会員"  %>
+    </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <table class="table text-center">
-        <thead class="bg-info">
-          <tr class="font-weight-bold">
-            <th class="font-weight-bold border border-dark">会員ID</th>
-            <th class="font-weight-bold border border-dark">ニックネーム</th>
-            <th class="font-weight-bold border border-dark">メールアドレス</th>
-            <th class="font-weight-bold border border-dark">ステータス</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @members.each do |member| %>
-            <tr>
-              <td class="border border-dark">
-                <%= member.id %>
-              </td>
-              <td class="border border-dark">
-                <%= link_to member.nickname, admin_member_path(member) %>
-              </td>
-              <td class="border border-dark">
-                <%= member.email %>
-              </td>
-              <td class="border border-dark">
-                <% if member.is_member_status == true %>
-                  <span class="text-success">有効</span>
-                <% else %>
-                  <span class="text-secondary">退会</span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render "admin/members/list.html.erb", members: @members %>
     </div>
   </div>
     

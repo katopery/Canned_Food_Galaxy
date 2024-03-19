@@ -54,6 +54,13 @@ class Member < ApplicationRecord
   def favorite?(canned_food)
     favorite_canned_foods.include?(canned_food)
   end
+  
+  # 検索機能用
+  def self.looks(search, word)
+    if search == "partial"
+      @member = Member.where("nickname LIKE?","%#{word}%")
+    end
+  end
 
   # ゲスト会員用メールアドレス
   GUEST_MEMBER_EMAIL = 'guest@example.com'
