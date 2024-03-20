@@ -19,3 +19,12 @@
   font-family: "Hannari";
   background-color: rgba(115, 80, 50, 0.8);
 }
+
+h2 {
+  padding: 1rem 2rem;
+  position: relative;
+  color: #fff;
+  font-family: "Times New Roman";
+  background: linear-gradient(-45deg, darken(#eb6100, 3%) 25%, #eb6100 0, #eb6100 50%, darken(#eb6100, 3%) 0, darken(#eb6100, 3%) 75%, #eb6100 0);
+  background-size: 20px 20px;
+}
