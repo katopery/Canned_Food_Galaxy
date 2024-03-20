@@ -1,6 +1,26 @@
 class Public::CannedFoodsController < ApplicationController
   def index
-    @canned_foods = CannedFood.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:sort_created_at]
+      # 新着/古い順表示の処理
+      @canned_foods = CannedFood.order(params[:sort_created_at]).page(params[:page]).per(10)
+    elsif params[:sort_review]
+      # 各評価項目ごとの降順表示の処理
+      @canned_foods = CannedFood.left_joins(:reviews)
+                                .group(:id).order("avg(reviews.#{params[:sort_review]}) desc")
+                                .page(params[:page])
+                                .per(10)
+    elsif params[:find_review]
+      # 各評価項目ごとの絞り込み表示の処理
+      @canned_foods = CannedFood.left_joins(:reviews)
+                                .group(:id)
+                                .where("reviews.#{params[:find_review]} >= #{params[:rate]}")
+                                .order("avg(reviews.#{params[:find_review]}) desc")
+                                .page(params[:page])
+                                .per(10)
+    else
+      # 通常の表示処理
+      @canned_foods = CannedFood.all.page(params[:page]).per(10)
+    end
   end
 
   def show
@@ -40,11 +60,19 @@ class Public::CannedFoodsController < ApplicationController
   end
   
   def search_tag
-    # 検索されたタグを受け取る
-    @tag = Tag.find(params[:tag_id])
-    # 検索されたタグに関連付けられたCannedTagを取得
-    @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
-    # 検索されたタグに関連付けられたCannedFoodを取得
-    @canned_foods = @canned_tags.map(&:canned_food)
+    # タグIDが存在しているかチェック
+    if params[:tag_id].present?
+      # 検索されたタグを受け取る
+      @tag = Tag.find(params[:tag_id])
+      # 検索されたタグに関連付けられたCannedTagを取得
+      @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
+      # 検索されたタグに関連付けられたCannedFoodを取得
+      @canned_foods = @canned_tags.map(&:canned_food)
+    else
+      # タグIDが指定されていない場合、タグIDを0として処理をする
+      @tag = nil
+      @canned_tags = Kaminari.paginate_array([]).page(params[:page]).per(10)
+      @canned_foods = []
+    end
   end
 end
