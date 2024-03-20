@@ -60,11 +60,19 @@ class Public::CannedFoodsController < ApplicationController
   end
   
   def search_tag
-    # 検索されたタグを受け取る
-    @tag = Tag.find(params[:tag_id])
-    # 検索されたタグに関連付けられたCannedTagを取得
-    @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
-    # 検索されたタグに関連付けられたCannedFoodを取得
-    @canned_foods = @canned_tags.map(&:canned_food)
+    # タグIDが存在しているかチェック
+    if params[:tag_id].present?
+      # 検索されたタグを受け取る
+      @tag = Tag.find(params[:tag_id])
+      # 検索されたタグに関連付けられたCannedTagを取得
+      @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
+      # 検索されたタグに関連付けられたCannedFoodを取得
+      @canned_foods = @canned_tags.map(&:canned_food)
+    else
+      # タグIDが指定されていない場合、タグIDを0として処理をする
+      @tag = nil
+      @canned_tags = Kaminari.paginate_array([]).page(params[:page]).per(10)
+      @canned_foods = []
+    end
   end
 end
