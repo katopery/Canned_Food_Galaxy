@@ -4,7 +4,7 @@ class Public::CannedFoodsController < ApplicationController
       # 新着/古い順表示の処理
       @canned_foods = CannedFood.order(params[:sort_created_at]).page(params[:page]).per(10)
     elsif params[:sort_review]
-      # 各評価項目ごとの昇順表示の処理
+      # 各評価項目ごとの降順表示の処理
       @canned_foods = CannedFood.left_joins(:reviews)
                                 .group(:id).order("avg(reviews.#{params[:sort_review]}) desc")
                                 .page(params[:page])
