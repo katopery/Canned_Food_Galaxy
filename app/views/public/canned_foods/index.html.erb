@@ -5,37 +5,45 @@
     <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_path, local: true, method: :get do |f| %>
         <div class="d-flex align-items-center justify-content-center">
-          <%= f.text_field :word, placeholder:"缶詰名", class:"mr-2" %>
+          <%= f.text_field :word, placeholder:"缶詰名"%>
           <%= f.hidden_field :range, value: "缶詰"%> 
           <%= f.hidden_field :search, value: "partial"%>
-          <%= f.submit "検索", class: "btn btn-primary" %>
+          <%= f.submit "検索", class: "btn btn-primary ml-2" %>
         </div>
       <% end %>
     </div>
     
     <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_tag_path, method: :get, class: 'boards_searchForm' do |f| %>
-        <%= f.collection_select(:tag_id, Tag.all, :id, :name, { prompt: 'タグで絞り込み検索' }) %>
-        <%= f.submit "検索", class: "btn btn-primary" %>
+        <div class="d-flex align-items-center justify-content-center">
+          <%= f.collection_select(:tag_id, Tag.all, :id, :name, { prompt: 'タグで絞り込み検索' }) %>
+          <%= f.submit "検索", class: "btn btn-primary ml-2" %>
+        </div>
       <% end %>
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <%= link_to "新しい順", canned_foods_path(sort_created_at: 'created_at desc') %> 
-    |
+  <div class="row my-3 text-center justify-content-center">
+    <%= link_to "新しい順", canned_foods_path(sort_created_at: 'created_at desc') %>
+    ｜
     <%= link_to "古い順", canned_foods_path(sort_created_at: 'created_at asc') %> 
-    |
-    <%= link_to "賞味期限評価の高い順", canned_foods_path(sort_review: 'expiry_date_rating') %>
-    |
-    <%= link_to "おいしさ評価の高い順", canned_foods_path(sort_review: 'taste_rating') %>
-    |
-    <%= link_to "おつまみ評価の高い順", canned_foods_path(sort_review: 'snack_rating') %>
-    |
-    <%= link_to "アウトドア評価の高い順", canned_foods_path(sort_review: 'outdoor_rating') %>
+  </div>
+  <div class="row my-3 text-center justify-content-center">
+    <div class="col-3 mb-2">
+      <h6>評価の高い順</h6>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <%= link_to "賞味期限評価", canned_foods_path(sort_review: 'expiry_date_rating') %>
+      |
+      <%= link_to "おいしさ評価", canned_foods_path(sort_review: 'taste_rating') %>
+      |
+      <%= link_to "おつまみ評価", canned_foods_path(sort_review: 'snack_rating') %>
+      |
+      <%= link_to "アウトドア評価", canned_foods_path(sort_review: 'outdoor_rating') %>
+    </div>
   </div>
     
-  <div class="row my-5 text-center justify-content-center">
+  <div class="row mb-5 text-center justify-content-center">
     <div class="col-3 mb-2">
       <h6>評価で絞り込み</h6>
     </div>

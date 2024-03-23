@@ -1,58 +1,56 @@
 <div class="container">
   <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center bg-info">
+    <h2 class="px-3 text-center">
       <%= @member.nickname %>さんのレビュー一覧
     </h2>
   </div>
   
   <div class="row my-4 text-center justify-content-center">
-    <div class="col-6 d-flex align-items-center">
-      <div class="col-4">
-        <%= image_tag @member.get_profile_image(100,100), class: "image" %><br>
-        <%= @member.nickname %>  
-      </div>
-      <div class="col-4">
-        レビュー数： <%= @member.reviews.count %>
-      </div>
-      <div class="col-4">
-        <% if !current_member.guest_member? && current_member != @member %>
-          <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
-        <% end %>
-      </div>
+    <div class="col-lg-3 col-md-12 mb-3">
+      <%= image_tag @member.get_profile_image(100,100), class: "image" %><br>
+      <%= @member.nickname %>  
+    </div>
+    <div class="col-lg-2 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+      レビュー数： <%= @member.reviews.count %>
+    </div>
+    <div class="col-lg-3 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+      <% if !current_member.guest_member? && current_member != @member %>
+        <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+      <% end %>
     </div>
   </div>
     
   <% @reviews.each do |review| %>
-    <div class="row my-5 text-center">
-      <div class="col-2">
-        <div>
-          <%= image_tag review.canned_food.get_image(200,100), class: "image" %>
+    <div class="row my-3 justify-content-center">
+      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+        <%= image_tag review.canned_food.get_image(150,100), class: "image" %><br>
+        <%= review.canned_food.canned_name %>
+      </div>
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+        <div class="row">
+          <div class="col-lg-3 col-md-12 my-2 text-center">
+            <div class="detail-review">賞味期限</div>
+            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
+          </div>
+          <div class="col-lg-3 col-md-12 my-2 text-center">
+            <div class="detail-review">おいしさ</div>
+            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
+          </div>
+          <div class="col-lg-3 col-md-12 my-2 text-center">
+            <div class="detail-review">おつまみ</div>
+            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
+          </div>
+          <div class="col-lg-3 col-md-12 my-2 text-center">
+            <div class="detail-review">アウトドア</div>
+            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
+          </div>
+          <div class="col-12 my-3 text-center">
+            <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary_button" %>
+            <% if review.member == current_member %>
+              <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger_button' %>
+            <% end %>
+          </div>
         </div>
-        <div>
-          <%= review.canned_food.canned_name %>
-        </div>
-      </div>
-      <div class="col-2">
-        賞味期限
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
-      </div>
-      <div class="col-2">
-        おいしさ
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
-      </div>
-      <div class="col-2">
-        おつまみ
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
-      </div>
-      <div class="col-2">
-        アウトドア
-        <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
-      </div>
-      <div class="col-2">
-        <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn btn-info mb-2" %>
-        <% if review.member == current_member %>
-          <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn btn-danger' %>
-        <% end %>
       </div>
     </div>
   <% end %>
