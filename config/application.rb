@@ -21,5 +21,8 @@ module DWCPf
     
     # エラー時にfield_with_errorsによるレイアウト崩れを防ぐため
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+    
+    # 日本語化対応のため
+    config.i18n.default_locale = :ja
   end
 end

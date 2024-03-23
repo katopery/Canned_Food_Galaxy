@@ -1,16 +1,16 @@
 <div class="container">
   <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center bg-info">マイページ</h2>
+    <h2 class="px-3 text-center">マイページ</h2>
   </div>
 
   <div class="row offset-2 my-3">
     <div class="mr-5 d-flex align-items-center">
-      <h4 class="px-3 text-center bg-info">登録情報</h4>
+      <h5 class="px-3 text-center">登録情報</h5>
     </div>
 
     <% unless @member.guest_member? %>
       <div class="d-flex align-items-center">
-        <%= link_to "編集する", members_information_edit_path, class: "btn btn-success" %>
+        <%= link_to "編集する", members_information_edit_path, class: "btn edit_button" %>
       </div>
     <% end %>
   </div>
@@ -28,22 +28,23 @@
       </p>
     </div>
 
-    <table class="table table-bordered col-7 text-center">
+    <table class="col-7 table-bordered member_info h-100">
       <tbody>
         <tr>
-          <td class="col-4 bg-secondary align-middle">
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-solid fa-phone"></i>
             電話番号
-          </td>
-          <td class="align-middle">
+          </th>
+          <td class="p-3 text-center align-middle">
             <%= @member.phone_number %>
           </td>
         </tr>
-
         <tr>
-          <td class="col-4 bg-secondary align-middle">
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-regular fa-envelope"></i>
             メールアドレス
-          </td>
-          <td class="align-middle">
+          </th>
+          <td class="p-3 text-center align-middle">
             <%= @member.email %>
           </td>
         </tr>
@@ -53,17 +54,17 @@
 
   <% unless @member.guest_member? %>
     <div class="row mt-5 text-center justify-content-center">
-      <div class="col-3">
-        <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
+      <div class="col-lg-3 col-md-6 mb-5">
+        <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn primary_button" %>
       </div>
-      <div class="col-3">
-        <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
+      <div class="col-lg-3 col-md-6 mb-5">
+        <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn primary_button" %>
       </div>
-      <div class="col-3">
-        <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn btn-primary px-4 py-2" %>
+      <div class="col-lg-3 col-md-6 mb-5">
+        <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn primary_button" %>
       </div>
-      <div class="col-3">
-        <%= link_to "お気に入り 一覧", favorites_path, class: "btn btn-primary px-4 py-2" %>
+      <div class="col-lg-3 col-md-6 mb-5">
+        <%= link_to "お気に入り 一覧", favorites_path, class: "btn primary_button" %>
       </div>
     </div>
   <% end %>

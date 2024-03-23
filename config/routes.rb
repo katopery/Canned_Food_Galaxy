@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     end
     
     resources :favorites, only: [:index, :create, :destroy]
+    
+    # 新規会員登録失敗時の対処
+    get "members" => redirect("/members/sign_up")
+    # 会員情報編集失敗時の対処
+    get "members/information" => redirect("/members/information/edit")
   end
   
   namespace :admin do

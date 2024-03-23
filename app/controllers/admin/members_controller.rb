@@ -18,6 +18,7 @@ class Admin::MembersController < ApplicationController
       flash[:notice] = "更新が完了しました。"
       redirect_to admin_member_path(@member.id)
     else
+      flash[:alert] = "更新が失敗しました。"
       render :edit
     end
   end

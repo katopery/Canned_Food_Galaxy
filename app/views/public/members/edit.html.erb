@@ -1,62 +1,56 @@
 <div class="container">
-  <div class="row offset-2 my-5">
-    <h3 class="px-3 text-center bg-info">会員情報編集</h3>
+  <div class="row offset-2 mt-5 mb-2">
+    <h2 class="px-3 text-center">会員情報編集</h2>
   </div>
   
-  <% if @member.errors.any? %>
-    <h3>
-      <%= @member.errors.count %>件のエラーが発生したため、保存されませんでした:
-    </h3>
-    <ul>
-      <% @member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  
   <%= form_with model: @member, url: members_information_path do |f| %>
+    <%= render "public/shared/error_messages", resource: @member %>
     <div class="row d-flex align-items-center justify-content-center">
-      <table class="table table-borderless col-7">
+      <table class="table-bordered member_info">
         <tbody>
-          <tr>
-            <div class="field">
-              <td><%= f.label :"ニックネーム" %></td>
-              <td>
-                <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ" %>
-              </td>
-            </div>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-user"></i>
+              <%= f.label :"ニックネーム" %>
+            </th>
+            <td class="p-3 align-middle">
+              <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ", size: 40 %>
+            </td>
           </tr>
-          <tr>
-            <div class="field">
-              <td><%= f.label :"メールアドレス" %></td>
-              <td>
-                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
-              </td>
-            </div>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-envelope"></i>
+              <%= f.label :"メールアドレス" %>
+            </th>
+            <td class="p-3">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+            </td>
           </tr>
-          <tr>
-            <div class="field">
-              <td><%= f.label :"電話番号(ハイフンなし)" %></td>
-              <td>
-                <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000" %>
-              </td>
-            </div>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-phone"></i>
+              <%= f.label :"電話番号(ハイフンなし)" %>
+            </th>
+            <td class="p-3">
+              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000", size: 40 %>
+            </td>
           </tr>
-          <tr>
-            <div class="field">
-              <td><%= f.label :"プロフィール画像" %></td>
-              <td>
-                <%= f.file_field :image, accept: "image/*" %>
-              </td>
-            </div>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-image-portrait"></i>
+              <%= f.label :"プロフィール画像" %>
+            </th>
+            <td class="p-3">
+              <%= f.file_field :image, accept: "image/*" %>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="row mt-5 justify-content-center">
-      <%= f.submit "編集内容を保存", class: "btn btn-success px-4" %>
-      <%= link_to "退会する", members_unsubscribe_path, class: "btn btn-danger offset-1 px-4" %>
+      <%= f.submit "編集内容を保存", class: "btn edit_button" %>
+      <%= link_to "退会する", members_unsubscribe_path, class: "offset-1 btn danger_button" %>
     </div>
   <% end %>
 </div>
