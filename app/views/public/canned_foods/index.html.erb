@@ -2,7 +2,7 @@
   <div class="row offset-1 my-5">
     <h2 class="px-3 text-center">缶詰一覧</h2>
     
-    <div class="search_form offset-1 d-flex align-items-center">
+    <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_path, local: true, method: :get do |f| %>
         <div class="d-flex align-items-center justify-content-center">
           <%= f.text_field :word, placeholder:"缶詰名", class:"mr-2" %>
@@ -13,7 +13,7 @@
       <% end %>
     </div>
     
-    <div class="search_form offset-1 d-flex align-items-center">
+    <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_tag_path, method: :get, class: 'boards_searchForm' do |f| %>
         <%= f.collection_select(:tag_id, Tag.all, :id, :name, { prompt: 'タグで絞り込み検索' }) %>
         <%= f.submit "検索", class: "btn btn-primary" %>
@@ -35,31 +35,31 @@
     <%= link_to "アウトドア評価の高い順", canned_foods_path(sort_review: 'outdoor_rating') %>
   </div>
     
-  <div class="row my-5 justify-content-center">
-    <div class="col-2">
-      <p>評価絞り込み検索</p>
+  <div class="row my-5 text-center justify-content-center">
+    <div class="col-3 mb-2">
+      <h6>評価で絞り込み</h6>
     </div>
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12 mb-2">
       <%= form_tag canned_foods_path, method: :get do %>
-        <%= select_tag :rate, options_for_select((1..5).map { |n| ["賞味期限 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["賞味期限 ☆#{n}以上".html_safe, n] }, @expiry_date_rating), onchange: 'this.form.submit()' %>
         <%= hidden_field_tag :find_review, 'expiry_date_rating' %>
       <% end %>
     </div>
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12 mb-2">
       <%= form_tag canned_foods_path, method: :get do %>
-        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おいしさ 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おいしさ ☆#{n}以上".html_safe, n] }, @taste_rating), onchange: 'this.form.submit()' %>
         <%= hidden_field_tag :find_review, 'taste_rating' %>
       <% end %>
     </div>
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12 mb-2">
       <%= form_tag canned_foods_path, method: :get do %>
-        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おつまみ 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["おつまみ ☆#{n}以上".html_safe, n] }, @snack_rating), onchange: 'this.form.submit()' %>
         <%= hidden_field_tag :find_review, 'snack_rating' %>
       <% end %>
     </div>
-    <div class="col-2">
+    <div class="col-lg-2 col-md-12 mb-2">
       <%= form_tag canned_foods_path, method: :get do %>
-        <%= select_tag :rate, options_for_select((1..5).map { |n| ["アウトドア 評価#{n}".html_safe, n] }), onchange: 'this.form.submit()' %>
+        <%= select_tag :rate, options_for_select((1..5).map { |n| ["アウトドア ☆#{n}以上".html_safe, n] }, @outdoor_rating), onchange: 'this.form.submit()' %>
         <%= hidden_field_tag :find_review, 'outdoor_rating' %>
       <% end %>
     </div>

@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     # 新規会員登録失敗時の対処
     get "members" => redirect("/members/sign_up")
     # 会員情報編集失敗時の対処
-    get "members/information" => redirect("/members/information/edit")
+    get "members/information" => redirect("/members/my_page")
   end
   
   namespace :admin do

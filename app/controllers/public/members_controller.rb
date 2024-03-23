@@ -22,6 +22,9 @@ class Public::MembersController < ApplicationController
   end
 
   def show
+    # 会員情報編集画面で更新失敗後にリロードした場合、マイページに遷移
+    return redirect_to members_my_page_path if params[:id] == "information"
+    
     @member = Member.find(params[:id])
     @reviews = @member.reviews.page(params[:page]).per(5)
   end
