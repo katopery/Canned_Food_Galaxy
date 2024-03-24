@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center align-middle bg-info">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
       <% if @tag.present?  %>
         "<%= @tag.name %>"の検索結果
       <% else %>
@@ -9,9 +9,7 @@
     </h2>
   </div>
   
-  <div class="row my-2">
-    <%= render "search.html.erb", canned_foods: @canned_foods %>
-  </div>
+  <%= render "search.html.erb", canned_foods: @canned_foods %>
   
   <div class="row">
     <div class="mx-auto my-2">

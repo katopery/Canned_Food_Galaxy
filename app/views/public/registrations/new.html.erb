@@ -1,67 +1,84 @@
 <div class="container">
-  <div class="row offset-2 my-5">
-    <h2 class="px-3 text-center bg-info">新規会員登録</h2>
+  <div class="row offset-2 mt-5 mb-2">
+    <h2 class="px-3 text-center">新規会員登録</h2>
   </div>
 
   <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member' do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
     <div class="row mt-5 justify-content-center">
-      <div class="field form-group">
-        <%= f.label :"👤ニックネーム" %>
-        <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ" %>
-      </div>
+      <table class="table-bordered member_table_infoinfo">
+        <tbody>
+          <tr class="field">
+            <th class="px-2 text-center table-info align-middle">
+              <i class="fa-regular fa-user"></i>
+              <%= f.label :"ニックネーム" %>
+            </th>
+            <td class="p-2 align-middle">
+              <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ", size: 40 %>
+              <p class="m-0 text-danger">※1~12文字以内</p>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="px-2 text-center table-info align-middle">
+              <i class="fa-regular fa-envelope"></i>
+              <%= f.label :"メールアドレス" %>
+            </th>
+            <td class="p-2">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="px-2 text-center table-info align-middle">
+              <i class="fa-solid fa-phone"></i>
+              <%= f.label :"電話番号(ハイフンなし)" %>
+            </th>
+            <td class="p-2">
+              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000", size: 40 %>
+              <p class="m-0 text-danger">※10~11文字以内</p>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="px-2 text-center table-info align-middle">
+              <i class="fa-solid fa-lock"></i>
+              <%= f.label :"パスワード" %>
+            </th>
+            <td class="p-2">
+              <%= f.password_field :password, autocomplete: "new-password", size: 40 %>
+              <p class="m-0 text-danger">※6~32文字以内</p>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="px-2 text-center table-info align-middle">
+              <i class="fa-solid fa-lock"></i>
+              <%= f.label :"パスワード（確認用）" %>
+            </th>
+            <td class="p-2">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 40 %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
-    <div class="row my-2 justify-content-center">
-      <div class= "field form-group">
-        <%= f.label :"📧メールアドレス" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
-      </div>
-    </div>
-    
-    <div class="row my-2 justify-content-center">
-      <div class= "field form-group">
-        <%= f.label :"📞電話番号(ハイフンなし)" %>
-        <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000" %>
-      </div>
-    </div>
-  
-    <div class="row my-2 justify-content-center">
-      <div class= "field form-group">
-        <%= f.label :"🔒パスワード" %>
-        <% if @minimum_password_length %>
-          (<%= @minimum_password_length %> 文字以上)
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-    </div>
-  
-    <div class="row my-2 justify-content-center">
-      <div class= "field form-group">
-        <%= f.label :"🔒パスワード（確認用）" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
-    </div>
-      
-    <div class="row my-2 justify-content-center">
+ 
+    <div class="row mt-2 justify-content-center">
       <div class="actions">
-        <%= f.submit "新規会員登録", class:"btn btn-success" %>
+        <%= f.submit "入力情報を確定する", class:"btn fixing_button" %>
       </div>
     </div>
   <% end %>
 
   <div class="row mt-5 justify-content-center">
-    <h5 class= "mr-2 p-2 text-center bg-secondary">既に登録済みの方</h5>
-    <h6 class="d-flex align-items-center">
+    <h5 class="mr-2 p-2 text-center">既に登録済みの方</h5>
+    <p class="d-flex align-items-center">
       <%= link_to "こちら", new_member_session_path %> からログインしてください。
-    </h6>
+    </p>
   </div>
   
   <div class="row my-2 justify-content-center">
-    <h5 class= "mr-2 p-2 text-center bg-secondary">ゲストログインを希望の方</h5>
-    <h6 class="d-flex align-items-center">
+    <h5 class="mr-2 p-2 text-center">ゲストログインを希望の方</h5>
+    <p class="d-flex align-items-center">
       <%= link_to 'ゲストログイン（閲覧用）', members_guest_sign_in_path, method: :post %> からログインしてください。
-    </h6>
+    </p>
   </div>
 
 </div>

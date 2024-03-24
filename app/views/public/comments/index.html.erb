@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center align-middle bg-info">レビュー詳細</h2>
+  <div class="row mt-5">
+    <h2 class="px-3 text-center">レビュー詳細</h2>
   </div>
   
-  <div class="row my-5 justify-content-center">
-    <div class="col-3 text-center">
+  <div class="row mt-5 justify-content-center">
+    <div class="col-4 text-center">
       <%= link_to canned_food_path(@canned_food) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -19,23 +19,17 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-8 border border-primary text-break overflow-auto" style="height: 200px">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
   </div>
   
-  <div class="row my-5 text-center">
-    <div class="col-2">
-      <%= link_to member_path(@review.member) do %>
-        <%= image_tag @review.member.get_profile_image(100,100), class: "image" %><br>
-        <%= @review.member.nickname %>
-      <% end %>  
-    </div>
-    
-    
-    <div class="col-10">
+  <div class="row mt-5 text-center">
+    <div class="col-12">
       <h5 class="row justify-content-center">
-        <%= @review.member.nickname %>さんの評価
+        <%= link_to member_path(@review.member) do %>
+          <%= @review.member.nickname %>さんの評価
+         <% end %> 
       </h5>
       
       <div class="row mt-3">
@@ -59,22 +53,28 @@
       
       <div class="row mt-3 justify-content-center">
         <% if @review.member == current_member %>
-          <%= link_to "レビューを編集", canned_food_path(@canned_food), method: :get, class:'btn btn-info mr-5' %>
-          <%= link_to "レビューを削除", review_path(@review.id), method: :delete, class: 'btn btn-danger' %>
+          <%= link_to "レビュー編集画面へ", canned_food_path(@canned_food), method: :get, class:'btn primary_button mr-5' %>
+          <%= link_to "レビューを削除", review_path(@review.id), method: :delete, class: 'btn danger_button' %>
         <% end %>
       </div>
     </div>
-    
   </div>
 
-  <div class="row offset-1 mt-5">
-    <h5 class="px-3 text-center bg-light">コメント一覧</h5>
-    <div class="mx-2">コメント数： <%= @review.comments.count %></div>
+  <div class="row mt-5">
+    <h5 class="col-12 text-center">
+      コメント一覧（コメント数： <%= @review.comments.count %>）
+    </h5>
   </div>
 
-  <div class="row my-3 justify-content-center">
-    <div class="col-10">
+  <div class="row mt-3 justify-content-center">
+    <div class="col-12">
       <table class="table table-bordered table-striped table-hover">
+        <thead class="text-center">
+          <th>投稿者</th>
+          <th>画像</th>
+          <th>コメント内容</th>
+          <th></th>
+        </thead>
         <tbody>
           <% @comments.each do |comment| %>
             <tr>
@@ -92,9 +92,9 @@
               <td class="col-6 text-break">
                 <%=safe_join(comment.content.split("\n"),tag(:br))%>
               </td>
-              <td class="col-2 text-center">
+              <td class="col-1 text-center">
                 <% if comment.member == current_member %>
-                  <%= link_to "削除", review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger float-end px-3" %>
+                  <%= link_to "削除", review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger" %>
                 <% end %>
               </td>
             </tr>
@@ -104,17 +104,11 @@
     </div>
   </div>
   
-  <div class="row">
-    <div class="mx-auto my-2">
+  <div class="row mt-2">
+    <div class="mx-auto">
       <%= paginate @comments %>
     </div>
   </div>
 
-  <div class="row my-5 justify-content-center">
-    <%= form_with model: @comment, url: review_comments_path, local: true do |f| %>
-      <%= f.file_field :image, autofocus: true, accept: "image/*" %>
-      <%= f.text_area :content, autofocus: true, placeholder: "コメントをここに", cols: "80", rows: "5" %>
-      <%= f.submit "送信" %>
-    <% end %>
-  </div>
+  <%= render "public/comments/index.html.erb", comments: @comments %>
 </div>

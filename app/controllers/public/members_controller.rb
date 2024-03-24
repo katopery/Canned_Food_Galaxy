@@ -16,11 +16,15 @@ class Public::MembersController < ApplicationController
       flash[:notice] = "更新が完了しました。"
       redirect_to members_my_page_path
     else
-      render :edit
+      flash[:alert] = "更新が失敗しました。"
+      render "edit"
     end
   end
 
   def show
+    # 会員情報編集画面で更新失敗後にリロードした場合、マイページに遷移
+    return redirect_to members_my_page_path if params[:id] == "information"
+    
     @member = Member.find(params[:id])
     @reviews = @member.reviews.page(params[:page]).per(5)
   end
