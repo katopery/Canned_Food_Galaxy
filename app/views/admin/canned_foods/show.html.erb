@@ -4,11 +4,11 @@
   </div>
   
   <div class="row justify-content-center">
-    <div class="col-3 d-flex align-items-center justify-content-center">
+    <div class="col-lg-3 col-md-12 d-flex align-items-center justify-content-center">
       <%= image_tag @canned_food.get_image(200,100), class: "image" %>
     </div>
     
-    <div class="col-9">
+    <div class="col-lg-9 col-md-12">
       <table class="table table-bordered text-center">
         <tbody>
           <tr>
@@ -41,7 +41,7 @@
           </tr>
           <tr>
             <th class="col-4 p-3 text-center table-info align-middle">
-              販売ステータス
+              表示ステータス
             </th>
             <td class="col-8 p-3 text-center align-middle">
               <% if @canned_food.is_canned_status == true %>
