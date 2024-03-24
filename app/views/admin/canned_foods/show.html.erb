@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center bg-info">缶詰詳細</h2>
+  <div class="row my-5">
+    <h2 class="px-3 text-center">缶詰詳細</h2>
   </div>
   
   <div class="row justify-content-center">
@@ -12,26 +12,38 @@
       <table class="table table-bordered text-center">
         <tbody>
           <tr>
-            <td class="col-4 bg-secondary">缶詰名</td>
-            <td><%= @canned_food.canned_name %></td>
+            <th class="col-4 p-3 text-center table-info align-middle">
+              缶詰名
+            </th>
+            <td class="col-8 text-center align-middle">
+              <%= @canned_food.canned_name %>
+            </td>
           </tr>
           <tr>
-            <td class="col-4 bg-secondary">缶詰説明</td>
+            <th class="col-4 p-3 text-center table-info align-middle">
+              缶詰説明
+            </th>
             <td>
-              <div class="text-left text-break overflow-auto" style="height: 300px">
+              <div class="col-8 text-left text-break overflow-auto" style="height: 300px">
                 <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
               </div>
             </td>
           </tr>
           <tr>
-            <td class="col-4 bg-secondary">缶詰タグ</td>
-            <% @tags.each do |tag| %>
-              <td><%= tag.name %></td>
-            <% end %>
+            <th class="col-4 p-3 text-center table-info align-middle">
+              缶詰タグ
+            </th>
+            <td class="col-8 text-center align-middle">
+              <% @tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
+            </td>
           </tr>
           <tr>
-            <td class="col-4 bg-secondary">販売ステータス</td>
-            <td>
+            <th class="col-4 p-3 text-center table-info align-middle">
+              販売ステータス
+            </th>
+            <td class="col-8 p-3 text-center align-middle">
               <% if @canned_food.is_canned_status == true %>
                 <strong class="text-success"><%= "表示" %></strong>
               <% else %>
@@ -44,8 +56,12 @@
     </div>
   </div>
   
-  <div class="my-4 text-center">
-    <%= link_to "編集する", edit_admin_canned_food_path(@canned_food.id), class: "btn btn-success mr-5" %>
-    <%= link_to "レビュー一覧", admin_canned_food_reviews_path(@canned_food.id), class: "btn btn-info" %>
+  <div class="row my-5 justify-content-center">
+    <div>
+      <%= link_to "編集する", edit_admin_canned_food_path(@canned_food.id), class: "btn edit_button" %>
+    </div>
+    <div class="offset-1">
+      <%= link_to "レビュー一覧", admin_canned_food_reviews_path(@canned_food.id), class: "btn primary_button" %>
+    </div>
   </div>
 </div>

@@ -38,10 +38,10 @@
   background-color: rgba(115, 80, 50, 0.8);
 }
 
-/* 会員情報テーブル用 */
+/* 情報テーブル用 */
 @media screen and (max-width:800px){
-    .member_info th,
-    .member_info td{
+    .table_info th,
+    .table_info td{
         display: block;
         text-align: left;
     }
@@ -85,10 +85,10 @@
 .primary_button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
-  font-size     : 15pt;                 /* 文字サイズ   */
+  font-size     : 12pt;                 /* 文字サイズ   */
   text-align    : center;               /* 文字位置     */
   cursor        : pointer;              /* カーソル     */
-  padding       : 12px 12px;            /* 余白         */
+  padding       : 10px 10px;            /* 余白         */
   background    : #4d4dff;              /* 背景色       */
   color         : #ffffff;              /* 文字色       */
   line-height   : 1em;                  /* 1行の高さ    */
@@ -106,10 +106,10 @@
 .fixing_button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
-  font-size     : 15pt;                 /* 文字サイズ   */
+  font-size     : 12pt;                 /* 文字サイズ   */
   text-align    : center;               /* 文字位置     */
   cursor        : pointer;              /* カーソル     */
-  padding       : 12px 12px;            /* 余白         */
+  padding       : 10px 10px;            /* 余白         */
   background    : #ffa64d;              /* 背景色       */
   color         : #ffffff;              /* 文字色       */
   line-height   : 1em;                  /* 1行の高さ    */
@@ -127,10 +127,10 @@
 .edit_button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
-  font-size     : 15pt;                 /* 文字サイズ   */
+  font-size     : 12pt;                 /* 文字サイズ   */
   text-align    : center;               /* 文字位置     */
   cursor        : pointer;              /* カーソル     */
-  padding       : 12px 12px;            /* 余白         */
+  padding       : 10px 10px;            /* 余白         */
   background    : #59b300;              /* 背景色       */
   color         : #ffffff;              /* 文字色       */
   line-height   : 1em;                  /* 1行の高さ    */
@@ -148,10 +148,10 @@
 .danger_button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
-  font-size     : 15pt;                 /* 文字サイズ   */
+  font-size     : 12pt;                 /* 文字サイズ   */
   text-align    : center;               /* 文字位置     */
   cursor        : pointer;              /* カーソル     */
-  padding       : 12px 12px;            /* 余白         */
+  padding       : 10px 10px;            /* 余白         */
   background    : #ff0000;              /* 背景色       */
   color         : #ffffff;              /* 文字色       */
   line-height   : 1em;                  /* 1行の高さ    */
@@ -165,9 +165,29 @@
   background    : #ffffff;  /* 文字色             */
 }
 
+/* 画像投稿ボタン */
+.image_input_btn {
+  display: inline-block;
+  background-color: #228B22;
+  width: 180px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding-top: 2px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+}
+.image_form{
+  display: none;
+}
+
 h2,h5,h6 {
-  background: #dfefff;
-  box-shadow: 0px 0px 0px 5px #dfefff;
+  background: #FF6633;
+  box-shadow: 0px 0px 0px 5px #FF6633;
   border: dashed 1px #96c2fe;
   padding: 0.2em 0.5em;
   color: #454545;

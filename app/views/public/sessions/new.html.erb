@@ -6,7 +6,7 @@
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
     <div class="row mt-5 justify-content-center">
-      <table class="member_info table-bordered">
+      <table class="table_info table-bordered">
         <tbody>
           <tr class="field">
             <th class="p-3 text-center table-info align-middle">
@@ -39,8 +39,8 @@
 
   <div class="row my-5 justify-content-center">
     <h5 class="mr-2 p-2 text-center">会員登録がお済みではない方</h5>
-    <h6 class="d-flex align-items-center">
+    <p class="d-flex align-items-center">
       <%= link_to "こちら", new_member_registration_path %>から新規登録を行なってください。
-    </h6>
+    </p>
   </div>
 </div>

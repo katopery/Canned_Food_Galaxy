@@ -1,22 +1,12 @@
 <div class="container">
-  <div class="row offset-2 my-5">
-    <h2 class="px-3 text-center bg-info">缶詰新規登録</h2>
+  <div class="row my-5">
+    <h2 class="px-3 text-center">缶詰新規登録</h2>
   </div>
   
-  <% if @canned_food.errors.any? %>
-    <h3>
-      <%= @canned_food.errors.count %>件のエラーが発生したため、保存されませんでした:
-    </h3>
-    <ul>
-      <% @canned_food.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <div class="row d-flex justify-content-center">
-    <%= form_with model: @canned_food, url: admin_canned_foods_path, method: :post do |f| %>
-      <table class="table table-borderless">
+  <%= form_with model: @canned_food, url: admin_canned_foods_path, method: :post do |f| %>
+    <%= render "admin/shared/error_messages", resource: @canned_food %>
+    <div class="row mt-5 justify-content-center">
+      <table class="table_info table-bordered">
         <tbody>
           <tr>
             <td>缶詰名</td>

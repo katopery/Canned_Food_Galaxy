@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row offset-1 my-5">
+  <div class="row my-5">
     <h2 class="px-3 text-center">レビュー一覧</h2>
   </div>
   
@@ -23,8 +23,9 @@
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
     
-    <div>お気に入りボタン</div>
-  
+    <div class="col-3 my-3 justify-content-center">
+      <%= render "/public/favorites/btn", canned_food: @canned_food %>
+    </div>
   </div>
   
   <div class="row my-5 text-center">
@@ -57,13 +58,9 @@
         </div>
       </div>
         
-      <div class="col-2">
-        <div class="mx-2">コメント数： <%= review.comments.count %></div>
-        <div>
-          <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn btn-info mb-2" %>
-        </div>
+      <div class="col-2 d-flex flex-column align-items-center justify-content-center">
+        <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary_button" %>
       </div>
-
     <% end %>
   </div>
 </div>

@@ -27,6 +27,7 @@ ja:
         updated_at: 更新日
     models:
       member: 会員情報
+      canned_food: 缶詰情報
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
