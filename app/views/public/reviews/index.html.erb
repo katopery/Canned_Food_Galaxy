@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center align-middle bg-info">レビュー一覧</h2>
+  <div class="row my-5">
+    <h2 class="px-3 text-center">レビュー一覧</h2>
   </div>
   
   <div class="row my-5 justify-content-center">
-    <div class="col-3 text-center">
+    <div class="col-lg-3 col-md-12 text-center">
       <%= link_to canned_food_path(@canned_food) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -19,51 +19,52 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto" style="height: 200px">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
     
-    <div>お気に入りボタン</div>
-  
+    <div class="col-lg-3 col-md-12 my-3 justify-content-center">
+      <%= render "/public/favorites/btn", canned_food: @canned_food %>
+    </div>
   </div>
   
-  <div class="row my-5 text-center">
-    <% @reviews.each do |review| %>
-      <div class="col-2">
+  <% @reviews.each do |review| %>
+    <div class="row my-3 justify-content-center">
+      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
         <%= link_to member_path(review.member) do %>
           <%= image_tag review.member.get_profile_image(100,100), class: "image" %><br>
           <%= review.member.nickname %>
         <% end %>  
       </div>
-      
-      <div class="col-8">
-        <div class="row mt-3">
-          <div class="col-3">
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+        <div class="row">
+          <div class="col-lg-3 col-md-12 my-2 text-center">
             賞味期限
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
+            <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-12 my-2 text-center">
             おいしさ
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
+            <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-12 my-2 text-center">
             おつまみ
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
+            <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-12 my-2 text-center">
             アウトドア
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
+            <%= render "admin/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
+          </div>
+          <div class="col-12 my-3 text-center">
+            <div class="text-center mb-2">コメント数： <%= review.comments.count %></div>
+            <div>
+              <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary_button" %>
+              <% if review.member == current_member %>
+                <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger_button' %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-        
-      <div class="col-2">
-        <div class="mx-2">コメント数： <%= review.comments.count %></div>
-        <div>
-          <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn btn-info mb-2" %>
-        </div>
-      </div>
-
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

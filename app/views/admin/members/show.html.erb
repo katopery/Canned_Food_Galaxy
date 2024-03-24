@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center bg-info">
+    <h2 class="px-3 text-center">
         <%= @member.nickname %>さんの会員詳細
     </h2>
   </div>
@@ -14,31 +14,32 @@
       </p>
     </div>
 
-    <table class="table table-bordered col-7 text-center">
+    <table class="col-7 table-bordered table_info h-100">
       <tbody>
         <tr>
-          <td class="col-4 bg-secondary align-middle">
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-solid fa-phone"></i>
             電話番号
-          </td>
-          <td class="align-middle">
+          </th>
+          <td class="p-3 text-center align-middle">
             <%= @member.phone_number %>
           </td>
         </tr>
-
         <tr>
-          <td class="col-4 bg-secondary align-middle">
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-regular fa-envelope"></i>
             メールアドレス
-          </td>
-          <td class="align-middle">
+          </th>
+          <td class="p-3 text-center align-middle">
             <%= @member.email %>
           </td>
         </tr>
-        
         <tr>
-          <td class="col-4 bg-secondary align-middle">
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-solid fa-clipboard-user"></i>
             会員ステータス
-          </td>
-          <td class="align-middle">
+          </th>
+          <td class="p-3 text-center align-middle">
             <% if @member.is_member_status == true %>
               <span class="text-success">有効</span>
             <% else %>
@@ -52,11 +53,10 @@
   
   <div class="row my-5 justify-content-center">
     <div>
-      <%= link_to "編集する", edit_admin_member_path, class: "btn btn-success px-4 py-2" %>
+      <%= link_to "編集する", edit_admin_member_path, class: "btn edit_button" %>
     </div>
-
     <div class="offset-1">
-      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn btn-primary px-4 py-2" %>
+      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn primary_button" %>
     </div>
   </div>
 </div>

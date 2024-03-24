@@ -9,7 +9,7 @@ class Public::CommentsController < ApplicationController
       redirect_to request.referer
     else
       # コメントの保存が失敗した場合の処理
-      flash[:error] = comment.errors.full_messages.join(", ")
+      flash[:alert] = "コメントの送信に失敗しました。"
       redirect_to request.referer
     end
   end
@@ -20,7 +20,6 @@ class Public::CommentsController < ApplicationController
     @tags = @canned_food.tags
     
     @comment = Comment.new
-    
     @comments = @review.comments.page(params[:page]).per(5)
   end
 

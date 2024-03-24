@@ -7,17 +7,17 @@
   
   <div class="row mt-4 justify-content-center">
     <h4 class="text-center">
-      退会すると、会員登録情報やレビュー、コメントが削除されます。<br>
+      退会すると、会員登録情報を閲覧できなくなります。<br>
       退会する場合は、「退会する」をクリックしてください。
     </h4>
   </div>
 
   <div class="row mt-4 justify-content-center">
     <div class="mb-3 text-center">
-      <%= link_to "退会しない", members_my_page_path, class: "btn btn-primary btn-block" %>
+      <%= link_to "退会しない", members_my_page_path, class: "btn primary_button" %>
     </div>
     <div class="mb-3 offset-1 text-center">
-      <%= link_to "退会する", members_withdraw_path, method: :patch, data: {confirm: "本当に退会しますか？"}, class: "btn btn-danger btn-block" %>
+      <%= link_to "退会する", members_withdraw_path, method: :patch, data: {confirm: "本当に退会しますか？"}, class: "btn danger_button" %>
     </div>
   </div>
 </div>

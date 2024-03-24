@@ -13,12 +13,12 @@
   </head>
 
   <body>
-    <div class="footer_adjustments">
+    <div class="footer-adjustments">
       <%= render 'layouts/header' %>
-      
-      <div>
-        <%= flash[:notice] %>
-      </div>
+
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
+      <% end %>
       
       <main>
         <%= yield %>

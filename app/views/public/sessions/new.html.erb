@@ -1,37 +1,46 @@
 <div class="container">
-  <div class="row offset-2 my-5">
-    <h2 class="px-3 text-center bg-info">ログイン</h2>
+  <div class="row offset-2 mt-5">
+    <h2 class="px-3 text-center">ログイン</h2>
   </div>
-  <div class="row offset-2 my-5">
-    <h4 class="px-3 text-center bg-info">会員の方はこちらからログイン</h4>
-  </div>
-
+  
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
     <div class="row mt-5 justify-content-center">
-      <div class="field form-group">
-        <%= f.label :email, "📧メールアドレス" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
-      </div>
+      <table class="table_info table-bordered">
+        <tbody>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-envelope"></i>
+              <%= f.label :email, "メールアドレス" %>
+            </th>
+            <td class="p-3">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-lock"></i>
+              <%= f.label :password, "パスワード" %>
+            </th>
+            <td class="p-3">
+              <%= f.password_field :password, autocomplete: "current-password", size: 40 %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="row my-2 justify-content-center">
-      <div class="field form-group">
-        <%= f.label :password, "🔒パスワード" %>
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-    </div>
-    
-    <div class="row justify-content-center">
-      <div class="actions mt-2">
-        <%= f.submit "ログイン", class:"btn btn-primary" %>
+      <div class="actions">
+        <%= f.submit "ログイン", class:"btn fixing_button" %>
       </div>
     </div>
   <% end %>
 
   <div class="row my-5 justify-content-center">
-    <h5 class="mr-2 p-2 text-center bg-secondary">会員登録がお済ではない方</h5>
-    <h6 class="d-flex align-items-center">
+    <h5 class="mr-2 p-2 text-center">会員登録がお済みではない方</h5>
+    <p class="d-flex align-items-center">
       <%= link_to "こちら", new_member_registration_path %>から新規登録を行なってください。
-    </h6>
+    </p>
   </div>
 </div>
