@@ -62,8 +62,6 @@ class Member < ApplicationRecord
     end
   end
 
-  # ゲスト会員用メールアドレス
-  GUEST_MEMBER_EMAIL = 'guest@example.com'
   # ゲスト会員用情報取得
   def self.guest
     find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|
@@ -77,7 +75,7 @@ class Member < ApplicationRecord
     email == GUEST_MEMBER_EMAIL
   end
 
-  validates :nickname, uniqueness: true, presence: true, length: { maximum: 12 }
+  validates :nickname, uniqueness: true, presence: true, length: { in: 1..12 }
   validates :phone_number, presence: true, length: { in: 10..11 }
   devise :validatable, password_length: 6..32
 end

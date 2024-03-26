@@ -15,9 +15,11 @@ class Admin::CannedFoodsController < ApplicationController
       canned_tags = @canned_food.canned_tags.build(tag_id: params[:canned_food][:tag_ids])
       canned_tags.save!
       # 保存成功した場合の処理
-      redirect_to admin_canned_food_path(@canned_food.id),notice: "缶詰の登録が完了しました"
+      flash[:notice] = "缶詰の登録が完了しました。"
+      redirect_to admin_canned_food_path(@canned_food.id)
     else
       # 保存失敗した場合の処理
+      flash[:alert] = "缶詰の登録が失敗しました。"
       render :new
     end
   end
@@ -39,9 +41,11 @@ class Admin::CannedFoodsController < ApplicationController
       # 中間テーブル缶詰タグの更新
       @canned_food.tag_ids = params[:canned_food][:tag_ids]
       # 更新成功した場合の処理
-      redirect_to admin_canned_food_path(@canned_food.id),notice: "缶詰情報が更新されました"
+      flash[:notice] = "缶詰の更新が完了しました。"
+      redirect_to admin_canned_food_path(@canned_food.id)
     else
       # 更新失敗した場合の処理
+      flash[:alert] = "缶詰の更新が失敗しました。"
       render :edit
     end
   end
