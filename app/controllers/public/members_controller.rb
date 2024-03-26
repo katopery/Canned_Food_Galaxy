@@ -1,5 +1,6 @@
 class Public::MembersController < ApplicationController
-  before_action :ensure_guest_member, only: %i[update unsubscribe]
+  before_action :authenticate_member!
+  before_action :ensure_guest_member, only: [:edit, :update, :unsubscribe, :withdraw]
   
   def index
     @member = Member.find(current_member.id)
@@ -42,7 +43,6 @@ class Public::MembersController < ApplicationController
   end
   
   private
-
   def member_params
     params.require(:member).permit(:nickname, :phone_number, :email, :password, :password_confirmation, :image)
   end
@@ -50,7 +50,7 @@ class Public::MembersController < ApplicationController
   def ensure_guest_member
     @member = Member.find(current_member.id)
     if @member.guest_member?
-      redirect_to members_my_page_path , notice: "ゲスト会員の更新・削除はできません。"
+      redirect_to members_my_page_path, notice: "ゲスト会員は更新・退会できません。"
     end
   end 
 end

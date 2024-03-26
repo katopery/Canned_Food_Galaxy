@@ -1,4 +1,6 @@
 class Admin::CannedFoodsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @canned_foods = CannedFood.page(params[:page]).per(10)
   end
@@ -10,7 +12,7 @@ class Admin::CannedFoodsController < ApplicationController
   def create
     @canned_food = CannedFood.new(canned_food_params)
   
-    if @canned_food.save
+    if params[:canned_food][:tag_ids] != "" && @canned_food.save
       # 中間テーブル缶詰タグの保存
       canned_tags = @canned_food.canned_tags.build(tag_id: params[:canned_food][:tag_ids])
       canned_tags.save!
@@ -19,7 +21,12 @@ class Admin::CannedFoodsController < ApplicationController
       redirect_to admin_canned_food_path(@canned_food.id)
     else
       # 保存失敗した場合の処理
-      flash[:alert] = "缶詰の登録が失敗しました。"
+      if params[:canned_food][:tag_ids] == ""
+        flash[:alert] = "缶詰の登録が失敗しました。タグの選択を行って下さい。"
+      else
+        flash[:alert] = "缶詰の登録が失敗しました。"
+      end
+    
       render :new
     end
   end
@@ -51,7 +58,6 @@ class Admin::CannedFoodsController < ApplicationController
   end
   
   private
-
   def canned_food_params
     params.require(:canned_food).permit(:canned_name, :description, :image, :is_canned_status, tag_ids: [])
   end

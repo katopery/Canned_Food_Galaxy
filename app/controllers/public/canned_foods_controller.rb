@@ -1,4 +1,6 @@
 class Public::CannedFoodsController < ApplicationController
+  before_action :authenticate_member!
+
   def index
     if params[:sort_created_at]
       # 新着/古い順表示の処理

@@ -1,4 +1,6 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @review = Review.find(params[:review_id])
     @canned_food = @review.canned_food

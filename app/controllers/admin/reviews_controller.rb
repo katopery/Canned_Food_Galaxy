@@ -1,4 +1,6 @@
 class Admin::ReviewsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @canned_food = CannedFood.find(params[:canned_food_id])
     @reviews = @canned_food.reviews.page(params[:page]).per(5)

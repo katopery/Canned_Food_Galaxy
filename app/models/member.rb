@@ -62,6 +62,8 @@ class Member < ApplicationRecord
     end
   end
 
+  # ゲスト会員用メールアドレス
+  GUEST_MEMBER_EMAIL = 'guest@example.com'
   # ゲスト会員用情報取得
   def self.guest
     find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |member|

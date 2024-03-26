@@ -104,11 +104,13 @@
     </div>
   </div>
   
-  <div class="row mt-2">
+  <div class="row my-2">
     <div class="mx-auto">
       <%= paginate @comments %>
     </div>
   </div>
-
-  <%= render "public/comments/index.html.erb", comments: @comments %>
+  
+  <% if !@member.guest_member? %>
+    <%= render "public/comments/index.html.erb", comments: @comments %>
+  <% end %>
 </div>
