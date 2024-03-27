@@ -109,14 +109,14 @@ Review.create!(
 # コメント
 Comment.create!(
   [
-    { id: 1   , member_id: 2  , review_id: 1, content: "賞味期限が近く、食べ方を工夫したです。どんな料理にあいますか？" },
+    { id: 1   , member_id: 2  , review_id: 1, content: "賞味期限が近く、食べ方を工夫したいです。どんな料理にあいますか？" },
     { id: 2   , member_id: 3  , review_id: 1, content: "カレーにあいます。", image: ActiveStorage::Blob.create_and_upload!( io: File.open("#{Rails.root}/db/fixtures/cook_curryrice.png")    , filename: "cook_curryrice.png" ) },
     { id: 3   , member_id: 4  , review_id: 1, content: "アウトドアにも使えますね。" },
     { id: 4   , member_id: 5  , review_id: 1, content: "いいですね。" },
     { id: 5   , member_id: 6  , review_id: 1, content: "親子丼もおいしいです。", image: ActiveStorage::Blob.create_and_upload!( io: File.open("#{Rails.root}/db/fixtures/cook_oyakodon.png")     , filename: "cook_oyakodon.png" ) },
     { id: 6   , member_id: 7  , review_id: 1, content: "そのままでもお酒のつまみになります。" },
     { id: 7   , member_id: 8  , review_id: 1, content: "ピザトースト作ってみました。", image: ActiveStorage::Blob.create_and_upload!( io: File.open("#{Rails.root}/db/fixtures/cook_pizza_toast.png")  , filename: "cook_pizza_toast.png" ) },
-    { id: 8   , member_id: 9  , review_id: 1, content: "そのままご飯の上に乗っけました。", image: ActiveStorage::Blob.create_and_upload!( io: File.open("#{Rails.root}/db/fixtures/cook_yakitoridon.png")  , filename: "cook_yakitoridon.png" ) },
+    { id: 8   , member_id: 9  , review_id: 1, content: "そのままご飯の上にのせました。", image: ActiveStorage::Blob.create_and_upload!( io: File.open("#{Rails.root}/db/fixtures/cook_yakitoridon.png")  , filename: "cook_yakitoridon.png" ) },
     { id: 9   , member_id: 10 , review_id: 1, content: "色々できますね。" },
     { id: 10  , member_id: 2  , review_id: 1, content: "情報ありがとうございます。" },
     { id: 11  , member_id: 2  , review_id: 2, content: "評価について意見をください。" },

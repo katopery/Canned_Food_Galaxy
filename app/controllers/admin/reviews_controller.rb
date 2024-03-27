@@ -14,8 +14,13 @@ class Admin::ReviewsController < ApplicationController
 
   def destroy
     review = Review.find(params[:id])
-    review.destroy
     
-    redirect_to request.referer
+    if review.destroy
+      flash[:notice] = "レビューを削除しました。"
+      redirect_to request.referer
+    else
+      flash[:alert] = "レビューの削除が失敗しました。"
+      render :show
+    end
   end
 end

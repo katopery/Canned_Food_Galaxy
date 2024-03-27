@@ -11,7 +11,13 @@ class Admin::CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to request.referer
+    
+    if comment.destroy
+      flash[:notice] = "コメントを削除しました。"
+      redirect_to request.referer
+    else
+      flash[:alert] = "コメントの削除が失敗しました。"
+      render :index
+    end
   end
 end

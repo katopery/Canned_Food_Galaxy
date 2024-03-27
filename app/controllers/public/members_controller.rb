@@ -28,6 +28,12 @@ class Public::MembersController < ApplicationController
     
     @member = Member.find(params[:id])
     @reviews = @member.reviews.page(params[:page]).per(5)
+    
+    # 会員ステータスがtrueではない場合、会員のレビュー一覧画面に遷移できないようにする
+    if @member.is_member_status != true
+      redirect_to members_my_page_path, alert: 'この会員は退会済みです。'
+      return
+    end
   end
 
   def unsubscribe

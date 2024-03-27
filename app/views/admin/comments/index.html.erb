@@ -87,7 +87,7 @@
                 <%=safe_join(comment.content.split("\n"),tag(:br))%>
               </td>
               <td class="col-2 text-center">
-                <%= link_to "削除", review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger float-end px-3" %>
+                <%= link_to "削除", admin_review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger float-end px-3" %>
               </td>
             </tr>
           <% end %>

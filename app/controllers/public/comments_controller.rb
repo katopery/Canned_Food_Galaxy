@@ -9,6 +9,7 @@ class Public::CommentsController < ApplicationController
     
     if comment.save
       # コメントの保存が成功した場合の処理
+      flash[:notice] = "コメントの送信に成功しました。"
       redirect_to request.referer
     else
       # コメントの保存が失敗した場合の処理
@@ -25,12 +26,24 @@ class Public::CommentsController < ApplicationController
     
     @comment = Comment.new
     @comments = @review.comments.page(params[:page]).per(5)
+    
+    # 缶詰の表示ステータスがtrueではない場合、レビュー詳細に遷移できないようにする
+    if @canned_food.is_canned_status != true
+      redirect_to canned_foods_path, alert: 'この缶詰は表示できません'
+      return
+    end
   end
 
   def destroy
     comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to request.referer
+    
+    if comment.destroy
+      flash[:notice] = "コメントを削除しました。"
+      redirect_to request.referer
+    else
+      flash[:alert] = "コメントの削除が失敗しました。"
+      render :index
+    end
   end
   
   private

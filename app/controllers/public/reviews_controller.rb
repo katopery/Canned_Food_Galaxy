@@ -13,10 +13,10 @@ class Public::ReviewsController < ApplicationController
     @review = current_member.reviews.new(review_params) 
 
     if @review.save
-      flash[:success] = 'レビューを投稿しました。'
+      flash[:notice] = 'レビューを投稿しました。'
       redirect_to review_comments_path(@review.id)
     else
-      flash[:error] = 'レビューを投稿に失敗しました。'
+      flash[:alert] = 'レビューを投稿に失敗しました。'
       
       # render用データ
       @canned_food = CannedFood.find(@review.canned_food_id)
@@ -38,7 +38,7 @@ class Public::ReviewsController < ApplicationController
       flash[:notice] = "レビューの更新が完了しました。"
       redirect_to review_comments_path(review_id: @review.id)
     else
-      flash[:error] = 'レビューの更新に失敗しました。'
+      flash[:alert] = 'レビューの更新に失敗しました。'
       
       # render用データ
       @canned_food = CannedFood.find(@review.canned_food_id)
@@ -57,8 +57,13 @@ class Public::ReviewsController < ApplicationController
     review = Review.find(params[:id])
     canned_food = CannedFood.find(review.canned_food_id)
     
-    review.destroy
-    redirect_to canned_food_path(canned_food)
+    if review.destroy
+      flash[:notice] = "レビューを削除しました。"
+      redirect_to canned_food_path(canned_food)
+    else
+      flash[:alert] = "レビューの削除が失敗しました。"
+      render :index
+    end
   end
   
   private

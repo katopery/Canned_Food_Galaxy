@@ -4,7 +4,7 @@
   </div>
   
   <div class="row my-5 justify-content-center">
-    <div class="col-3 text-center">
+    <div class="col-lg-3 col-md-12 text-center">
       <%= link_to admin_canned_food_path(@canned_food.id) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -19,7 +19,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto" style="height: 200px">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
   </div>
@@ -61,4 +61,10 @@
       </div>
     </div>
   <% end %>
+  
+  <div class="row">
+    <div class="mx-auto my-5">
+      <%= paginate @reviews %>
+    </div>
+  </div>
 </div>

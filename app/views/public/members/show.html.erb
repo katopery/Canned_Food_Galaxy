@@ -27,33 +27,7 @@
         <%= review.canned_food.canned_name %>
       </div>
       <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
-        <div class="row">
-          <div class="col-lg-3 col-md-12 my-2 text-center">
-            賞味期限
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'expiry_date_rating' %>
-          </div>
-          <div class="col-lg-3 col-md-12 my-2 text-center">
-            おいしさ
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'taste_rating' %>
-          </div>
-          <div class="col-lg-3 col-md-12 my-2 text-center">
-            おつまみ
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'snack_rating' %>
-          </div>
-          <div class="col-lg-3 col-md-12 my-2 text-center">
-            アウトドア
-            <%= render "public/reviews/rate_read_only.html.erb", review: review, type: 'outdoor_rating' %>
-          </div>
-          <div class="col-12 my-3 text-center">
-            <div class="text-center mb-2">コメント数： <%= review.comments.count %></div>
-            <div>
-              <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary_button" %>
-              <% if review.member == current_member %>
-                <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger_button' %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= render "public/reviews/index", review: review %>
       </div>
     </div>
   <% end %>
