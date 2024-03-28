@@ -1,0 +1,24 @@
+<div class="row my-3 justify-content-center text-center">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-2">ニックネーム</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% members.each do |member| %>
+        <tr>
+          <td class="col-2">
+            <%= image_tag member.get_profile_image(100,100) %></br>
+            <%= member.nickname %>
+          </td>
+          <td class="col-2">フォロー数: <%= member.followings.count %></td>
+          <td class="col-2">フォロワー数: <%= member.followers.count %></td>
+          <td class="col-2"><%= render "public/relationships/btn", member: member, options: { class: ""} %></td>
+          <td class="col-2"><%= link_to "レビュー一覧", member_path(member.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

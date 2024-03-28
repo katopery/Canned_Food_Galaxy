@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
+      "<%= @word %>"の検索結果
+    </h2>
+  </div>
+  
+  <div class="row my-2">
+    <% if @range == "缶詰" %>
+      <%= render "admin/canned_foods/list.html.erb", canned_foods: @canned_foods %>
+    <% elsif @range == "会員" %>
+      <%= render "admin/members/list.html.erb", members: @members %>
+    <% end %>
+  </div>
+  
+  <div class="row">
+    <div class="mx-auto my-2">
+      <%= paginate @paginate %>
+    </div>
+  </div>
+</div>

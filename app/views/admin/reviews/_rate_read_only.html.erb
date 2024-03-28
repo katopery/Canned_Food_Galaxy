@@ -1,0 +1,29 @@
+<div class="detail-value", id="<%= type %>-<%= review.id %>"></div> <%# .idでどの評価であるかを取得 %>
+
+<script>
+  // Turbolinksで星が増殖する現象を解消
+  $('#<%= type %>-<%= review.id %>').empty(); 
+  
+  raty(document.querySelector('#<%= type %>-<%= review.id %>'),{
+    size      : 36,
+    starOff   : '<%= asset_path('star-off.png') %>',
+    starOn    : '<%= asset_path('star-on.png') %>',
+    
+    // scoreオプションで最初の評価内容を取得
+    <% if type == "expiry_date_rating" %> 
+      score   : '<%= review.expiry_date_rating %>',    
+    <% end %>
+    <% if type == "taste_rating" %> 
+      score   : '<%= review.taste_rating %>',
+    <% end %>
+    <% if type == "snack_rating" %> 
+      score   : '<%= review.snack_rating %>',
+    <% end %>
+    <% if type == "outdoor_rating" %> 
+      score   : '<%= review.outdoor_rating %>',
+    <% end %>
+    
+    half      : false,
+    readOnly  : true,
+  });
+</script>

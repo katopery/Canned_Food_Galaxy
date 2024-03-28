@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
+      <%= @member.nickname %>さんの会員情報編集
+    </h2>
+  </div>
+
+  <%= form_with model: @member, url: admin_member_path(@member) do |f| %>
+    <%= render "admin/shared/error_messages", resource: @member %>
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="table-bordered table_info">
+        <tbody>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-user"></i>
+              <%= f.label :"ニックネーム" %>
+            </th>
+            <td class="p-3 text-center align-middle">
+              <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-envelope"></i>
+              <%= f.label :"メールアドレス" %>
+            </th>
+            <td class="p-3 text-center align-middle">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-phone"></i>
+              <%= f.label :"電話番号(ハイフンなし)" %>
+            </th>
+            <td class="p-3 text-center align-middle">
+              <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-image-portrait"></i>
+              <%= f.label :"プロフィール画像" %>
+            </th>
+            <td class="p-3 text-center align-middle">
+              <%= f.file_field :image, accept: "image/*" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-clipboard-user"></i>
+              会員ステータス
+            </th>
+            <td class="p-3 text-center align-middle">
+              <%= f.radio_button :is_member_status, :true,class:"form-check-input ml-2" %>
+              <%= f.label :is_member_status, "有効",class:"form-check-label ml-4" %>
+
+              <%= f.radio_button :is_member_status, :false,class:"form-check-input ml-2" %>
+              <%= f.label :is_member_status, "退会",class:"form-check-label ml-4" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row my-5 justify-content-center">
+      <%= f.submit "編集内容を保存", class: "btn edit-button" %>
+    </div>
+  <% end %>
+</div>

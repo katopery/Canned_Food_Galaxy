@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row offset-1 my-5">
+    <h2 class="px-3 text-center">
+        <%= @member.nickname %>さんの会員詳細
+    </h2>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div class="col-3 text-center">
+      <%= image_tag @member.get_profile_image(100,100), class: "image" %>
+      <p>
+        ニックネーム</br>
+        <%= @member.nickname %>
+      </p>
+    </div>
+
+    <table class="col-7 table-bordered table_info">
+      <tbody>
+        <tr>
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-solid fa-phone"></i>
+            電話番号
+          </th>
+          <td class="p-3 text-center align-middle">
+            <%= @member.phone_number %>
+          </td>
+        </tr>
+        <tr>
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-regular fa-envelope"></i>
+            メールアドレス
+          </th>
+          <td class="p-3 text-center align-middle">
+            <%= @member.email %>
+          </td>
+        </tr>
+        <tr>
+          <th class="p-3 text-center table-info align-middle">
+            <i class="fa-solid fa-clipboard-user"></i>
+            会員ステータス
+          </th>
+          <td class="p-3 text-center align-middle">
+            <% if @member.is_member_status == true %>
+              <span class="text-success">有効</span>
+            <% else %>
+              <span class="text-danger">退会</span>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div>
+      <%= link_to "編集する", edit_admin_member_path, class: "btn edit-button" %>
+    </div>
+    <div class="offset-1">
+      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn primary-button" %>
+    </div>
+  </div>
+</div>

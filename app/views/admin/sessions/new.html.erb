@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <div class="row offset-2 my-5">
+    <h2 class="px-3 text-center">管理者ログイン</h2>
+  </div>
+
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row mt-5 justify-content-center">
+      <table class="table_info table-bordered">
+        <tbody>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-regular fa-envelope"></i>
+              <%= f.label :email, "メールアドレス" %>
+            </th>
+            <td class="p-3">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
+            </td>
+          </tr>
+          <tr class="field">
+            <th class="p-3 text-center table-info align-middle">
+              <i class="fa-solid fa-lock"></i>
+              <%= f.label :password, "パスワード" %>
+            </th>
+            <td class="p-3">
+              <%= f.password_field :password, autocomplete: "current-password", size: 40 %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="row justify-content-center">
+      <div class="actions mt-2">
+        <%= f.submit "ログイン", class:"btn fixing-button" %>
+      </div>
+    </div>
+  <% end %>
+  <%= render "admin/shared/links" %>
+</div>

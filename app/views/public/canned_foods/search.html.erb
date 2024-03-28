@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
+      "<%= @word %>"の検索結果
+    </h2>
+  </div>
+  
+  <%= render "search.html.erb", canned_foods: @canned_foods %>
+  
+  <div class="row">
+    <div class="mx-auto my-2">
+      <%= paginate @canned_foods %>
+    </div>
+  </div>
+</div>

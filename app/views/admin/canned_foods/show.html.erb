@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">缶詰詳細</h2>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-12 my-2 d-flex align-items-center justify-content-center">
+      <%= image_tag @canned_food.get_image(200,100), class: "image" %>
+    </div>
+    
+    <div class="col-lg-9 col-md-12">
+      <table class="col-12 table-bordered table_info">
+        <tbody>
+          <tr>
+            <th class="col-lg-4 col-md-12 p-3 text-center table-info align-middle">
+              缶詰名
+            </th>
+            <td class="col-lg-8 col-md-12 p-3 text-center align-middle">
+              <%= @canned_food.canned_name %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-4 col-md-12 p-3 text-center table-info align-middle">
+              缶詰説明
+            </th>
+            <td class="col-lg-8 col-md-12 p-3 text-left text-break">
+              <div class="overflow-auto description-box">
+                <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-4 col-md-12 p-3 text-center table-info align-middle">
+              缶詰タグ
+            </th>
+            <td class="col-lg-8 col-md-12 p-3 text-center align-middle">
+              <% @tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-4 col-md-12 p-3 text-center table-info align-middle">
+              表示ステータス
+            </th>
+            <td class="col-lg-8 col-md-12 p-3 text-center align-middle">
+              <% if @canned_food.is_canned_status == true %>
+                <strong class="text-success"><%= "表示" %></strong>
+              <% else %>
+                <strong class="text-danger"><%= "非表示" %></strong>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div>
+      <%= link_to "編集する", edit_admin_canned_food_path(@canned_food.id), class: "btn edit-button" %>
+    </div>
+    <div class="offset-1">
+      <%= link_to "レビュー一覧", admin_canned_food_reviews_path(@canned_food.id), class: "btn primary-button" %>
+    </div>
+  </div>
+</div>

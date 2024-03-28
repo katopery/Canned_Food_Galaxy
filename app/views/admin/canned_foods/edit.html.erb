@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">缶詰編集</h2>
+  </div>
+
+  <%= form_with model: @canned_food, url: admin_canned_food_path(@canned_food), method: :patch do |f| %>
+    <%= render "admin/shared/error_messages", resource: @canned_food %>
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="col-12 table-bordered table_info">
+        <tbody>
+          <tr class="field">
+            <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">
+              缶詰名
+            </th>
+            <td class="col-lg-9 col-md-12 p-3 text-center align-middle">
+              <%= f.text_field :canned_name, autofocus: true, placeholder: "缶詰名", class: "form-control" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">
+              缶詰説明
+            </th>
+            <td class="col-lg-9 col-md-12 p-3 text-center align-middle">
+              <%= f.text_area :description, autofocus: true, placeholder: "ここに説明文を記述します", class: "form-control", cols: "80", rows: "10" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">
+              缶詰画像
+            </th>
+            <td class="col-lg-9 col-md-12 p-3 text-center align-middle">
+              <%= f.file_field :image, autofocus: true, accept: "image/*" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">
+              缶詰タグ
+            </th>
+            <td class="col-lg-9 col-md-12 p-3 text-center align-middle">
+              <%= f.collection_select :tag_ids, Tag.all, :id, :name, autofocus: true, multiple: true, include_blank: "--選択してください--", class: "form-control" %>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">
+              表示ステータス
+            </th>
+            <td class="col-lg-9 col-md-12 p-3 text-center align-middle">
+              <%= f.radio_button :is_canned_status, :true,class:"form-check-input ml-2" %>
+              <%= f.label :is_canned_status, "表示",class:"form-check-label ml-4" %>
+
+              <%= f.radio_button :is_canned_status, :false,class:"form-check-input ml-2" %>
+              <%= f.label :is_canned_status, "非表示",class:"form-check-label ml-4" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="my-4 text-center">
+        <%= f.submit "変更を保存", class: "btn edit-button" %>
+      </div>
+    </div>
+  <% end %>
+</div>

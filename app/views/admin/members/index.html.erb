@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">会員一覧</h2>
+    
+    <div class="search_form offset-1 d-flex align-items-center">
+      <%= render "admin/searches/form", word: "会員名", range: "会員"  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= render "admin/members/list.html.erb", members: @members %>
+  </div>
+    
+  <div class="row">
+    <div class="mx-auto my-2">
+      <%= paginate @members %>
+    </div>
+  </div>
+</div>

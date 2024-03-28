@@ -15,19 +15,22 @@
 多様な用途に適した缶詰を探す情報も提供していることで、さまざまなニーズに応えていきたいと考えています。
 
 ### ターゲットユーザ
- - 災害時や緊急事態に備えるための非常食として缶詰を準備したい方</br>
- - アウトドア活動での食事やおつまみとして缶詰を利用したい方</br>
- - 新しい缶詰を試したい料理愛好家</br>
+ - 災害時や緊急事態に備えるための非常食として缶詰を準備したい方
+ - アウトドア活動での食事やおつまみとして缶詰を利用したい方
+ - 新しい缶詰を試したい料理愛好家
  - 賞味期限切れの缶詰を美味しく食べる方法を探している方
 ​
 ### 主な利用シーン
- - 防災用品としての非常食を準備する際、適切な缶詰を選ぶための情報を探す</br>
- - アウトドアに持って行く缶詰を選ぶ</br>
- - おつまみとして缶詰を選ぶ際、レビューを参考にする</br>
- - 賞味期限切れの缶詰を美味しく食べる方法を探す
+ - 防災用品としての非常食を準備する際、適切な缶詰を選ぶための情報を探す時
+ - アウトドアに持って行く缶詰を選ぶ時
+ - おつまみとして缶詰を選ぶ際、レビューを参考にする時
+ - 賞味期限切れの缶詰を美味しく食べる方法を探す時
 
 ## 設計書
-
+ - [開発スケジュール](https://docs.google.com/spreadsheets/d/1E6AYNlJDmsNJWIR6qGKcLktGV9oGaNubxeViOHuYhXs/edit?usp=sharing)
+ - [ER図](https://drive.google.com/file/d/15Qmdz7JK7YeO3-JXO_fXOLXjOMWbvRWd/view?usp=sharing)
+ - [テーブル定義書](https://docs.google.com/spreadsheets/d/1SthKiJa7Srr-IV5fHP_vttu9g0mcAhnB/edit?usp=sharing&ouid=100095781632532015304&rtpof=true&sd=true)
+ - [アプリケーション詳細設計書](https://docs.google.com/spreadsheets/d/1TnV3QOlMCB3on_oPjr69AhnE9wYWHOg_j9Kpsu7PES4/edit?usp=sharing)
 ​
 ## 開発環境
  - OS：Linux(CentOS)
@@ -37,4 +40,5 @@
  - IDE：Cloud9
 ​
 ## 使用素材
- - 追加予定
+ - [イラストエイト](https://illust8.com/)を利用しました。
+ - [かわいいフリー素材集いらすとや](https://www.irasutoya.com/)を利用しました。

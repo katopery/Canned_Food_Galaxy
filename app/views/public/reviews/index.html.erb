@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">レビュー一覧</h2>
+  </div>
+  
+  <div class="row my-5 justify-content-center">
+    <div class="col-lg-3 col-md-12 text-center">
+      <%= link_to canned_food_path(@canned_food) do %>
+        <div>
+          <%= image_tag @canned_food.get_image(200,100), class: "image" %>
+        </div>
+        <div>
+          缶詰名： <%= @canned_food.canned_name %>
+        </div>
+      <% end %>
+      <div>
+        <% @tags.each do |tag| %>
+          タグ： <%= tag.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto description-box">
+      <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
+    </div>
+    
+    <% if !@member.guest_member? %>
+      <div class="col-lg-3 col-md-12 my-3 justify-content-center">
+        <div class="text-center justify-content-center">
+          <h6>お気に入り登録</h6>
+          <div class="d-flex flex-column align-items-center">
+            <div id="favorite_btn_<%= @canned_food.id %>" %>
+              <%= render "/public/favorites/btn", canned_food: @canned_food %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% @reviews.each do |review| %>
+    <div class="row my-3 justify-content-center">
+      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+        <%= link_to member_path(review.member) do %>
+          <%= image_tag review.member.get_profile_image(100,100), class: "image" %><br>
+          <%= review.member.nickname %>
+        <% end %>  
+      </div>
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+        <%= render "index.html.erb", review: review %>
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="mx-auto my-5">
+      <%= paginate @reviews %>
+    </div>
+  </div>
+</div>

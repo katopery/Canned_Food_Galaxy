@@ -1,0 +1,19 @@
+<div id="star_<%= canned_food.id %>_<%= type %>"></div>
+<div class="eval-star"><%= ave.to_f.round(1) %>/5点</div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#star_<%= canned_food.id %>_<%= type %>');
+    if(elem == null) return;
+
+    elem.innerHTML = ""
+    let opt = {
+      starOn    : "<%= asset_path('star-on.png') %>",
+      starOff   : "<%= asset_path('star-off.png') %>",
+      starHalf  : "<%= asset_path('star-half.png') %>",
+      score     : <%= ave.to_f.round(1) %>,
+      readOnly  : true,
+    };
+    raty(elem, opt);
+  });
+</script>

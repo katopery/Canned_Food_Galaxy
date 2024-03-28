@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
+      <%= @member.nickname %>さんのレビュー一覧
+    </h2>
+  </div>
+  
+  <div class="row my-4 text-center justify-content-center">
+    <div class="col-lg-3 col-md-12 mb-3">
+      <%= image_tag @member.get_profile_image(100,100), class: "image" %><br>
+      <%= @member.nickname %>  
+    </div>
+    <div class="col-lg-2 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+      レビュー数： <%= @member.reviews.count %>
+    </div>
+    <div class="col-lg-3 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+      <% if !current_member.guest_member? && current_member != @member %>
+        <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+      <% end %>
+    </div>
+  </div>
+    
+  <% @reviews.each do |review| %>
+    <div class="row my-3 justify-content-center">
+      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+        <%= image_tag review.canned_food.get_image(150,100), class: "image" %><br>
+        <%= review.canned_food.canned_name %>
+      </div>
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+        <%= render "public/reviews/index", review: review %>
+      </div>
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="mx-auto my-5">
+      <%= paginate @reviews %>
+    </div>
+  </div>
+</div>
