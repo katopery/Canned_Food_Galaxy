@@ -27,7 +27,10 @@
  - 賞味期限切れの缶詰を美味しく食べる方法を探す時
 
 ## 設計書
-
+ - [開発スケジュール](https://docs.google.com/spreadsheets/d/1E6AYNlJDmsNJWIR6qGKcLktGV9oGaNubxeViOHuYhXs/edit?usp=sharing)
+ - [ER図](https://drive.google.com/file/d/15Qmdz7JK7YeO3-JXO_fXOLXjOMWbvRWd/view?usp=sharing)
+ - [テーブル定義書](https://docs.google.com/spreadsheets/d/1SthKiJa7Srr-IV5fHP_vttu9g0mcAhnB/edit?usp=sharing&ouid=100095781632532015304&rtpof=true&sd=true)
+ - [アプリケーション詳細設計書](https://docs.google.com/spreadsheets/d/1TnV3QOlMCB3on_oPjr69AhnE9wYWHOg_j9Kpsu7PES4/edit?usp=sharing)
 ​
 ## 開発環境
  - OS：Linux(CentOS)
@@ -37,4 +40,5 @@
  - IDE：Cloud9
 ​
 ## 使用素材
- - 追加予定
+ - [イラストエイト](https://illust8.com/)を利用しました。
+ - [かわいいフリー素材集いらすとや](https://www.irasutoya.com/)を利用しました。
