@@ -1,4 +1,6 @@
 class Admin::MembersController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @members = Member.page(params[:page]).per(10)
   end
@@ -23,10 +25,8 @@ class Admin::MembersController < ApplicationController
     end
   end
   
-  
   private
-
   def member_params
-    params.require(:member).permit(:nickname, :phone_number, :email, :is_member_status)
+    params.require(:member).permit(:nickname, :phone_number, :email, :is_member_status, :image)
   end
 end

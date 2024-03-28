@@ -1,4 +1,6 @@
 class Admin::CommentsController < ApplicationController
+  before_action :authenticate_admin!
+  
   def index
     @review = Review.find(params[:review_id])
     @canned_food = @review.canned_food
@@ -9,7 +11,13 @@ class Admin::CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to request.referer
+    
+    if comment.destroy
+      flash[:notice] = "コメントを削除しました。"
+      redirect_to request.referer
+    else
+      flash[:alert] = "コメントの削除が失敗しました。"
+      render :index
+    end
   end
 end

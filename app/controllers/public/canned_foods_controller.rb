@@ -1,4 +1,6 @@
 class Public::CannedFoodsController < ApplicationController
+  before_action :authenticate_member!
+
   def index
     if params[:sort_created_at]
       # 新着/古い順表示の処理
@@ -60,9 +62,15 @@ class Public::CannedFoodsController < ApplicationController
       @member = nil
     end
 
+    # 新規レビュー作成用
     if @review == nil
-       # 新規レビュー作成用
       @review = @canned_food.reviews.build
+    end
+    
+    # 缶詰の表示ステータスがtrueではない場合、詳細画面に遷移できないようにする
+    if @canned_food.is_canned_status != true
+      redirect_to canned_foods_path, alert: 'この缶詰は表示できません'
+      return
     end
   end
 

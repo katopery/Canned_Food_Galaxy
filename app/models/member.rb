@@ -77,7 +77,7 @@ class Member < ApplicationRecord
     email == GUEST_MEMBER_EMAIL
   end
 
-  validates :nickname, uniqueness: true, presence: true, length: { maximum: 12 }
+  validates :nickname, uniqueness: true, presence: true, length: { in: 1..12 }
   validates :phone_number, presence: true, length: { in: 10..11 }
   devise :validatable, password_length: 6..32
 end

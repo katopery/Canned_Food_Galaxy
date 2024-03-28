@@ -29,7 +29,7 @@
     <%= link_to "古い順", canned_foods_path(sort_created_at: 'created_at asc') %> 
   </div>
   <div class="row my-3 text-center justify-content-center">
-    <div class="col-3 mb-2">
+    <div class="col-lg-3 col-md-12 mb-2">
       <h6>評価の高い順</h6>
     </div>
     <div class="col-lg-6 col-md-12">
@@ -44,7 +44,7 @@
   </div>
     
   <div class="row mb-5 text-center justify-content-center">
-    <div class="col-3 mb-2">
+    <div class="col-lg-3 col-md-12 mb-2">
       <h6>評価で絞り込み</h6>
     </div>
     <div class="col-lg-2 col-md-12 mb-2">
@@ -74,7 +74,7 @@
   </div>
 
   <% @canned_foods.each do |canned_food| %>
-    <%= render "public/canned_foods/index.html.erb", canned_food: canned_food %>
+    <%= render "list.html.erb", canned_food: canned_food %>
   <% end %>
   
   <div class="row">

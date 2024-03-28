@@ -19,7 +19,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-8 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-8 border border-primary text-break overflow-auto description-box">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
   </div>
@@ -53,8 +53,8 @@
       
       <div class="row mt-3 justify-content-center">
         <% if @review.member == current_member %>
-          <%= link_to "レビュー編集画面へ", canned_food_path(@canned_food), method: :get, class:'btn primary_button mr-5' %>
-          <%= link_to "レビューを削除", review_path(@review.id), method: :delete, class: 'btn danger_button' %>
+          <%= link_to "レビュー編集画面へ", canned_food_path(@canned_food), method: :get, class:'btn primary-button mr-5' %>
+          <%= link_to "レビューを削除", review_path(@review.id), method: :delete, class: 'btn danger-button' %>
         <% end %>
       </div>
     </div>
@@ -68,47 +68,17 @@
 
   <div class="row mt-3 justify-content-center">
     <div class="col-12">
-      <table class="table table-bordered table-striped table-hover">
-        <thead class="text-center">
-          <th>投稿者</th>
-          <th>画像</th>
-          <th>コメント内容</th>
-          <th></th>
-        </thead>
-        <tbody>
-          <% @comments.each do |comment| %>
-            <tr>
-              <td class="col-2 text-center">
-                <%= link_to member_path(comment.member) do %>
-                  <%= image_tag comment.member.get_profile_image(50,50), class: "image" %><br>
-                  <%= comment.member.nickname %>
-                <% end %>
-              </td>
-              <td class="col-2 text-center">
-                <% if comment.image.attached? %>
-                  <%= image_tag comment.get_image(100,100), class: "image" %>
-                <% end %>
-              </td>
-              <td class="col-6 text-break">
-                <%=safe_join(comment.content.split("\n"),tag(:br))%>
-              </td>
-              <td class="col-1 text-center">
-                <% if comment.member == current_member %>
-                  <%= link_to "削除", review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render "comment_list.html.erb", comments: @comments, review: @review %>
     </div>
   </div>
   
-  <div class="row mt-2">
+  <div class="row my-2">
     <div class="mx-auto">
       <%= paginate @comments %>
     </div>
   </div>
-
-  <%= render "public/comments/index.html.erb", comments: @comments %>
+  
+  <% if !@member.guest_member? %>
+    <%= render "comment.html.erb", comments: @comments %>
+  <% end %>
 </div>
