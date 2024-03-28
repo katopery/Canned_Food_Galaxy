@@ -15,7 +15,7 @@
               <i class="fa-regular fa-user"></i>
               <%= f.label :"ニックネーム" %>
             </th>
-            <td class="p-3 align-middle">
+            <td class="p-3 text-center align-middle">
               <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "カンヅメ", size: 40 %>
             </td>
           </tr>
@@ -24,7 +24,7 @@
               <i class="fa-regular fa-envelope"></i>
               <%= f.label :"メールアドレス" %>
             </th>
-            <td class="p-3">
+            <td class="p-3 text-center align-middle">
               <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: 40 %>
             </td>
           </tr>
@@ -33,7 +33,7 @@
               <i class="fa-solid fa-phone"></i>
               <%= f.label :"電話番号(ハイフンなし)" %>
             </th>
-            <td class="p-3">
+            <td class="p-3 text-center align-middle">
               <%= f.text_field :phone_number, autofocus: true, autocomplete: "phone_number", placeholder: "00000000000", size: 40 %>
             </td>
           </tr>
@@ -42,7 +42,7 @@
               <i class="fa-solid fa-image-portrait"></i>
               <%= f.label :"プロフィール画像" %>
             </th>
-            <td class="p-3">
+            <td class="p-3 text-center align-middle">
               <%= f.file_field :image, accept: "image/*" %>
             </td>
           </tr>
@@ -51,7 +51,7 @@
               <i class="fa-solid fa-clipboard-user"></i>
               会員ステータス
             </th>
-            <td>
+            <td class="p-3 text-center align-middle">
               <%= f.radio_button :is_member_status, :true,class:"form-check-input ml-2" %>
               <%= f.label :is_member_status, "有効",class:"form-check-label ml-4" %>
 
@@ -64,7 +64,7 @@
     </div>
 
     <div class="row my-5 justify-content-center">
-      <%= f.submit "編集内容を保存", class: "btn edit_button" %>
+      <%= f.submit "編集内容を保存", class: "btn edit-button" %>
     </div>
   <% end %>
 </div>

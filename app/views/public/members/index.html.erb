@@ -10,7 +10,7 @@
 
     <% unless @member.guest_member? %>
       <div class="d-flex align-items-center">
-        <%= link_to "編集する", members_information_edit_path, class: "btn edit_button" %>
+        <%= link_to "編集する", members_information_edit_path, class: "btn edit-button" %>
       </div>
     <% end %>
   </div>
@@ -55,16 +55,16 @@
   <% unless @member.guest_member? %>
     <div class="row mt-5 text-center justify-content-center">
       <div class="col-lg-3 col-md-6 mb-5">
-        <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn primary_button" %>
+        <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn primary-button" %>
       </div>
       <div class="col-lg-3 col-md-6 mb-5">
-        <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn primary_button" %>
+        <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn primary-button" %>
       </div>
       <div class="col-lg-3 col-md-6 mb-5">
-        <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn primary_button" %>
+        <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn primary-button" %>
       </div>
       <div class="col-lg-3 col-md-6 mb-5">
-        <%= link_to "お気に入り 一覧", favorites_path, class: "btn primary_button" %>
+        <%= link_to "お気に入り 一覧", favorites_path, class: "btn primary-button" %>
       </div>
     </div>
   <% end %>

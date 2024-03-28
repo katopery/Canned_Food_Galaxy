@@ -44,7 +44,7 @@ class Admin::CannedFoodsController < ApplicationController
   def update
     @canned_food = CannedFood.find(params[:id])
     
-    if @canned_food.update(canned_food_params)
+    if params[:canned_food][:tag_ids] != "" && @canned_food.update(canned_food_params)
       # 中間テーブル缶詰タグの更新
       @canned_food.tag_ids = params[:canned_food][:tag_ids]
       # 更新成功した場合の処理
@@ -52,7 +52,12 @@ class Admin::CannedFoodsController < ApplicationController
       redirect_to admin_canned_food_path(@canned_food.id)
     else
       # 更新失敗した場合の処理
-      flash[:alert] = "缶詰の更新が失敗しました。"
+      if params[:canned_food][:tag_ids] == ""
+        flash[:alert] = "缶詰の更新が失敗しました。タグの選択を行って下さい。"
+      else
+        flash[:alert] = "缶詰の更新が失敗しました。"
+      end
+      
       render :edit
     end
   end

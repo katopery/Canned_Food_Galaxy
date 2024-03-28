@@ -19,7 +19,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto description-box">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
     
@@ -39,7 +39,7 @@
         <% end %>  
       </div>
       <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
-        <%= render "public/reviews/index", review: review %>
+        <%= render "index.html.erb", review: review %>
       </div>
     </div>
   <% end %>

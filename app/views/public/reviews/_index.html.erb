@@ -18,9 +18,9 @@
   <div class="col-12 my-3 text-center">
     <div class="text-center mb-2">コメント数： <%= review.comments.count %></div>
     <div>
-      <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary_button" %>
+      <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary-button" %>
       <% if review.member == current_member %>
-        <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger_button' %>
+        <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger-button' %>
       <% end %>
     </div>
   </div>

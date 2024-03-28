@@ -4,7 +4,7 @@
   </div>
   
   <div class="row my-5 justify-content-center">
-    <div class="col-3 text-center">
+    <div class="col-lg-4 col-md-12 text-center">
       <%= link_to admin_canned_food_path(@canned_food.id) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -19,7 +19,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-6 border border-primary text-break overflow-auto" style="height: 200px">
+    <div class="col-lg-8 col-md-12 border border-primary text-break overflow-auto description-box">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
   </div>
@@ -51,7 +51,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 
   <div class="row mt-5">
@@ -62,37 +61,7 @@
 
   <div class="row my-3 justify-content-center">
     <div class="col-12">
-      <table class="table table-bordered table-striped table-hover">
-        <thead class="text-center">
-          <th>投稿者</th>
-          <th>画像</th>
-          <th>コメント内容</th>
-          <th></th>
-        </thead>
-        <tbody>
-          <% @comments.each do |comment| %>
-            <tr>
-              <td class="col-2 text-center">
-                <%= link_to admin_member_path(comment.member) do %>
-                  <%= image_tag comment.member.get_profile_image(50,50), class: "image" %><br>
-                  <%= comment.member.nickname %>
-                <% end %>
-              </td>
-              <td class="col-2 text-center">
-                <% if comment.image.attached? %>
-                  <%= image_tag comment.get_image(100,100), class: "image" %>
-                <% end %>
-              </td>
-              <td class="col-6 text-break">
-                <%=safe_join(comment.content.split("\n"),tag(:br))%>
-              </td>
-              <td class="col-2 text-center">
-                <%= link_to "削除", admin_review_comment_path(@review, comment), method: :delete, class: "btn btn-sm btn-danger float-end px-3" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render "comment_list.html.erb", comments: @comments, review: @review %>
     </div>
   </div>
   

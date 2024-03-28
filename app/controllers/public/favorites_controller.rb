@@ -9,7 +9,7 @@ class Public::FavoritesController < ApplicationController
   end
 
   def index
-    @favorites = current_member.favorites.includes(:canned_food, :member).order(created_at: :desc)
+    @favorites = current_member.favorites.includes(:canned_food, :member).order(created_at: :desc).page(params[:page]).per(9)
     @canned_foods = @favorites.map(&:canned_food)
   end
 

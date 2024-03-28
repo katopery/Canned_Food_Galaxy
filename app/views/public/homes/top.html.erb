@@ -3,8 +3,8 @@
     <div class="d-flex align-items-center justify-content-center top-image">
       <p class="p-2 text-center top-text">
         <strong class="top-font-size">ようこそ、缶詰の星へ！</strong></br>
-        「缶詰の星」は人々が安心して備蓄品を選べるように、</br>
-        賞味期限や保存方法、味の特性などを詳しく共有するレビューサイトです。</br>
+        「缶詰の星」は人々が安心して備蓄品を選べるよう、</br>
+        賞味期限や保存方法、味の特性などを共有するレビューサイトです。</br>
         缶詰は非常食だけでなく、キャンプ飯やちょっとした高級なおつまみとしても人気があり、</br>
         多様な用途に適した缶詰を探す情報も提供します。
       </p>
@@ -16,7 +16,7 @@
   </div>
 
   <% @canned_foods[0,5].each do |canned_food| %>
-    <%= render "public/canned_foods/index.html.erb", canned_food: canned_food %>
+    <%= render "public/canned_foods/list.html.erb", canned_food: canned_food %>
   <% end %>
   
   <div class="row mb-5">

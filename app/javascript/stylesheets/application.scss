@@ -56,6 +56,11 @@
   box-shadow    : 0 0 0 12px #ffcc99;   /* 影を利用した外余白   */
 }
 
+/* 説明表示用 */
+.description-box {
+  height : 300px;
+  width  : 100%;
+}
 
 /* 共通の設定                        */
 
@@ -82,7 +87,7 @@
 }
 
 /* 主要なボタン */
-.primary_button {
+.primary-button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
   font-size     : 12pt;                 /* 文字サイズ   */
@@ -96,14 +101,14 @@
   box-shadow    : 5px 5px 4px #666666;  /* 影の設定     */
   border        : 2px solid #4d4dff;    /* 枠の指定     */
 }
-.primary_button:hover {
+.primary-button:hover {
   box-shadow    : none;     /* カーソル時の影消去 */
   color         : #4d4dff;  /* 背景色             */
   background    : #ffffff;  /* 文字色             */
 }
 
 /* 確定ボタン */
-.fixing_button {
+.fixing-button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
   font-size     : 12pt;                 /* 文字サイズ   */
@@ -117,14 +122,14 @@
   box-shadow    : 5px 5px 4px #666666;  /* 影の設定     */
   border        : 2px solid #ffa64d;    /* 枠の指定     */
 }
-.fixing_button:hover {
+.fixing-button:hover {
   box-shadow    : none;     /* カーソル時の影消去 */
   color         : #ffa64d;  /* 背景色             */
   background    : #ffffff;  /* 文字色             */
 }
 
 /* 編集ボタン */
-.edit_button {
+.edit-button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
   font-size     : 12pt;                 /* 文字サイズ   */
@@ -138,14 +143,14 @@
   box-shadow    : 5px 5px 4px #666666;  /* 影の設定     */
   border        : 2px solid #59b300;    /* 枠の指定     */
 }
-.edit_button:hover {
+.edit-button:hover {
   box-shadow    : none;     /* カーソル時の影消去 */
   color         : #59b300;  /* 背景色             */
   background    : #ffffff;  /* 文字色             */
 }
 
 /* 削除ボタン */
-.danger_button {
+.danger-button {
   display       : inline-block;
   border-radius : 20%;                  /* 角丸         */
   font-size     : 12pt;                 /* 文字サイズ   */
@@ -159,14 +164,14 @@
   box-shadow    : 5px 5px 4px #666666;  /* 影の設定     */
   border        : 2px solid #ff0000;    /* 枠の指定     */
 }
-.danger_button:hover {
+.danger-button:hover {
   box-shadow    : none;     /* カーソル時の影消去 */
   color         : #ff0000;  /* 背景色             */
   background    : #ffffff;  /* 文字色             */
 }
 
 /* 画像投稿ボタン */
-.image_input_btn {
+.image-input-btn {
   display: inline-block;
   background-color: #228B22;
   width: 180px;
@@ -181,7 +186,7 @@
   line-height: 30px;
   cursor: pointer;
 }
-.image_form{
+.image-form{
   display: none;
 }
 

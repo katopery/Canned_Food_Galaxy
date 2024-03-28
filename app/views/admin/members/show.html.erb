@@ -14,7 +14,7 @@
       </p>
     </div>
 
-    <table class="col-7 table-bordered table_info h-100">
+    <table class="col-7 table-bordered table_info">
       <tbody>
         <tr>
           <th class="p-3 text-center table-info align-middle">
@@ -53,10 +53,10 @@
   
   <div class="row my-5 justify-content-center">
     <div>
-      <%= link_to "編集する", edit_admin_member_path, class: "btn edit_button" %>
+      <%= link_to "編集する", edit_admin_member_path, class: "btn edit-button" %>
     </div>
     <div class="offset-1">
-      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn primary_button" %>
+      <%= link_to "レビュー 一覧", admin_reviews_member_path(@member.id), class: "btn primary-button" %>
     </div>
   </div>
 </div>

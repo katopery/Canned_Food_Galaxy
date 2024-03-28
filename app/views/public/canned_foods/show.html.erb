@@ -47,7 +47,7 @@
       <div class="col-lg-3 col-md-12 mt-3 text-center">
         <h6>缶詰説明 </h6>
       </div>
-      <div class="my-2 border border-primary bg-light text-break overflow-auto" style="height: 300px">
+      <div class="my-2 border border-primary bg-light text-break overflow-auto description-box">
         <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
       </div>
     </div>
@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="my-4 d-flex flex-column align-items-center justify-content-center">
-          <%= f.submit "レビュー追加", class: "btn fixing_button" %>
+          <%= f.submit "レビュー追加", class: "btn fixing-button" %>
         </div>
       <% end %>
 
@@ -103,13 +103,13 @@
           </div>
         </div>
         <div class="my-4 d-flex flex-column align-items-center justify-content-center">
-          <%= f.submit "レビュー編集", class: "btn edit_button" %>
+          <%= f.submit "レビュー編集", class: "btn edit-button" %>
         </div>
       <% end %>
     <% end %>
   <% end %>
 
   <div class="row my-5 justify-content-center">
-    <%= link_to "レビュー 一覧", canned_food_reviews_path(@canned_food.id), class: "btn primary_button" %>
+    <%= link_to "レビュー 一覧", canned_food_reviews_path(@canned_food.id), class: "btn primary-button" %>
   </div>
 </div>
