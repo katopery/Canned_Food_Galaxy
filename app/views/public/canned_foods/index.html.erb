@@ -74,7 +74,11 @@
   </div>
 
   <% @canned_foods.each do |canned_food| %>
-    <%= render "list.html.erb", canned_food: canned_food %>
+    <% if canned_food.is_canned_status == true %>
+      <%= render "list.html.erb", canned_food: canned_food %>
+    <% else %>
+      <!-- 表示ステータスがfalseである場合は、表示しない -->
+    <% end %>
   <% end %>
   
   <div class="row">

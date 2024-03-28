@@ -3,20 +3,19 @@ class Public::FavoritesController < ApplicationController
   before_action :ensure_guest_member
   
   def create
-    canned_food = CannedFood.find(params[:canned_food_id])
-    current_member.favorite(canned_food)
-    redirect_to request.referer
+    @canned_food = CannedFood.find(params[:canned_food_id])
+    current_member.favorite(@canned_food)
   end
 
   def index
     @favorites = current_member.favorites.includes(:canned_food, :member).order(created_at: :desc).page(params[:page]).per(9)
     @canned_foods = @favorites.map(&:canned_food)
+    @canned_food 
   end
 
   def destroy
-    canned_food = current_member.favorites.find_by(id: params[:id])&.canned_food
-    current_member.unfavorite(canned_food)
-    redirect_to request.referer
+    @canned_food = current_member.favorites.find_by(id: params[:id])&.canned_food
+    current_member.unfavorite(@canned_food)
   end
   
   private

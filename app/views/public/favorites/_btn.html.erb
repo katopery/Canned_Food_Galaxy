@@ -1,14 +1,9 @@
-<div class="text-center justify-content-center">
-  <h6>お気に入り登録</h6>
-  <div class="d-flex flex-column align-items-center">
-    <% if current_member.favorite?(canned_food) %>
-      <%= link_to favorite_path(current_member.favorites.find_by(canned_food_id: canned_food.id)), id: "js-bookmark-button-for-board-#{canned_food.id}", class:"float-right", method: :delete do %>
-        <i class="fa-sharp fa-solid fa-heart fa-3x"></i>
-      <% end %>
-    <% else %>
-      <%= link_to favorites_path(canned_food_id: canned_food.id), id: "js-bookmark-button-for-board-#{canned_food.id}", class:"float-right", method: :post do %>
-        <i class="fa-sharp fa-regular fa-heart fa-3x"></i>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<% if current_member.favorite?(canned_food) %>
+  <%= link_to favorite_path(current_member.favorites.find_by(canned_food_id: canned_food.id)), id: "js-bookmark-button-for-board-#{canned_food.id}", class:"float-right", method: :delete, remote: true do %>
+    <i class="fa-sharp fa-solid fa-heart fa-3x"></i>
+  <% end %>
+<% else %>
+  <%= link_to favorites_path(canned_food_id: canned_food.id), id: "js-bookmark-button-for-board-#{canned_food.id}", class:"float-right", method: :post, remote: true do %>
+    <i class="fa-sharp fa-regular fa-heart fa-3x"></i>
+  <% end %>
+<% end %>
