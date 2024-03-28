@@ -25,7 +25,14 @@
     
     <% if !@member.guest_member? %>
       <div class="col-lg-3 col-md-12 my-3 justify-content-center">
-        <%= render "/public/favorites/btn", canned_food: @canned_food %>
+        <div class="text-center justify-content-center">
+          <h6>お気に入り登録</h6>
+          <div class="d-flex flex-column align-items-center">
+            <div id="favorite_btn_<%= @canned_food.id %>" %>
+              <%= render "/public/favorites/btn", canned_food: @canned_food %>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

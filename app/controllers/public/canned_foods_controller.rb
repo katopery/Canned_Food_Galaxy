@@ -4,10 +4,11 @@ class Public::CannedFoodsController < ApplicationController
   def index
     if params[:sort_created_at]
       # 新着/古い順表示の処理
-      @canned_foods = CannedFood.order(params[:sort_created_at]).page(params[:page]).per(10)
+      @canned_foods = CannedFood.where(is_canned_status: true).order(params[:sort_created_at]).page(params[:page]).per(10)
     elsif params[:sort_review]
       # 各評価項目ごとの降順表示の処理
-      @canned_foods = CannedFood.left_joins(:reviews)
+      @canned_foods = CannedFood.where(is_canned_status: true)
+                                .left_joins(:reviews)
                                 .group(:id)
                                 .order("avg(reviews.#{params[:sort_review]}) desc")
                                 .page(params[:page])
@@ -23,10 +24,10 @@ class Public::CannedFoodsController < ApplicationController
       # 指定された評価項目の平均値が指定された`params[:rate]`よりも高いものを選択。
       # 選択された結果の中から、`pluck(:id)`を使ってその`CannedFood`のIDのみを取得
       ave = canned_foods.select{ |c| (c.ave||0) >= params[:rate].to_f}.pluck(:id)
-      @canned_foods = CannedFood.where(id: ave).page(params[:page]).per(10)
+      @canned_foods = CannedFood.where(id: ave, is_canned_status: true).page(params[:page]).per(10)
     else
       # 通常の表示処理
-      @canned_foods = CannedFood.all.page(params[:page]).per(10)
+      @canned_foods = CannedFood.all.where(is_canned_status: true).page(params[:page]).per(10)
     end
 
     # 各評価項目ごとの絞り込み表示で選択した値を表示するための処理
@@ -81,7 +82,7 @@ class Public::CannedFoodsController < ApplicationController
 
     # 検索された缶詰に関連付けられたCannedFoodを取得
     if @range == "缶詰"
-      @canned_foods = CannedFood.looks(@search, @word).page(params[:page]).per(10)
+      @canned_foods = CannedFood.where(is_canned_status: true).looks(@search, @word).page(params[:page]).per(10)
     end
   end
 
@@ -91,7 +92,7 @@ class Public::CannedFoodsController < ApplicationController
       # 検索されたタグを受け取る
       @tag = Tag.find(params[:tag_id])
       # 検索されたタグに関連付けられたCannedTagを取得
-      @canned_tags = @tag.canned_tags.page(params[:page]).per(10)
+      @canned_tags = @tag.canned_tags.where(is_canned_status: true).page(params[:page]).per(10)
       # 検索されたタグに関連付けられたCannedFoodを取得
       @canned_foods = @canned_tags.map(&:canned_food)
     else
