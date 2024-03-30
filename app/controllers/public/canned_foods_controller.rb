@@ -92,7 +92,7 @@ class Public::CannedFoodsController < ApplicationController
       # 検索されたタグを受け取る
       @tag = Tag.find(params[:tag_id])
       # 検索されたタグに関連付けられたCannedTagを取得
-      @canned_tags = @tag.canned_tags.where(is_canned_status: true).page(params[:page]).per(10)
+      @canned_tags = @tag.canned_tags.joins(:canned_food).where("canned_foods.is_canned_status = ?", true).page(params[:page]).per(10)
       # 検索されたタグに関連付けられたCannedFoodを取得
       @canned_foods = @canned_tags.map(&:canned_food)
     else
