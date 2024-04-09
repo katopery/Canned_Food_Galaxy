@@ -29,6 +29,31 @@ class Public::MembersController < ApplicationController
     @member = Member.find(params[:id])
     @reviews = @member.reviews.page(params[:page]).per(5)
     
+    # roomが作成された時に現在ログインしている会員と、
+    # メッセージ相手になる会員の両方をEntriseテーブルから取得する。
+    @current_entry = Entry.where(member_id: current_member.id)
+    @another_entry = Entry.where(member_id: @member.id)
+    
+    # 現在ログインしている会員ではない場合にメッセージを行う。
+    unless @member.id == current_member.id
+      # entryテーブル内に同じroom_idがある場合は、
+      # 既にroomがあるため、@is_roomにtrueを設定する。
+      @current_entry.each do |current|
+        @another_entry.each do |another|
+          if current.room_id == another.room_id
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      
+      # @is_roomがtrueではない場合に、新規でroomを作成する。
+      unless @is_room
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
+    
     # 会員ステータスがtrueではない場合、会員のレビュー一覧画面に遷移できないようにする
     if @member.is_member_status != true
       redirect_to members_my_page_path, alert: 'この会員は退会済みです。'
