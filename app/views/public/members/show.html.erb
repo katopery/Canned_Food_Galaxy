@@ -13,9 +13,21 @@
     <div class="col-lg-2 col-md-12 mb-3 justify-content-center d-flex align-items-center">
       レビュー数： <%= @member.reviews.count %>
     </div>
-    <div class="col-lg-3 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+    <div class="col-lg-4 col-md-12 mb-3 justify-content-center d-flex align-items-center">
       <% if !current_member.guest_member? && current_member != @member %>
         <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+      <% end %>
+      <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
+        <% if @is_room == true %>
+          <%= link_to 'メッセージへ', room_path(@room_id), class: "btn fixing-button ml-5" %>
+        <% else %>
+          <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :member_id, value: @member.id %>
+            <% end %>
+            <%= f.submit "メッセージを始める", class:"btn fixing-button ml-5" %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

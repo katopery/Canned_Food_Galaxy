@@ -40,5 +40,4 @@
  - IDE：Cloud9
 ​
 ## 使用素材
- - [イラストエイト](https://illust8.com/)を利用しました。
- - [かわいいフリー素材集いらすとや](https://www.irasutoya.com/)を利用しました。
+ - [Fotor](https://www.fotor.com/jp/)を利用しました。
