@@ -16,7 +16,7 @@
   </div>
 
   <% @canned_foods[0,5].each do |canned_food| %>
-    <%= render "public/canned_foods/list.html.erb", canned_food: canned_food %>
+    <%= render "public/canned_foods/list", canned_food: canned_food %>
   <% end %>
   
   <div class="row mb-5">

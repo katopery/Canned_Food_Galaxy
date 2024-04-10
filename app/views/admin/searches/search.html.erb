@@ -7,9 +7,9 @@
   
   <div class="row my-2">
     <% if @range == "缶詰" %>
-      <%= render "admin/canned_foods/list.html.erb", canned_foods: @canned_foods %>
+      <%= render "admin/canned_foods/list", canned_foods: @canned_foods %>
     <% elsif @range == "会員" %>
-      <%= render "admin/members/list.html.erb", members: @members %>
+      <%= render "admin/members/list", members: @members %>
     <% end %>
   </div>
   
