@@ -1,0 +1,34 @@
+<% if messages.present? %>
+  <% messages.each do |message| %>
+    <% if message.member_id == current_member.id %>
+      <div class="row mb-3">
+        <div class="col-6 offset-4">
+          <div class="d-flex flex-column text-left">
+            <p class="current-message-style text-left text-break" id="message_<%= message.id %>"><%= message.content %></p>
+            <p id="post_date_<%= message.id %>">投稿日：<%= message.created_at.strftime("%m/%d %H:%M") %></p>
+          </div>
+        </div>
+    
+        <div class="col-1">
+          <div class="d-flex justify-content-end ml-5">
+            <%= button_to "削除", message_path(message.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn danger-button", remote: true, id: "delete_message_#{message.id}" %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="row mb-3">
+        <div class="col-1">
+          <%= image_tag message.member.get_profile_image(50,50), class: "image" %>
+        </div>
+        
+        <div class="col-6 text-left">
+          <p class="another-message-style text-break"><%= message.content %></p>
+          <p>投稿日：<%= message.created_at.strftime("%m/%d %H:%M") %></p>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3>メッセージがありません。</h3>
+<% end %>

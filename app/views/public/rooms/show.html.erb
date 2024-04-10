@@ -10,32 +10,14 @@
   </div>
   
   <div class="row my-4 text-center justify-content-center">
-    <% if @messages.present? %>
-      <% @messages.each do |message| %>
-        <% if message.member_id == current_member.id %>
-          <div class="col-12 text-right">
-            <p><%= message.content %></p>
-            <p><%= message.created_at.strftime("%m/%d %H:%M") %></p>
-            <%= button_to "削除", message_path(message.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2", remote: true, id: "delete_message_#{message.id}" %>
-          </div>
-        <% else %>
-           <div class="col-12 text-left">
-            <%= image_tag message.member.get_profile_image(70,70), class: "image"  %>
-            <p><%= message.content %></p>
-            <p><%= message.created_at.strftime("%m/%d %H:%M") %></p>
-          </div>
-        <% end %>
-      <% end %>
-    <% else %>
-      <div class="row my-3 justify-content-center text-center">
-        <h3>メッセージがありません。</h3>
-      </div>
-  　<% end %>
+    <div id="messages">
+      <%= render "public/messages/message.html.erb", messages: @messages %>
+    </div>
   </div>
 
   <div class="row my-4 text-center justify-content-center">
     <%= form_with model: @message, data: {remote: true} do |f| %>
-      <%= f.text_area :content, autofocus: true, placeholder: "メッセージをここに（100文字以内）", cols: "120" %>
+      <%= f.text_area :content, autofocus: true, placeholder: "メッセージをここに（100文字以内）", cols: "60", row: "2" %>
       <%= f.submit "送信", class: "btn fixing-button ml-5" %>
       <%= f.hidden_field :room_id, value: @room.id %>
     <% end %>

@@ -4,31 +4,26 @@ class Public::MessagesController < ApplicationController
   def create
     # フォームから送信されたメッセージを取得し、現在の会員に関連付けて保存
     @message = current_member.messages.new(message_params)
-    
     if @message.save
-      # メッセージの保存が成功した場合の処理
-      flash[:notice] = "メッセージの送信に成功しました。"
-    else
-      # メッセージの保存が失敗した場合の処理
-      flash[:alert] = "メッセージの送信に失敗しました。"
+      # 非同期化通信用、表示データ
+      @room = @message.room
+      @messages = @room.messages.all
+      @message = Message.new
+      @entries = @room.entries
+      @another_entry = @entries.where.not(member_id: current_member.id).first
     end
-    
-    redirect_to room_path(@message.room_id)
   end
 
   def destroy
-    # ログイン中の会員に関連するメッセージを削除
+    # ログイン中の会員に関連するメッセージを取得
     @message = current_member.messages.find(params[:id])
-    
-    if @message.destroy
-      # メッセージの削除が成功した場合の処理
-      flash[:notice] = "メッセージの削除に成功しました。"
-    else
-      # メッセージの削除が失敗した場合の処理
-      flash[:alert] = "メッセージの削除に失敗しました。"
-    end
-    
-    redirect_to room_path(@message.room_id)
+    # 非同期化通信用、表示データ
+    @room = @message.room
+    @messages = @room.messages.all
+    @entries = @room.entries
+    @another_entry = @entries.where.not(member_id: current_member.id).first
+    # メッセージを削除
+    @message.destroy
   end
 
 
