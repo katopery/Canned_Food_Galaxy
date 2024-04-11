@@ -10,19 +10,19 @@
     <div class="row">
       <div class="col-lg-3 col-md-12 my-2 text-center">
         <div class="detail-review">賞味期限</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:expiry_date_rating) || 0, type: 'expiry_date_ave' %>
+        <%= render "public/reviews/rate_average", canned_food: canned_food, ave: canned_food.reviews.average(:expiry_date_rating) || 0, type: 'expiry_date_ave' %>
       </div>
       <div class="col-lg-3 col-md-12 my-2 text-center">
         <div class="detail-review">おいしさ</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:taste_rating) || 0, type: 'taste_ave' %>
+        <%= render "public/reviews/rate_average", canned_food: canned_food, ave: canned_food.reviews.average(:taste_rating) || 0, type: 'taste_ave' %>
       </div>
       <div class="col-lg-3 col-md-12 my-2 text-center">
         <div class="detail-review">おつまみ</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:snack_rating) || 0, type: 'snack_ave' %>
+        <%= render "public/reviews/rate_average", canned_food: canned_food, ave: canned_food.reviews.average(:snack_rating) || 0, type: 'snack_ave' %>
       </div>
       <div class="col-lg-3 col-md-12 my-2 text-center">
         <div class="detail-review">アウトドア</div>
-        <%= render "public/reviews/rate_average.html.erb", canned_food: canned_food, ave: canned_food.reviews.average(:outdoor_rating) || 0, type: 'outdoor_ave' %>
+        <%= render "public/reviews/rate_average", canned_food: canned_food, ave: canned_food.reviews.average(:outdoor_rating) || 0, type: 'outdoor_ave' %>
       </div>
     </div>
   </div>

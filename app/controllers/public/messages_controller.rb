@@ -4,6 +4,7 @@ class Public::MessagesController < ApplicationController
   def create
     # フォームから送信されたメッセージを取得し、現在の会員に関連付けて保存
     @message = current_member.messages.new(message_params)
+    
     if @message.save
       # 非同期化通信用、表示データ
       @room = @message.room
@@ -11,6 +12,8 @@ class Public::MessagesController < ApplicationController
       @message = Message.new
       @entries = @room.entries
       @another_entry = @entries.where.not(member_id: current_member.id).first
+    else
+      render 'error'
     end
   end
 

@@ -10,6 +10,8 @@ ja:
         canned_name: "缶詰名"
         description: "缶詰説明"
         image: "画像"
+      message:
+        content: "メッセージ内容"
   date:
     abbr_day_names:
     - 日

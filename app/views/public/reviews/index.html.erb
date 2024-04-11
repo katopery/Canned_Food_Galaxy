@@ -46,7 +46,15 @@
         <% end %>  
       </div>
       <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
-        <%= render "index.html.erb", review: review %>
+        <div class="row">
+          <%= render "display", review: review %>
+          <div class="col-12 text-center">
+            <%= render "public/comments/count", comment: review.comments %>
+          </div>
+          <div class="col-12 my-3 text-center">
+            <%= render "btn", review: review %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

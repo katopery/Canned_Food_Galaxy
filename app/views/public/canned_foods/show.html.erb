@@ -21,19 +21,19 @@
       <div class="row">
         <div class="col-lg-3 col-md-12 mt-2 text-center">
           <div class="detail-review">賞味期限</div>
-          <%= render "public/reviews/rate_average.html.erb", canned_food: @canned_food, ave: @expiry_date_avg, type: 'expiry_date_ave' %>
+          <%= render "public/reviews/rate_average", canned_food: @canned_food, ave: @expiry_date_avg, type: 'expiry_date_ave' %>
         </div>
         <div class="col-lg-3 col-md-12 mt-2 text-center">
           <div class="detail-review">おいしさ</div>
-          <%= render "public/reviews/rate_average.html.erb", canned_food: @canned_food, ave: @taste_avg, type: 'taste_rate_ave' %>
+          <%= render "public/reviews/rate_average", canned_food: @canned_food, ave: @taste_avg, type: 'taste_rate_ave' %>
          </div>
         <div class="col-lg-3 col-md-12 mt-2 text-center">
           <div class="detail-review">おつまみ</div>
-          <%= render "public/reviews/rate_average.html.erb", canned_food: @canned_food, ave: @snack_avg, type: 'snack_rate_ave' %>
+          <%= render "public/reviews/rate_average", canned_food: @canned_food, ave: @snack_avg, type: 'snack_rate_ave' %>
         </div>
         <div class="col-lg-3 col-md-12 mt-2 text-center">
           <div class="detail-review">アウトドア</div>
-          <%= render "public/reviews/rate_average.html.erb", canned_food: @canned_food, ave: @outdoor_avg, type: 'outdoor_rate_ave' %>
+          <%= render "public/reviews/rate_average", canned_food: @canned_food, ave: @outdoor_avg, type: 'outdoor_rate_ave' %>
         </div>
         <% if !@member.guest_member? %>
           <div class="col-12 my-3 justify-content-center">
@@ -68,19 +68,19 @@
         <div class="row my-4 justify-content-center">
           <div class="col-3">
             <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'expiry_date_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'expiry_date_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'taste_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'taste_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'snack_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'snack_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'outdoor_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'outdoor_rating' %>
           </div>
         </div>
         <div class="my-4 d-flex flex-column align-items-center justify-content-center">
@@ -94,19 +94,19 @@
         <div class="row my-4 justify-content-center">
           <div class="col-3">
             <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'expiry_date_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'expiry_date_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'taste_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'taste_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'snack_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'snack_rating' %>
           </div>
           <div class="col-3">
             <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
-            <%= render "public/reviews/rating.html.erb", review: @review, type: 'outdoor_rating' %>
+            <%= render "public/reviews/rating", review: @review, type: 'outdoor_rating' %>
           </div>
         </div>
         <div class="my-4 d-flex flex-column align-items-center justify-content-center">

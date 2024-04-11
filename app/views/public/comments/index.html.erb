@@ -35,19 +35,19 @@
       <div class="row mt-3">
         <div class="col-3">
           賞味期限
-          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'expiry_date_rating' %>
+          <%= render "public/reviews/rate_read_only", review: @review, type: 'expiry_date_rating' %>
         </div>
         <div class="col-3">
           おいしさ
-          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'taste_rating' %>
+          <%= render "public/reviews/rate_read_only", review: @review, type: 'taste_rating' %>
         </div>
         <div class="col-3">
           おつまみ
-          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'snack_rating' %>
+          <%= render "public/reviews/rate_read_only", review: @review, type: 'snack_rating' %>
         </div>
         <div class="col-3">
           アウトドア
-          <%= render "public/reviews/rate_read_only.html.erb", review: @review, type: 'outdoor_rating' %>
+          <%= render "public/reviews/rate_read_only", review: @review, type: 'outdoor_rating' %>
         </div>
       </div>
       
@@ -62,13 +62,15 @@
 
   <div class="row mt-5">
     <h5 class="col-12 text-center">
-      コメント一覧（コメント数： <%= @review.comments.count %>）
+      コメント一覧（
+      <%= render "count", comment: @review.comments %>
+      ）
     </h5>
   </div>
 
   <div class="row mt-3 justify-content-center">
     <div class="col-12">
-      <%= render "comment_list.html.erb", comments: @comments, review: @review %>
+      <%= render "comment_list", comments: @comments, review: @review %>
     </div>
   </div>
   
@@ -79,6 +81,6 @@
   </div>
   
   <% if !@member.guest_member? %>
-    <%= render "comment.html.erb", comments: @comments %>
+    <%= render "comment", comments: @comments %>
   <% end %>
 </div>
