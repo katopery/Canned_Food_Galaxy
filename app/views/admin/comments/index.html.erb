@@ -55,7 +55,9 @@
 
   <div class="row mt-5">
     <h5 class="col-12 text-center">
-      コメント一覧（コメント数： <%= @review.comments.count %>）
+      コメント一覧（
+      <%= render "count", comment: @review.comments %>
+      ）
     </h5>
   </div>
 

@@ -24,7 +24,16 @@
         <%= review.canned_food.canned_name %>
       </div>
       <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
-        <%= render "list", review: review %>
+        <div class="row">
+          <%= render "display", review: review %>
+          <div class="col-12 text-center">
+            <%= render "admin/comments/count", comment: review.comments %>
+          </div>
+          <div class="col-12 my-3 text-center">
+            <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn primary-button" %>
+            <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn danger-button' %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
