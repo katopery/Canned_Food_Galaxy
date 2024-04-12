@@ -15,32 +15,23 @@
     </div>
     <div class="col-lg-4 col-md-12 mb-3 justify-content-center d-flex align-items-center">
       <% if !current_member.guest_member? && current_member != @member %>
-        <%= render "public/relationships/btn", member: @member, options: { class: ""} %>
+        <%= render "public/relationships/btn", member: @member %>
       <% end %>
       <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
-        <% if @is_room == true %>
-          <%= link_to 'メッセージへ', room_path(@room_id), class: "btn fixing-button ml-5" %>
-        <% else %>
-          <%= form_for @room do |f| %>
-            <%= fields_for @entry do |e| %>
-              <%= e.hidden_field :member_id, value: @member.id %>
-            <% end %>
-            <%= f.submit "メッセージを始める", class:"btn fixing-button ml-5" %>
-          <% end %>
-        <% end %>
+        <%= render "public/messages/btn", member: @member, is_room: @is_room, room_id: @room_id, room: @room, entry: @entry %>
       <% end %>
     </div>
   </div>
     
   <% @reviews.each do |review| %>
     <div class="row my-3 justify-content-center">
-      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+      <div class="col-lg-3 col-md-12 p-3 text-center display-box">
         <%= image_tag review.canned_food.get_image(150,100), class: "image" %><br>
         <%= review.canned_food.canned_name %>
       </div>
-      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
         <div class="row">
-          <%= render "public/reviews/display", review: review %>
+          <%= render "public/reviews/review_read_only", review: review %>
           <div class="col-12 text-center">
             <%= render "public/comments/count", comment: review.comments %>
           </div>
@@ -55,7 +46,7 @@
   <% end %>
   
   <div class="row">
-    <div class="mx-auto my-5">
+    <div class="mx-auto my-3">
       <%= paginate @reviews %>
     </div>
   </div>

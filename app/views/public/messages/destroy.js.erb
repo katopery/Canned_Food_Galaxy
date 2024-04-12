@@ -1,3 +1,8 @@
 $('#message_<%= @message.id %>').remove();
 $('#post_date_<%= @message.id %>').remove();
 $('#delete_message_<%= @message.id %>').remove();
+
+if ($("#messages-error").length)
+{
+  $("#messages-error").hide();
+}
