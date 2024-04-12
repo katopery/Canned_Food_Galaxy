@@ -4,7 +4,7 @@
   </div>
 
   <div class="row mt-5 justify-content-center">
-    <div class="col-lg-3 col-md-12 d-flex flex-column align-items-center justify-content-center canned-food-box">
+    <div class="col-lg-3 col-md-12 d-flex flex-column align-items-center justify-content-center display-box">
       <div>
         <%= image_tag @canned_food.get_image(200,100), class: "image" %>
       </div>
@@ -17,7 +17,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+    <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
       <div class="row">
         <div class="col-lg-3 col-md-12 mt-2 text-center">
           <div class="detail-review">賞味期限</div>
@@ -50,7 +50,7 @@
       </div>
     </div>
     
-    <div class="col-12 canned-food-box">
+    <div class="col-12 display-box">
       <div class="col-lg-3 col-md-12 mt-3 text-center">
         <h6>缶詰説明</h6>
       </div>
@@ -66,24 +66,9 @@
       <%= form_with model: @review, local: true do |f| %>
         <%= f.hidden_field :canned_food_id, value:  @review.canned_food_id %>
         <div class="row my-4 justify-content-center">
-          <div class="col-3">
-            <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'expiry_date_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'taste_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'snack_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'outdoor_rating' %>
-          </div>
+          <%= render "public/reviews/review_rating", review: @review %>
         </div>
-        <div class="my-4 d-flex flex-column align-items-center justify-content-center">
+        <div class="row my-4 d-flex flex-column align-items-center justify-content-center">
           <%= f.submit "レビュー追加", class: "btn fixing-button" %>
         </div>
       <% end %>
@@ -92,24 +77,9 @@
       <%= form_with model: @review, url: review_path(@review.id), local: true do |f| %>
         <%= f.hidden_field :canned_food_id, value:  @review.canned_food_id %>
         <div class="row my-4 justify-content-center">
-          <div class="col-3">
-            <%= f.label :expiry_date_rating,'賞味期限', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'expiry_date_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :taste_rating,'おいしさ', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'taste_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :snack_rating,'おつまみ', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'snack_rating' %>
-          </div>
-          <div class="col-3">
-            <%= f.label :outdoor_rating,'アウトドア', class:'col-form-label' %>
-            <%= render "public/reviews/rating", review: @review, type: 'outdoor_rating' %>
-          </div>
+          <%= render "public/reviews/review_rating", review: @review %>
         </div>
-        <div class="my-4 d-flex flex-column align-items-center justify-content-center">
+        <div class="row my-4 d-flex flex-column align-items-center justify-content-center">
           <%= f.submit "レビュー編集", class: "btn edit-button" %>
         </div>
       <% end %>

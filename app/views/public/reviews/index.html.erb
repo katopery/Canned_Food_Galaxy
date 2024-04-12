@@ -39,15 +39,15 @@
   
   <% @reviews.each do |review| %>
     <div class="row my-3 justify-content-center">
-      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+      <div class="col-lg-3 col-md-12 p-3 text-center display-box">
         <%= link_to member_path(review.member) do %>
           <%= image_tag review.member.get_profile_image(100,100), class: "image" %><br>
           <%= review.member.nickname %>
         <% end %>  
       </div>
-      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
         <div class="row">
-          <%= render "display", review: review %>
+          <%= render "review_read_only", review: review %>
           <div class="col-12 text-center">
             <%= render "public/comments/count", comment: review.comments %>
           </div>

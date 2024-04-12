@@ -19,11 +19,11 @@
     
   <% @reviews.each do |review| %>
     <div class="row my-3 justify-content-center">
-      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
+      <div class="col-lg-3 col-md-12 p-3 text-center display-box">
         <%= image_tag review.canned_food.get_image(200,100), class: "image" %><br>
         <%= review.canned_food.canned_name %>
       </div>
-      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
+      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
         <div class="row">
           <%= render "display", review: review %>
           <div class="col-12 text-center">
