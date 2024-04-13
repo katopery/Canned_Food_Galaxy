@@ -2,6 +2,7 @@
   <div class="row offset-1 my-5">
     <h2 class="px-3 text-center">缶詰一覧</h2>
     
+    <!--缶詰名での検索-->
     <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_path, local: true, method: :get do |f| %>
         <div class="d-flex align-items-center justify-content-center">
@@ -13,6 +14,7 @@
       <% end %>
     </div>
     
+    <!--タグ名での検索-->
     <div class="search_form col-lg-4 m-2 text-center justify-content-center d-flex align-items-center">
       <%= form_with url: canned_foods_search_tag_path, method: :get, class: 'boards_searchForm' do |f| %>
         <div class="d-flex align-items-center justify-content-center">
@@ -23,11 +25,14 @@
     </div>
   </div>
 
+  <!--新しい順/古い順表示-->
   <div class="row my-3 text-center justify-content-center">
     <%= link_to "新しい順", canned_foods_path(sort_created_at: 'created_at desc') %>
     ｜
     <%= link_to "古い順", canned_foods_path(sort_created_at: 'created_at asc') %> 
   </div>
+  
+  <!--各評価の高い順表示-->
   <div class="row my-3 text-center justify-content-center">
     <div class="col-lg-3 col-md-12 mb-2">
       <h6>評価の高い順</h6>
@@ -42,7 +47,8 @@
       <%= link_to "アウトドア評価", canned_foods_path(sort_review: 'outdoor_rating') %>
     </div>
   </div>
-    
+
+  <!--各評価での絞り込み表示-->
   <div class="row mb-5 text-center justify-content-center">
     <div class="col-lg-3 col-md-12 mb-2">
       <h6>評価で絞り込み</h6>
@@ -73,6 +79,7 @@
     </div>
   </div>
 
+  <!--缶詰一覧の表示-->
   <% @canned_foods.each do |canned_food| %>
     <%= render "list", canned_food: canned_food %>
   <% end %>

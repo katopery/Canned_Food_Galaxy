@@ -27,9 +27,9 @@ class Public::CommentsController < ApplicationController
     @comment = Comment.new
     @comments = @review.comments.page(params[:page]).per(5)
     
-    # 缶詰の表示ステータスがtrueではない場合、レビュー詳細に遷移できないようにする
-    if @canned_food.is_canned_status != true
-      redirect_to canned_foods_path, alert: 'この缶詰は表示できません'
+    # 缶詰の表示ステータス、または会員ステータスがtrueではない場合、レビュー詳細に遷移できないようにする
+    if @canned_food.is_canned_status != true || @review.member.is_member_status != true
+      redirect_to canned_food_reviews_path(@canned_food.id), alert: 'レビューは確認できません。'
       return
     end
   end

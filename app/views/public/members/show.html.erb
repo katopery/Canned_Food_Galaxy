@@ -22,7 +22,8 @@
       <% end %>
     </div>
   </div>
-    
+
+  <!-- 会員のレビュー一覧 -->
   <% @reviews.each do |review| %>
     <div class="row my-3 justify-content-center">
       <div class="col-lg-3 col-md-12 p-3 text-center display-box">
@@ -37,7 +38,10 @@
           </div>
           <div class="col-12 my-3 text-center">
             <div>
-              <%= render "public/reviews/btn", review: review %>
+              <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary-button" %>
+              <% if review.member == current_member %>
+                <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'offset-1 btn danger-button' %>
+              <% end %>
             </div>
           </div>
         </div>

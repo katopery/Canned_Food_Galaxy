@@ -9,7 +9,7 @@
   </div>
   
   <% if @members.present? %>
-    <%= render "/public/members/member_follow_list", members: @members %>
+    <%= render "list", members: @members %>
   <% else %>
     <div class="row my-3 justify-content-center text-center">
       <%= link_to members_my_page_path, class: 'nav-link' do %>

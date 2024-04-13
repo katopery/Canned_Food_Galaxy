@@ -1,4 +1,0 @@
-<%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary-button" %>
-<% if review.member == current_member %>
-  <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'btn danger-button' %>
-<% end %>
