@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-5">
     <h2 class="px-3 text-center">
-      <%= @member.nickname %>さんのレビュー一覧
+      <%= @member.nickname %>さんのレビュー一覧 (レビュー数： <%= @member.reviews.count %>)
     </h2>
   </div>
   
@@ -10,16 +10,21 @@
       <%= image_tag @member.get_profile_image(100,100), class: "image" %><br>
       <%= @member.nickname %>  
     </div>
-    <div class="col-lg-2 col-md-12 mb-3 justify-content-center d-flex align-items-center">
-      レビュー数： <%= @member.reviews.count %>
+    <div class="col-lg-4 col-md-12 mb-3 justify-content-center d-flex align-items-center">
+      <%= render "public/relationships/count", member: @member %>
     </div>
     <div class="col-lg-4 col-md-12 mb-3 justify-content-center d-flex align-items-center">
       <% if !current_member.guest_member? && current_member != @member %>
-        <%= render "public/relationships/btn", member: @member %>
+        <div id="relationship-btn<%= @member.id %>">
+          <%= render "public/relationships/btn", member: @member %>
+        </div>
       <% end %>
-      <% if current_member != @member && current_member.following?(@member) && @member.following?(current_member) %>
-        <%= render "public/messages/btn", member: @member, is_room: @is_room, room_id: @room_id, room: @room, entry: @entry %>
-      <% end %>
+      <div id="message-btn">
+      
+        
+          <%= render "public/messages/btn", member: @member, is_room: @is_room, room_id: @room_id, room: @room, entry: @entry %>
+        
+      </div>
     </div>
   </div>
 

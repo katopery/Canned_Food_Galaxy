@@ -3,21 +3,22 @@
     <thead class="table-info">
       <tr>
         <th class="col-2">ニックネーム</th>
-        <th colspan="4"></th>
+        <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
       <% members.each do |member| %>
         <tr>
-          <td class="col-2">
+          <td class="col-2 align-middle">
             <%= image_tag member.get_profile_image(80,80) %></br>
             <%= member.nickname %>
           </td>
-          <td class="col-2">フォロー数: <%= member.followings.count %></td>
-          <td class="col-2">フォロワー数: <%= member.followers.count %></td>
-          <td class="col-2"><%= link_to "レビュー一覧", member_path(member.id), class: "btn primary-button" %></td>
-          <td class="col-2">
-            <%= render "btn", member: member %>
+          <td class="col-4 align-middle"><%= render "count", member: member %></td>
+          <td class="col-3 align-middle"><%= link_to "レビュー一覧", member_path(member.id), class: "btn primary-button" %></td>
+          <td class="col-3 align-middle">
+            <div id="relationship-btn<%= member.id %>">
+              <%= render "btn", member: member %>
+            </div>
           </td>
         </tr>
       <% end %>

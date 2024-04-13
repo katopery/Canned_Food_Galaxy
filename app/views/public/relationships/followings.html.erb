@@ -4,7 +4,7 @@
       フォロー一覧
     </h2>
     <div class="ml-3 d-flex align-items-center">
-      (フォロー数：<%= current_member.followings.count %>,フォロワー数：<%= current_member.followers.count %>)
+      <%= render "count", member: current_member %>
     </div>
   </div>
   
