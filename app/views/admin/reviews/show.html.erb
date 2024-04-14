@@ -3,6 +3,9 @@
     <h2 class="px-3 text-center">
       <%= @member.nickname %>さんのレビュー一覧
     </h2>
+    <div class="col-md-auto col-sm-12 justify-content-center d-flex align-items-center">
+       (レビュー数： <%= @member.reviews.count %>)
+    </div>
   </div>
   
   <div class="row my-4 text-center justify-content-center">
@@ -12,29 +15,33 @@
         <%= @member.nickname %>  
       <% end %> 
     </div>
-    <div class="col-lg-2 col-md-12 mb-3 justify-content-center d-flex align-items-center">
-      レビュー数： <%= @member.reviews.count %>
-    </div>
   </div>
-    
-  <% @reviews.each do |review| %>
-    <div class="row my-3 justify-content-center">
-      <div class="col-lg-3 col-md-12 p-3 text-center display-box">
-        <%= image_tag review.canned_food.get_image(200,100), class: "image" %><br>
-        <%= review.canned_food.canned_name %>
-      </div>
-      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
-        <div class="row">
-          <%= render "display", review: review %>
-          <div class="col-12 text-center">
-            <%= render "admin/comments/count", comment: review.comments %>
-          </div>
-          <div class="col-12 my-3 text-center">
-            <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn primary-button" %>
-            <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn danger-button' %>
+
+  <!-- 会員のレビュー一覧 -->
+  <% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+      <div class="row my-3 justify-content-center">
+        <div class="col-lg-3 col-md-12 p-3 text-center display-box">
+          <%= image_tag review.canned_food.get_image(200,100), class: "image" %><br>
+          <%= review.canned_food.canned_name %>
+        </div>
+        <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
+          <div class="row">
+            <%= render "display", review: review %>
+            <div class="col-12 text-center">
+              <%= render "admin/comments/count", comment: review.comments %>
+            </div>
+            <div class="col-12 my-3 text-center">
+              <%= link_to "レビュー詳細", admin_review_comments_path(review.id), class: "btn primary-button" %>
+              <%= link_to "レビュー削除", admin_review_path(review.id), method: :delete, class: 'btn danger-button' %>
+            </div>
           </div>
         </div>
       </div>
+    <% end %>
+  <% else %>
+    <div class="col my-5 text-center justify-content-center">
+      <h3>レビューはありません。</h3>
     </div>
   <% end %>
   

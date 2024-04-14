@@ -1,11 +1,11 @@
 <div class="container mt-5">
-  <div class="row offset-2 my-5">
-    <h2 class="px-3 text-center">管理者ログイン</h2>
+  <div class="row offset-md-2 my-5">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">管理者ログイン</h2>
   </div>
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="row mt-5 justify-content-center">
-      <table class="table_info table-bordered">
+      <table class="table-information table-bordered">
         <tbody>
           <tr class="field">
             <th class="p-3 text-center table-info align-middle">
@@ -29,8 +29,8 @@
       </table>
     </div>
     
-    <div class="row justify-content-center">
-      <div class="actions mt-2">
+    <div class="row my-2 justify-content-center">
+      <div class="actions">
         <%= f.submit "ログイン", class:"btn fixing-button" %>
       </div>
     </div>
