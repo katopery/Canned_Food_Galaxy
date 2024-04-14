@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">
-      <%= @member.nickname %>さんのレビュー一覧 (レビュー数： <%= @member.reviews.count %>)
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">
+      <%= @member.nickname %>さんのレビュー一覧
     </h2>
+    <div class="col-md-auto col-sm-12 justify-content-center d-flex align-items-center">
+       (レビュー数： <%= @member.reviews.count %>)
+    </div>
   </div>
   
   <div class="row my-4 text-center justify-content-center">
@@ -20,10 +23,7 @@
         </div>
       <% end %>
       <div id="message-btn">
-      
-        
-          <%= render "public/messages/btn", member: @member, is_room: @is_room, room_id: @room_id, room: @room, entry: @entry %>
-        
+        <%= render "public/messages/btn", member: @member, is_room: @is_room, room_id: @room_id, room: @room, entry: @entry %>
       </div>
     </div>
   </div>

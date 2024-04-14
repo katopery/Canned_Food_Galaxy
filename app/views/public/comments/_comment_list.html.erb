@@ -19,7 +19,7 @@
             <%= image_tag comment.get_image(100,100), class: "image" %>
           <% end %>
         </td>
-        <td class="col-6 text-break">
+        <td class="col-7 text-break">
           <%=safe_join(comment.content.split("\n"),tag(:br))%>
         </td>
         <td class="col-1 text-center">

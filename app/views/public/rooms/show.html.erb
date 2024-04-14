@@ -19,7 +19,7 @@
 
   <div class="row my-4 text-center justify-content-center">
     <%= form_with model: @message, data: {remote: true} do |f| %>
-      <%= f.text_area :content, autofocus: true, placeholder: "メッセージをここに（100文字以内）", cols: "60", row: "2" %>
+      <%= f.text_area :content, autofocus: true, placeholder: "メッセージをここに（100文字以内）", cols: "50", row: "2" %>
       <%= f.submit "送信", class: "btn fixing-button ml-5" %>
       <%= f.hidden_field :room_id, value: @room.id %>
     <% end %>

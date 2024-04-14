@@ -19,6 +19,10 @@
     </div>
     <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
       <div class="row">
+        <div class="col-12 mt-2 justify-content-center d-flex align-items-center">
+          総合レビュー数：<%= @canned_food.reviews.count %>
+        </div>
+        
         <%= render "public/reviews/review_average", canned_food: @canned_food %>
         
         <!-- ゲストログインでない場合にお気に入り登録を可能にする -->
