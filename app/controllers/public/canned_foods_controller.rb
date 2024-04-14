@@ -48,12 +48,6 @@ class Public::CannedFoodsController < ApplicationController
     @canned_food = CannedFood.find(params[:id])
     @tags = @canned_food.tags
 
-    # 各レビューの平均値算出
-    @expiry_date_avg = @canned_food.reviews.average(:expiry_date_rating) || 0
-    @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
-    @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
-    @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
-
     if current_member
       # 会員がログインしている場合
       @member = Member.find(current_member.id)
@@ -96,7 +90,7 @@ class Public::CannedFoodsController < ApplicationController
       # 検索されたタグに関連付けられたCannedFoodを取得
       @canned_foods = @canned_tags.map(&:canned_food)
     else
-      # タグIDが指定されていない場合、タグIDを0として処理をする
+      # タグIDが指定されていない場合、タグIDをnilとして処理をする
       @tag = nil
       @canned_tags = Kaminari.paginate_array([]).page(params[:page]).per(10)
       @canned_foods = []

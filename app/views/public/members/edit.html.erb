@@ -1,12 +1,12 @@
 <div class="container">
-  <div class="row offset-2 my-5 mb-2">
-    <h2 class="px-3 text-center">会員情報編集</h2>
+  <div class="row offset-md-2 my-5 mb-2">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">会員情報編集</h2>
   </div>
   
   <%= form_with model: @member, url: members_information_path do |f| %>
     <%= render "public/shared/error_messages", resource: @member %>
     <div class="row d-flex align-items-center justify-content-center">
-      <table class="table-bordered table_info">
+      <table class="table-bordered table-information">
         <tbody>
           <tr class="field">
             <th class="p-3 text-center table-info align-middle">

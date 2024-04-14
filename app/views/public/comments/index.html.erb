@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row mt-5">
-    <h2 class="px-3 text-center">レビュー詳細</h2>
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">レビュー詳細</h2>
   </div>
   
   <div class="row mt-5 justify-content-center">
-    <div class="col-4 text-center">
+    <div class="col-lg-4 col-md-12 text-center">
       <%= link_to canned_food_path(@canned_food) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -19,7 +19,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-8 border border-primary text-break overflow-auto description-box">
+    <div class="col-lg-8 col-md-12 border border-primary text-break overflow-auto description-box">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
   </div>
@@ -28,8 +28,9 @@
     <div class="col-12">
       <h5 class="row justify-content-center">
         <%= link_to member_path(@review.member) do %>
-          <%= @review.member.nickname %>さんの評価
-         <% end %> 
+          <%= @review.member.nickname %>
+        <% end %>
+        さんの評価
       </h5>
       
       <div class="row mt-3">

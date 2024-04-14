@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">缶詰編集</h2>
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">缶詰編集</h2>
   </div>
 
   <%= form_with model: @canned_food, url: admin_canned_food_path(@canned_food), method: :patch do |f| %>
     <%= render "admin/shared/error_messages", resource: @canned_food %>
     <div class="row d-flex align-items-center justify-content-center">
-      <table class="col-12 table-bordered table_info">
+      <table class="col-12 table-bordered table-information">
         <tbody>
           <tr class="field">
             <th class="col-lg-3 col-md-12 p-3 text-center table-info align-middle">

@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row offset-1 my-5">
-    <h2 class="px-3 text-center">マイページ</h2>
+  <div class="row offset-md-1 my-5">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">マイページ</h2>
   </div>
 
   <div class="row offset-2 my-3">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row my-5 justify-content-center">
-    <div class="col-3 text-center">
+    <div class="col-lg-3 col-md-12 text-center">
       <% if @member.image.attached? %>
         <%= image_tag @member.image, size: "100x100" %>
       <% else %>
@@ -28,7 +28,7 @@
       </p>
     </div>
 
-    <table class="col-7 table-bordered table_info">
+    <table class="col-lg-7 col-md-12 table-bordered table-information">
       <tbody>
         <tr>
           <th class="p-3 text-center table-info align-middle">
@@ -54,16 +54,16 @@
 
   <% unless @member.guest_member? %>
     <div class="row mt-5 text-center justify-content-center">
-      <div class="col-lg-3 col-md-6 mb-5">
+      <div class="col-lg-3 col-md-6 mb-3">
         <%= link_to "レビュー 一覧", member_path(current_member.id), class: "btn primary-button" %>
       </div>
-      <div class="col-lg-3 col-md-6 mb-5">
+      <div class="col-lg-3 col-md-6 mb-3">
         <%= link_to "フォロー 一覧", member_followings_path(current_member.id), class: "btn primary-button" %>
       </div>
-      <div class="col-lg-3 col-md-6 mb-5">
+      <div class="col-lg-3 col-md-6 mb-3">
         <%= link_to "フォロワー 一覧", member_followers_path(current_member.id), class: "btn primary-button" %>
       </div>
-      <div class="col-lg-3 col-md-6 mb-5">
+      <div class="col-lg-3 col-md-6 mb-3">
         <%= link_to "お気に入り 一覧", favorites_path, class: "btn primary-button" %>
       </div>
     </div>

@@ -10,5 +10,5 @@ class Comment < ApplicationRecord
     end
   end
   
-  validates :content, presence: true
+  validates :content, presence: true, length: { in: 1..100 }
 end

@@ -16,7 +16,7 @@ class Public::ReviewsController < ApplicationController
       flash[:notice] = 'レビューを投稿しました。'
       redirect_to review_comments_path(@review.id)
     else
-      flash[:alert] = 'レビューを投稿に失敗しました。'
+      flash[:alert] = 'レビューの投稿に失敗しました。'
       
       # render用データ
       @canned_food = CannedFood.find(@review.canned_food_id)
