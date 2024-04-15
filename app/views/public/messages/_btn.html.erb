@@ -1,0 +1,12 @@
+<% if current_member != member && current_member.following?(member) && member.following?(current_member) %>
+  <% if is_room == true %>
+    <%= link_to 'メッセージへ', room_path(room_id), class: "btn fixing-button ml-5" %>
+  <% else %>
+    <%= form_for room do |f| %>
+      <%= fields_for entry do |e| %>
+        <%= e.hidden_field :member_id, value: member.id %>
+      <% end %>
+      <%= f.submit "メッセージを始める", class:"btn fixing-button ml-5" %>
+    <% end %>
+  <% end %>
+<% end %>

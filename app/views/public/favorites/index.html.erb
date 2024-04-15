@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">お気に入り一覧</h2>
-    <div class="ml-3 d-flex align-items-center">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">お気に入り一覧</h2>
+    <div class="col-md-auto col-sm-12 justify-content-center d-flex align-items-center">
       (お気に入り登録数: <%= @favorites.count %>)
     </div>
   </div>
@@ -19,20 +19,15 @@
             </div>
           <% end %>
         </div>
-        <div class="col-lg-2 col-sm-3 col-6 my-3">
-          <div class="text-center justify-content-center">
-            <h6>お気に入り登録</h6>
-            <div class="d-flex flex-column align-items-center">
-              <div id="favorite_btn_<%= canned_food.id %>" %>
-                <%= render "/public/favorites/btn", canned_food: canned_food %>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-2 col-sm-3 col-6 py-3">
+          <%= render "/public/favorites/index", canned_food: canned_food %>
         </div>
       <% end %>
     <% else %>
       <div class="col my-5 text-center justify-content-center">
-        <h3>お気に入り登録している缶詰が見つかりませんでした。</h3>
+        <%= link_to members_my_page_path, class: 'nav-link' do %>
+          <h3>お気に入り登録している缶詰が見つかりませんでした。</h3>
+        <% end %>
       </div>
     <% end %>
   </div>

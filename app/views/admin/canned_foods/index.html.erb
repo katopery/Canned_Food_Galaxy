@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">缶詰一覧</h2>
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">缶詰一覧</h2>
     
     <div class="search_form offset-1 d-flex align-items-center">
       <%= render "admin/searches/form", word: "缶詰名", range: "缶詰"  %>
@@ -8,7 +8,7 @@
   </div>
   
   <div class="row justify-content-end">
-    <div class="col-lg-2 col-md-6 text-center">
+    <div class="col-lg-2 col-md-12 text-center">
       <h5>
         <%= link_to new_admin_canned_food_path do %>
           新規追加
@@ -19,7 +19,7 @@
   </div>
     
   <div class="row">
-    <%= render "admin/canned_foods/list.html.erb", canned_foods: @canned_foods %>
+    <%= render "admin/canned_foods/list", canned_foods: @canned_foods %>
   </div>
   
   <div class="row">

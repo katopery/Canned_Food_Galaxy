@@ -1,12 +1,12 @@
 <div class="container">
-  <div class="row offset-2 mt-5">
-    <h2 class="px-3 text-center">ログイン</h2>
+  <div class="row offset-md-2 mt-5">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">ログイン</h2>
   </div>
   
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
     <div class="row mt-5 justify-content-center">
-      <table class="table_info table-bordered">
+      <table class="table-information table-bordered">
         <tbody>
           <tr class="field">
             <th class="p-3 text-center table-info align-middle">
@@ -38,8 +38,8 @@
   <% end %>
 
   <div class="row my-5 justify-content-center">
-    <h5 class="mr-2 p-2 text-center">会員登録がお済みではない方</h5>
-    <p class="d-flex align-items-center">
+    <h5 class="col-md-auto col-sm-12 text-center">会員登録がお済みではない方</h5>
+    <p class="col-md-auto col-sm-12 d-flex align-items-center">
       <%= link_to "こちら", new_member_registration_path %>から新規登録を行なってください。
     </p>
   </div>

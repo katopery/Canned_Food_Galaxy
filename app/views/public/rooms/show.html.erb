@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row my-5">
+    <h2 class="px-3 text-center">
+      <% if @another_entry %>
+        <%= @another_entry.member.nickname %>さんとのメッセージ
+      <% else %>
+        メッセージ相手が存在しません
+      <% end %>
+    </h2>
+  </div>
+
+  <div class="row my-4 text-center justify-content-center">
+    <div id="messages">
+      <%= render "public/messages/message", messages: @messages %>
+    </div>
+  </div>
+
+  <div id ="messages-error"></div>
+
+  <div class="row my-4 text-center justify-content-center">
+    <%= form_with model: @message, data: {remote: true} do |f| %>
+      <%= f.text_area :content, autofocus: true, placeholder: "メッセージをここに（100文字以内）", cols: "50", row: "2" %>
+      <%= f.submit "送信", class: "btn fixing-button ml-5" %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+    <% end %>
+  </div>
+</div>

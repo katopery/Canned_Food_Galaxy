@@ -40,26 +40,30 @@
 
 /* 情報テーブル用 */
 @media screen and (max-width:800px){
-    .table_info th,
-    .table_info td{
+    .table-information th,
+    .table-information td{
         display: block;
         text-align: left;
     }
-}
-
-/* 缶詰box用 */
-.canned-food-box {
-  color         : #7f4600;              /* 文字色               */
-  background    : #ffcc99;              /* BOXの背景色          */
-  border        : 7px dotted #7f4600;   /* 枠線の指定           */
-  border-radius : 1px;                  /* 角丸の指定           */
-  box-shadow    : 0 0 0 12px #ffcc99;   /* 影を利用した外余白   */
 }
 
 /* 説明表示用 */
 .description-box {
   height : 300px;
   width  : 100%;
+}
+
+/* ログインしている側のメッセージ表示用 */
+.current-message-style {
+  background-color: rgba(0, 185, 0, 0.6);
+  padding: 5px;
+  border-radius: 10px;
+}
+/* 相手側のメッセージ表示用 */
+.another-message-style {
+  background-color: #F5F5DC;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 /* 共通の設定                        */
@@ -196,4 +200,13 @@ h2,h5,h6 {
   border: dashed 1px #96c2fe;
   padding: 0.2em 0.5em;
   color: #454545;
+}
+
+/* 表示box用 */
+.display-box {
+  color         : #7f4600;              /* 文字色               */
+  background    : #ffcc99;              /* BOXの背景色          */
+  border        : 7px dotted #7f4600;   /* 枠線の指定           */
+  border-radius : 1px;                  /* 角丸の指定           */
+  box-shadow    : 0 0 0 12px #ffcc99;   /* 影を利用した外余白   */
 }

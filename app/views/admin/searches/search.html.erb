@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">
+    <h2 class="col-md-auto col-sm-12 px-3 text-cente">
       "<%= @word %>"の検索結果
     </h2>
   </div>
   
   <div class="row my-2">
     <% if @range == "缶詰" %>
-      <%= render "admin/canned_foods/list.html.erb", canned_foods: @canned_foods %>
+      <%= render "admin/canned_foods/list", canned_foods: @canned_foods %>
     <% elsif @range == "会員" %>
-      <%= render "admin/members/list.html.erb", members: @members %>
+      <%= render "admin/members/list", members: @members %>
     <% end %>
   </div>
   

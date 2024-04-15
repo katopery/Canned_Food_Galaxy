@@ -1,0 +1,7 @@
+$('#messages').html("<%= j(render "public/messages/message", messages: @messages) %>");
+$("textarea").val('');
+
+if ($("#messages-error").length)
+{
+  $("#messages-error").hide();
+}

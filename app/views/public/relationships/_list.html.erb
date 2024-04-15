@@ -1,0 +1,26 @@
+<div class="row my-3 justify-content-center text-center">
+  <table class="table">
+    <thead class="table-info">
+      <tr>
+        <th>ニックネーム</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% members.each do |member| %>
+        <tr>
+          <td class="align-middle">
+            <%= image_tag member.get_profile_image(80,80) %></br>
+            <%= member.nickname %>
+          </td>
+          <td class="align-middle"><%= link_to "レビュー一覧", member_path(member.id), class: "btn primary-button" %></td>
+          <td class="align-middle">
+            <div id="relationship-btn<%= member.id %>">
+              <%= render "btn", member: member %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

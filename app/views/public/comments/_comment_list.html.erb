@@ -19,12 +19,12 @@
             <%= image_tag comment.get_image(100,100), class: "image" %>
           <% end %>
         </td>
-        <td class="col-6 text-break">
+        <td class="col-7 text-break">
           <%=safe_join(comment.content.split("\n"),tag(:br))%>
         </td>
         <td class="col-1 text-center">
           <% if comment.member == current_member %>
-            <%= link_to "削除", review_comment_path(review, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+            <%= link_to "削除", review_comment_path(review, comment), method: :delete, class: "btn danger-button" %>
           <% end %>
         </td>
       </tr>

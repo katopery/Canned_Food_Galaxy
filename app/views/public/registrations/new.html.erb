@@ -1,12 +1,12 @@
 <div class="container">
-  <div class="row offset-2 mt-5 mb-2">
-    <h2 class="px-3 text-center">新規会員登録</h2>
+  <div class="row offset-md-2 mt-5 mb-2">
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">新規会員登録</h2>
   </div>
 
   <%= form_with model: @member, url: member_registration_path, id: 'new_member', class: 'new_member' do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
-    <div class="row mt-5 justify-content-center">
-      <table class="table-bordered member_table_infoinfo">
+    <div class="row d-flex align-items-center justify-content-center">
+      <table class="table-bordered table-information">
         <tbody>
           <tr class="field">
             <th class="px-2 text-center table-info align-middle">
@@ -68,17 +68,16 @@
   <% end %>
 
   <div class="row mt-5 justify-content-center">
-    <h5 class="mr-2 p-2 text-center">既に登録済みの方</h5>
-    <p class="d-flex align-items-center">
+    <h5 class="col-md-auto col-sm-12 text-center">既に会員登録済みの方</h5>
+    <p class="col-md-auto col-sm-12 d-flex align-items-center">
       <%= link_to "こちら", new_member_session_path %> からログインしてください。
     </p>
   </div>
   
   <div class="row my-2 justify-content-center">
-    <h5 class="mr-2 p-2 text-center">ゲストログインを希望の方</h5>
-    <p class="d-flex align-items-center">
-      <%= link_to 'ゲストログイン（閲覧用）', members_guest_sign_in_path, method: :post %> からログインしてください。
+    <h5 class="col-md-auto col-sm-12 text-center">ゲストログインを希望の方</h5>
+    <p class="col-md-auto col-sm-12 d-flex align-items-center">
+      <%= link_to 'ゲスト（閲覧用）', members_guest_sign_in_path, method: :post %> からログインしてください。
     </p>
   </div>
-
 </div>

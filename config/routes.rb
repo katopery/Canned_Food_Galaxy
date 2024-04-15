@@ -44,6 +44,9 @@ Rails.application.routes.draw do
     
     resources :favorites, only: [:index, :create, :destroy]
     
+    resources :messages, only: [:create, :destroy]
+    resources :rooms, only: [:create, :show]
+    
     # 新規会員登録失敗時の対処
     get "members" => redirect("/members/sign_up")
   end

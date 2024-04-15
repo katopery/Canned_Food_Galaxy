@@ -1,10 +1,15 @@
 <div class="container">
   <div class="row my-5">
-    <h2 class="px-3 text-center">レビュー一覧</h2>
+    <h2 class="col-md-auto col-sm-12 px-3 text-center">
+      レビュー一覧
+    </h2>
+    <div class="col-md-auto col-sm-12 justify-content-center d-flex align-items-center">
+      (レビュー数：<%= @canned_food.reviews.count %>)
+    </div>
   </div>
   
   <div class="row my-5 justify-content-center">
-    <div class="col-lg-3 col-md-12 text-center">
+    <div class="col-lg-4 col-md-12 text-center">
       <%= link_to canned_food_path(@canned_food) do %>
         <div>
           <%= image_tag @canned_food.get_image(200,100), class: "image" %>
@@ -18,36 +23,47 @@
           タグ： <%= tag.name %>
         <% end %>
       </div>
+      <!-- ゲストログインでない場合にお気に入り登録を可能にする -->
+      <% if !@member.guest_member? %>
+        <div class="my-3 justify-content-center">
+          <%= render "/public/favorites/index", canned_food: @canned_food %>
+        </div>
+      <% end %>
     </div>
-    <div class="col-lg-6 col-md-12 border border-primary text-break overflow-auto description-box">
+    <div class="col-lg-8 col-md-12 border border-primary text-break overflow-auto description-box">
       <%=safe_join(@canned_food.description.split("\n"),tag(:br))%>
     </div>
-    
-    <% if !@member.guest_member? %>
-      <div class="col-lg-3 col-md-12 my-3 justify-content-center">
-        <div class="text-center justify-content-center">
-          <h6>お気に入り登録</h6>
-          <div class="d-flex flex-column align-items-center">
-            <div id="favorite_btn_<%= @canned_food.id %>" %>
-              <%= render "/public/favorites/btn", canned_food: @canned_food %>
+  </div>
+  
+  <!-- 缶詰へのレビュー一覧 -->
+  <% if @reviews.present? %>
+    <% @reviews.each do |review| %>
+      <div class="row my-3 justify-content-center">
+        <div class="col-lg-3 col-md-12 p-3 text-center display-box">
+          <%= link_to member_path(review.member) do %>
+            <%= image_tag review.member.get_profile_image(100,100), class: "image" %><br>
+            <%= review.member.nickname %>
+          <% end %>  
+        </div>
+        <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center display-box">
+          <div class="row">
+            <%= render "review_read_only", review: review %>
+            <div class="col-12 text-center">
+              <%= render "public/comments/count", comment: review.comments %>
+            </div>
+            <div class="col-12 my-3 text-center">
+              <%= link_to "レビュー詳細", review_comments_path(review.id), class: "btn primary-button" %>
+              <% if review.member == current_member %>
+                <%= link_to "レビュー削除", review_path(review.id), method: :delete, class: 'offset-1 btn danger-button' %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
-  </div>
-  
-  <% @reviews.each do |review| %>
-    <div class="row my-3 justify-content-center">
-      <div class="col-lg-3 col-md-12 p-3 text-center canned-food-box">
-        <%= link_to member_path(review.member) do %>
-          <%= image_tag review.member.get_profile_image(100,100), class: "image" %><br>
-          <%= review.member.nickname %>
-        <% end %>  
-      </div>
-      <div class="col-lg-9 col-md-12 d-flex align-items-center justify-content-center canned-food-box">
-        <%= render "index.html.erb", review: review %>
-      </div>
+  <% else %>
+    <div class="col my-5 text-center justify-content-center">
+      <h3>この缶詰へのレビューはありません。</h3>
     </div>
   <% end %>
   
