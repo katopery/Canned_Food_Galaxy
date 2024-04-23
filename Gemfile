@@ -65,6 +65,8 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+# メールアドレスバリデーション
+gem 'email_validator'
 
 gem "net-smtp"
 gem "net-pop"

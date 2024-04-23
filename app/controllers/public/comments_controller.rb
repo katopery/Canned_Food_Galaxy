@@ -23,15 +23,16 @@ class Public::CommentsController < ApplicationController
     @canned_food = @review.canned_food
     @tags = @canned_food.tags
     @member = Member.find(current_member.id)
-    
     @comment = Comment.new
-    @comments = @review.comments.page(params[:page]).per(5)
     
-    # 缶詰の表示ステータス、または会員ステータスがtrueではない場合、レビュー詳細に遷移できないようにする
-    if @canned_food.is_canned_status != true || @review.member.is_member_status != true
-      redirect_to canned_food_reviews_path(@canned_food.id), alert: 'レビューは確認できません。'
-      return
+    # 削除されたページ数を計算し、現在のページ番号が削除範囲を超えている場合は修正する
+    deleted_page = (@review.comments.count / 5.0).ceil
+    if params[:page].to_i > deleted_page
+      params[:page] = deleted_page.to_s
     end
+    
+    # 削除後にページネーションを更新
+    @comments = @review.comments.page(params[:page]).per(5)
   end
 
   def destroy

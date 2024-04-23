@@ -4,9 +4,17 @@ class Public::ReviewsController < ApplicationController
   
   def index
     @canned_food = CannedFood.find(params[:canned_food_id])
-    @reviews = @canned_food.reviews.page(params[:page]).per(5)
     @tags = @canned_food.tags
     @member = Member.find(current_member.id)
+    
+    # 削除されたページ数を計算し、現在のページ番号が削除範囲を超えている場合は修正する
+    deleted_page = (@canned_food.reviews.count / 5.0).ceil
+    if params[:page].to_i > deleted_page
+      params[:page] = deleted_page.to_s
+    end
+    
+    # 削除後にページネーションを更新
+    @reviews = @canned_food.reviews.page(params[:page]).per(5)
   end
 
   def create

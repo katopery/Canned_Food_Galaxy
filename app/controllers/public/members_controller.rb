@@ -27,6 +27,14 @@ class Public::MembersController < ApplicationController
     return redirect_to members_my_page_path if params[:id] == "information"
     
     @member = Member.find(params[:id])
+    
+    # 削除されたページ数を計算し、現在のページ番号が削除範囲を超えている場合は修正する
+    deleted_page = (@member.reviews.count / 5.0).ceil
+    if params[:page].to_i > deleted_page
+      params[:page] = deleted_page.to_s
+    end
+    
+    # 削除後にページネーションを更新
     @reviews = @member.reviews.page(params[:page]).per(5)
     
     # roomが作成された時に現在ログインしている会員と、

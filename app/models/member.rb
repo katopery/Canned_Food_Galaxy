@@ -81,6 +81,6 @@ class Member < ApplicationRecord
   end
 
   validates :nickname, uniqueness: true, presence: true, length: { in: 1..12 }
-  validates :phone_number, presence: true, length: { in: 10..11 }
+  validates :phone_number, presence: true, numericality: {only_integer: true}, length: { in: 10..11 }
   devise :validatable, password_length: 6..32
 end
