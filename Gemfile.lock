@@ -90,6 +90,8 @@ GEM
     dotenv-rails (3.1.0)
       dotenv (= 3.1.0)
       railties (>= 6.1)
+    email_validator (2.2.4)
+      activemodel
     erubi (1.12.0)
     ffi (1.16.3)
     globalid (1.2.1)
@@ -261,6 +263,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+  email_validator
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)

@@ -12,6 +12,16 @@ ja:
         image: "画像"
       message:
         content: "メッセージ内容"
+      review:
+        expiry_date_rating: "賞味期限"
+        taste_rating: "おいしさ"
+        snack_rating: "おつまみ"
+        outdoor_rating: "アウトドア"
+    
+    errors:
+      messages:
+        not_a_number: "の評価を設定してください"
+      
   date:
     abbr_day_names:
     - 日

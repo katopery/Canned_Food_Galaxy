@@ -52,6 +52,10 @@
         <div class="row my-4 justify-content-center">
           <%= render "public/reviews/review_rating", review: @review %>
         </div>
+        
+        <!-- レビュー新規追加時は初期値が0のため、未設定の場合はエラーメッセージ表示-->
+        <%= render "public/shared/error_messages", resource: @review %>
+        
         <div class="row my-4 d-flex flex-column align-items-center justify-content-center">
           <%= f.submit "レビュー追加", class: "btn fixing-button" %>
         </div>
