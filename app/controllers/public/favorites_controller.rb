@@ -8,11 +8,6 @@ class Public::FavoritesController < ApplicationController
   end
 
   def index
-    # お気に入りの削除処理
-    if params[:favorite_id].present?
-      Favorite.find(params[:favorite_id]).destroy
-    end
-    
     @favorites = current_member.favorites.includes(:canned_food, :member).order(created_at: :desc)
     @canned_foods = @favorites.map(&:canned_food)
   end
