@@ -18,10 +18,8 @@ class CannedFood < ApplicationRecord
   end
   
   # 検索機能用
-  def self.looks(search, word)
-    if search == "partial"
+  def self.looks(word)
       @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
-    end
   end
 
   validates :canned_name, presence: true

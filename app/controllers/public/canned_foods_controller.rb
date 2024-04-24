@@ -2,46 +2,35 @@ class Public::CannedFoodsController < ApplicationController
   before_action :authenticate_member!
 
   def index
-    if params[:sort_created_at]
-      # 新着/古い順表示の処理
-      @canned_foods = CannedFood.where(is_canned_status: true).order(params[:sort_created_at]).page(params[:page]).per(10)
-    elsif params[:sort_review]
-      # 各評価項目ごとの降順表示の処理
-      @canned_foods = CannedFood.where(is_canned_status: true)
-                                .left_joins(:reviews)
-                                .group(:id)
-                                .order("avg(reviews.#{params[:sort_review]}) desc")
-                                .page(params[:page])
-                                .per(10)
-    elsif params[:find_review]
-      # 各評価項目ごとの絞り込み表示の処理
-      
-      # `CannedFood`モデルのデータに関連する`reviews`テーブルとの結合。
-      # `group(:id)`により、`CannedFood`レコードを`id`でグループ化。
-      # `avg(reviews.#{params[:find_review]})`を使って指定された評価項目の平均値を計算し、`canned_food_id`を`id`として選択。
-      # 上記の内容から各`CannedFood`のIDと指定された評価項目の平均値が含まれた結果のセットが取得。
-      canned_foods = CannedFood.left_joins(:reviews).group(:id).select("canned_food_id as id, avg(reviews.#{params[:find_review]}) as ave")
-      # 指定された評価項目の平均値が指定された`params[:rate]`よりも高いものを選択。
-      # 選択された結果の中から、`pluck(:id)`を使ってその`CannedFood`のIDのみを取得
-      ave = canned_foods.select{ |c| (c.ave||0) >= params[:rate].to_f}.pluck(:id)
-      @canned_foods = CannedFood.where(id: ave, is_canned_status: true).page(params[:page]).per(10)
-    else
-      # 通常の表示処理
-      @canned_foods = CannedFood.all.where(is_canned_status: true).page(params[:page]).per(10)
+    # 有効な缶詰を取得
+    @canned_foods = CannedFood.where(is_canned_status: true)
+    
+    # 評価項目ごとに絞り込みを行う
+    rating_params = [:expiry_date_rating, :taste_rating, :snack_rating, :outdoor_rating]
+    rating_params.each do |param|
+      # 評価項目のパラメータが指定されているか確認
+      next unless params[param]
+      avg_column = "avg(reviews.#{param})"
+      # 平均値が指定された評価値以上のものを選択する
+      ids = CannedFood.left_joins(:reviews)
+                      .group(:id)
+                      .having("#{avg_column} >= ?", params[param].to_f)
+                      .pluck(:id)
+      @canned_foods = @canned_foods.where(id: ids)
     end
-
-    # 各評価項目ごとの絞り込み表示で選択した値を表示するための処理
-    if params[:find_review] == "expiry_date_rating"
-      @expiry_date_rating = params[:rate] || 1
-    elsif params[:find_review] == "taste_rating"
-      @taste_rating = params[:rate] || 1
-    elsif params[:find_review] == "snack_rating"
-      @snack_rating = params[:rate] || 1
-    elsif params[:find_review] == "outdoor_rating"
-      @outdoor_rating = params[:rate] || 1
-    else
-      # 何もしない
+  
+    # 評価順にソートする場合の処理
+    if params[:sort_review]
+      @canned_foods = @canned_foods.left_joins(:reviews)
+                                    .group(:id)
+                                    .order("avg(reviews.#{params[:sort_review]}) desc")
     end
+  
+    # デフォルトは10件ずつ表示し、ページネーションを適用
+    @canned_foods = @canned_foods.page(params[:page]).per(10)
+  
+    # ビュー側で表示するための評価項目ごとの値を保持
+    set_rating_params
   end
 
   def show
@@ -61,7 +50,7 @@ class Public::CannedFoodsController < ApplicationController
     if @review == nil
       @review = @canned_food.reviews.build
     end
-    
+
     # 缶詰の表示ステータスがtrueではない場合、詳細画面に遷移できないようにする
     if @canned_food.is_canned_status != true
       redirect_to canned_foods_path, alert: 'この缶詰は表示できません'
@@ -70,14 +59,35 @@ class Public::CannedFoodsController < ApplicationController
   end
 
   def search
+    # 検索ワードを取得し、缶詰表示ステータスが有効な缶詰を取得
     @word = params[:word]
-    @search = params[:search]
-    @range = params[:range]
+    @canned_foods = CannedFood.where(is_canned_status: true).looks(@word)
 
-    # 検索された缶詰に関連付けられたCannedFoodを取得
-    if @range == "缶詰"
-      @canned_foods = CannedFood.where(is_canned_status: true).looks(@search, @word).page(params[:page]).per(10)
+    if params[:sort_review]
+      # 各評価項目ごとの降順表示の処理
+      @canned_foods = @canned_foods.left_joins(:reviews)
+                                    .group(:id)
+                                    .order("avg(reviews.#{params[:sort_review]}) desc")
     end
+
+    # 各評価項目ごとに絞り込みを行う
+    rating_params = [:expiry_date_rating, :taste_rating, :snack_rating, :outdoor_rating]
+    rating_params.each do |param|
+      # 評価項目のパラメータが指定されているか確認
+      next unless params[param]
+      avg_column = "avg(reviews.#{param})"
+      # 平均値が指定された評価値以上のものを選択する
+      ids = CannedFood.left_joins(:reviews)
+                      .group(:id)
+                      .having("#{avg_column} >= ?", params[param].to_f)
+                      .pluck(:id)
+      @canned_foods = @canned_foods.where(id: ids)
+    end
+    
+    @canned_foods = @canned_foods.page(params[:page]).per(10)
+
+    # ビュー側で表示するための評価項目ごとの値を保持
+    set_rating_params
   end
 
   def search_tag
@@ -95,5 +105,15 @@ class Public::CannedFoodsController < ApplicationController
       @canned_tags = Kaminari.paginate_array([]).page(params[:page]).per(10)
       @canned_foods = []
     end
+  end
+
+  private
+
+  # ビュー側で表示するための評価項目ごとの値を保持
+  def set_rating_params
+    @expiry_date_rating = params[:expiry_date_rating]
+    @taste_rating = params[:taste_rating]
+    @snack_rating = params[:snack_rating]
+    @outdoor_rating = params[:outdoor_rating]
   end
 end
