@@ -5,25 +5,13 @@
     </h2>
   </div>
   
-    <!--各評価の高い順表示-->
-  <div class="row my-3 text-center justify-content-center">
-    <div class="col-lg-3 col-md-12 mb-2">
-      <h6>評価の高い順</h6>
-    </div>
-    <div class="col-lg-6 col-md-12">
-      <%= link_to "賞味期限評価", canned_foods_search_path(sort_review: 'expiry_date_rating', word: @word) %>
-      |
-      <%= link_to "おいしさ評価", canned_foods_search_path(sort_review: 'taste_rating', word: @word) %>
-      |
-      <%= link_to "おつまみ評価", canned_foods_search_path(sort_review: 'snack_rating', word: @word) %>
-      |
-      <%= link_to "アウトドア評価", canned_foods_search_path(sort_review: 'outdoor_rating', word: @word) %>
-    </div>
-  </div>
+  <!--各評価の高い順表示-->
+  <%= render "sorted_ratings", url_for: canned_foods_search_path, expiry_date_rating: @expiry_date_rating, taste_rating: @taste_rating, snack_rating: @snack_rating, outdoor_rating: @outdoor_rating, word: @word, tag_id: nil %>
   
   <!--各評価での絞り込み表示-->
-  <%= render "rating_filter", expiry_date_rating: @expiry_date_rating, taste_rating: @taste_rating, snack_rating: @snack_rating, outdoor_rating: @outdoor_rating, path: canned_foods_search_path, word: @word %>
+  <%= render "rating_filter", path: canned_foods_search_path, expiry_date_rating: @expiry_date_rating, taste_rating: @taste_rating, snack_rating: @snack_rating, outdoor_rating: @outdoor_rating, word: @word, tag_id: nil %>
   
+  <!--検索結果表示-->
   <%= render "search", canned_foods: @canned_foods %>
   
   <div class="row">

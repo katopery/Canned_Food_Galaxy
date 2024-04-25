@@ -19,7 +19,7 @@ class CannedFood < ApplicationRecord
   
   # 検索機能用
   def self.looks(word)
-      @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
+    @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
   end
 
   validates :canned_name, presence: true

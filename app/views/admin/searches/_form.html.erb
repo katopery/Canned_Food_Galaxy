@@ -2,7 +2,6 @@
   <div class="d-flex align-items-center justify-content-center">
     <%= f.text_field :word, placeholder: word, class:"mr-2" %>
     <%= f.hidden_field :range, value: range %> 
-    <%= f.hidden_field :search, value: "partial" %>
     <%= f.submit "検索", class: "btn btn-primary" %>
   </div>
 <% end %>
