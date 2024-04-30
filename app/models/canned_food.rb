@@ -10,16 +10,16 @@ class CannedFood < ApplicationRecord
   def get_image(width, height)
     unless image.attached?
       # デフォルトの画像を設定する
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join("app/assets/images/no_image.jpg")
+      image.attach(io: File.open(file_path), filename: "no_image.jpg", content_type: "image/jpeg")
     end
     # 指定した幅と高さにリサイズした画像を返す
-    image.variant(resize_to_limit: [width,height]).processed
+    image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   # 検索機能用
   def self.looks(word)
-    @canned_food = CannedFood.where("canned_name LIKE?","%#{word}%")
+    @canned_food = CannedFood.where("canned_name LIKE?", "%#{word}%")
   end
 
   validates :canned_name, presence: true
