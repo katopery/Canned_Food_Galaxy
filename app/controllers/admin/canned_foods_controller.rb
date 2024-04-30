@@ -1,6 +1,6 @@
 class Admin::CannedFoodsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @canned_foods = CannedFood.page(params[:page]).per(10)
   end
@@ -11,7 +11,7 @@ class Admin::CannedFoodsController < ApplicationController
 
   def create
     @canned_food = CannedFood.new(canned_food_params)
-  
+
     if params[:canned_food][:tag_ids] != "" && @canned_food.save
       # 中間テーブル缶詰タグの保存
       canned_tags = @canned_food.canned_tags.build(tag_id: params[:canned_food][:tag_ids])
@@ -26,11 +26,11 @@ class Admin::CannedFoodsController < ApplicationController
       else
         flash[:alert] = "缶詰の登録が失敗しました。"
       end
-    
+
       render :new
     end
   end
-  
+
   def show
     @canned_food = CannedFood.find(params[:id])
     @tags = @canned_food.tags
@@ -43,7 +43,7 @@ class Admin::CannedFoodsController < ApplicationController
 
   def update
     @canned_food = CannedFood.find(params[:id])
-    
+
     if params[:canned_food][:tag_ids] != "" && @canned_food.update(canned_food_params)
       # 中間テーブル缶詰タグの更新
       @canned_food.tag_ids = params[:canned_food][:tag_ids]
@@ -57,13 +57,13 @@ class Admin::CannedFoodsController < ApplicationController
       else
         flash[:alert] = "缶詰の更新が失敗しました。"
       end
-      
+
       render :edit
     end
   end
-  
+
   private
-  def canned_food_params
-    params.require(:canned_food).permit(:canned_name, :description, :image, :is_canned_status, tag_ids: [])
-  end
+    def canned_food_params
+      params.require(:canned_food).permit(:canned_name, :description, :image, :is_canned_status, tag_ids: [])
+    end
 end

@@ -1,31 +1,31 @@
 class Public::ReviewsController < ApplicationController
   before_action :authenticate_member!
   before_action :ensure_guest_member, only: [:create, :update, :destroy]
-  
+
   def index
     @canned_food = CannedFood.find(params[:canned_food_id])
     @tags = @canned_food.tags
     @member = Member.find(current_member.id)
-    
+
     # 削除されたページ数を計算し、現在のページ番号が削除範囲を超えている場合は修正する
     deleted_page = (@canned_food.reviews.count / 5.0).ceil
     if params[:page].to_i > deleted_page
       params[:page] = deleted_page.to_s
     end
-    
+
     # 削除後にページネーションを更新
     @reviews = @canned_food.reviews.page(params[:page]).per(5)
   end
 
   def create
-    @review = current_member.reviews.new(review_params) 
+    @review = current_member.reviews.new(review_params)
 
     if @review.save
-      flash[:notice] = 'レビューを投稿しました。'
+      flash[:notice] = "レビューを投稿しました。"
       redirect_to review_comments_path(@review.id)
     else
-      flash[:alert] = 'レビューの投稿に失敗しました。'
-      
+      flash[:alert] = "レビューの投稿に失敗しました。"
+
       # render用データ
       @canned_food = CannedFood.find(@review.canned_food_id)
       @tags = @canned_food.tags
@@ -34,8 +34,8 @@ class Public::ReviewsController < ApplicationController
       @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
       @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
       @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
-      
-      render 'public/canned_foods/show'
+
+      render "public/canned_foods/show"
     end
   end
 
@@ -46,8 +46,8 @@ class Public::ReviewsController < ApplicationController
       flash[:notice] = "レビューの更新が完了しました。"
       redirect_to review_comments_path(review_id: @review.id)
     else
-      flash[:alert] = 'レビューの更新に失敗しました。'
-      
+      flash[:alert] = "レビューの更新に失敗しました。"
+
       # render用データ
       @canned_food = CannedFood.find(@review.canned_food_id)
       @tags = @canned_food.tags
@@ -56,15 +56,15 @@ class Public::ReviewsController < ApplicationController
       @taste_avg = @canned_food.reviews.average(:taste_rating) || 0
       @snack_avg = @canned_food.reviews.average(:snack_rating) || 0
       @outdoor_avg = @canned_food.reviews.average(:outdoor_rating) || 0
-      
-      render 'public/canned_foods/show'
+
+      render "public/canned_foods/show"
     end
   end
-  
+
   def destroy
     review = Review.find(params[:id])
     canned_food = CannedFood.find(review.canned_food_id)
-    
+
     if review.destroy
       flash[:notice] = "レビューを削除しました。"
       redirect_to canned_food_path(canned_food)
@@ -73,16 +73,16 @@ class Public::ReviewsController < ApplicationController
       render :index
     end
   end
-  
+
   private
-  def review_params
-    params.require(:review).permit(:canned_food_id, :expiry_date_rating, :taste_rating, :snack_rating, :outdoor_rating) 
-  end
-  
-  def ensure_guest_member
-    @member = Member.find(current_member.id)
-    if @member.guest_member?
-      redirect_to members_my_page_path, notice: "ゲスト会員はレビュー登録・編集・削除できません。"
+    def review_params
+      params.require(:review).permit(:canned_food_id, :expiry_date_rating, :taste_rating, :snack_rating, :outdoor_rating)
     end
-  end
+
+    def ensure_guest_member
+      @member = Member.find(current_member.id)
+      if @member.guest_member?
+        redirect_to members_my_page_path, notice: "ゲスト会員はレビュー登録・編集・削除できません。"
+      end
+    end
 end
