@@ -65,7 +65,7 @@ class Public::MembersController < ApplicationController
     # 会員ステータスがtrueではない場合、会員のレビュー一覧画面に遷移できないようにする
     if @member.is_member_status != true
       redirect_to members_my_page_path, alert: "この会員は退会済みです。"
-      nil
+      return
     end
   end
 
